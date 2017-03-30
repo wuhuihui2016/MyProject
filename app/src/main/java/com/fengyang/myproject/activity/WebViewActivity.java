@@ -16,7 +16,7 @@ public class WebViewActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_web);
         contentWebView = (WebView) findViewById(R.id.webview);
         // 启用javascript
         contentWebView.getSettings().setJavaScriptEnabled(true);
