@@ -7,6 +7,8 @@ import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import java.io.File;
+
 /**
  * Created by wuhuihui on 2017/3/24.
  */
@@ -25,7 +27,23 @@ public class PermissionUtils {
             cursor.close();
         } catch (Exception e) {
             Log.i("Exception", e.toString());
-            if (e.toString().contains("requires android.permission")) {
+            if (e.toString().contains("permission")) {
+                checkCallback.onCheck(false);
+            }
+        }
+
+    }
+
+    /**
+     * 判断通讯录权限获取成功与否
+     * @param checkCallback
+     */
+    public static void checkSDcardPermission(OnCheckCallback checkCallback) {
+        try {
+            FileUtils.createDirs(new File(FileUtils.basePath));
+        } catch (Exception e) {
+            Log.i("Exception", e.toString());
+            if (e.toString().contains("permission")) {
                 checkCallback.onCheck(false);
             }
         }
@@ -37,26 +55,6 @@ public class PermissionUtils {
      */
     public interface OnCheckCallback {
         void onCheck(boolean isSucess);
-    }
-
-    /**
-     * 判断通讯录权限获取成功与否
-     * @param checkCallback
-     */
-    public static void checkSDcardPermission(Context context, final OnCheckCallback checkCallback) {
-        try {
-            Cursor cursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    new String[] {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER }, null, null, null);
-            if (cursor == null) checkCallback.onCheck(false);
-            else checkCallback.onCheck(true);
-            cursor.close();
-        } catch (Exception e) {
-            Log.i("Exception", e.toString());
-            if (e.toString().contains("requires android.permission")) {
-                checkCallback.onCheck(false);
-            }
-        }
-
     }
 
     /**

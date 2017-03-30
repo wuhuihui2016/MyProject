@@ -4,7 +4,10 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 读取联系人-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读取SD卡-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> <!-- 读取SD卡-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 读取网络状态-->
+    <uses-permission android:name="android.permission.INTERNET"/> <!-- 连接网络 -->
+
 
     <application
         android:name=".MyApp"
@@ -21,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ContactActivity"/>
+        <activity android:name=".activity.WebViewActivity"/>
 
         <!-- 网络监听 -->
         <receiver android:name=".receiver.NetReceiver">

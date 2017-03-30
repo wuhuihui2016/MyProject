@@ -35,6 +35,12 @@
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_camera"
             android:background="@android:drawable/editbox_background"/>
+        <Button
+            android:id="@+id/toJSMutual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JS交互"
+            android:background="@android:drawable/editbox_background"/>
     </LinearLayout>
 
 </ScrollView>

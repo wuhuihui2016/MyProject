@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.Utils.FileUtils;
-import com.fengyang.myproject.Utils.LogUtils;
 import com.fengyang.myproject.Utils.PermissionUtils;
 import com.fengyang.myproject.Utils.StringUtils;
 import com.fengyang.myproject.receiver.MyReceiver;
@@ -29,8 +28,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO 3.下载图片并显示
-        do3Download();
+        do5JSMutual();
+
 
     }
 
@@ -39,10 +38,13 @@ public class MainActivity extends BaseActivity {
         super.onResume();
 
         //TODO 1.获取联系人权限并跳转指定ContactActivity
-        do1Contact();//申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
+//        do1Contact();//申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
 
         //TODO 2.发送广播的方法在MyApp.class中
         do2Receiver();//由于OnReceiveCallback为静态必须重新赋值，需在onResume时再次调用方法
+
+        //TODO 3.下载图片并显示
+        do3Download();
 
     }
 
@@ -106,26 +108,68 @@ public class MainActivity extends BaseActivity {
      * 下载图片并显示
      */
     private void do3Download() {
-        try {
-            final ImageButton toDownload = (ImageButton) findViewById(R.id.toDownload);
-            toDownload.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String url = "http://pic.qiantucdn.com/58pic/10/96/99/18u58PICXCS.jpg";
-                    String fileName = FileUtils.basePath + "image.jpg";
-                    FileUtils.downLoadImage(url, fileName, new FileUtils.onSucessCallback(){
+        //申请弹出获取SD卡权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
+        final ImageButton toDownload = (ImageButton) findViewById(R.id.toDownload);
+
+        PermissionUtils.checkSDcardPermission(new PermissionUtils.OnCheckCallback() {
+            @Override
+            public void onCheck(boolean isSucess) {
+                if (isClicked) {
+                    if (isSucess) {
+                        //权限获取成功后，如果跳转按钮已点击则直接跳转指定界面，并将标志还原
+                        isClicked = false;
+
+                    } else {//也要考虑某些手机（比如vivo，oppo）自动禁止权限的问题
+                        StringUtils.show1Toast(context, "可能读取SD卡权限未打开，请检查后重试！");
+                    }
+                } else {//设置按钮的点击事件，进一步判断权限的获取或跳转指定界面
+                    toDownload.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onSucess(Bitmap bitmap) {
-                            if (bitmap != null) {
-                                toDownload.setImageBitmap(bitmap);
-                            }
+                        public void onClick(View v) {
+                            PermissionUtils.checkSDcardPermission(new PermissionUtils.OnCheckCallback() {
+                                @Override
+                                public void onCheck(final boolean isSucess) {
+                                    if (isSucess) {
+                                        toDownload.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                String url = "http://pic.qiantucdn.com/58pic/10/96/99/18u58PICXCS.jpg";
+                                                String fileName = FileUtils.basePath + "image.jpg";
+                                                FileUtils.downLoadImage(url, fileName, new FileUtils.onSucessCallback(){
+                                                    @Override
+                                                    public void onSucess(Bitmap bitmap) {
+                                                        if (bitmap != null) {
+                                                            toDownload.setImageBitmap(bitmap);
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    } else {
+                                        //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
+                                        isClicked = true;
+                                        String[] permissions = { Manifest.permission.WRITE_EXTERNAL_STORAGE };
+                                        PermissionUtils.notPermission(MainActivity.this, permissions);
+                                    }
+                                }
+                            });
                         }
                     });
                 }
-            });
-        } catch (Exception e) {
-            LogUtils.i("Exception", e.toString());
-        }
+            }
+        });
+
+
+    }
+
+    private void do5JSMutual() {
+        Button toJSMutual = (Button) findViewById(R.id.toJSMutual);
+        toJSMutual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication(), WebViewActivity.class));
+            }
+        });
     }
 
 
