@@ -128,6 +128,7 @@ public class FileUtils {
             public void run() {
                 super.run();
                 try {
+                    LogUtils.i("downLoadImage", "downLoadImage");
                     File file = null;
                     Bitmap bitmap = null;
                     file = new File(fileName);

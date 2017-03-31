@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 读取网络状态-->
     <uses-permission android:name="android.permission.INTERNET"/> <!-- 连接网络 -->
 
-
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -23,8 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ContactActivity"/>
-        <activity android:name=".activity.WebViewActivity"/>
+
+        <activity android:name=".activity.ContactActivity"/><!--联系人-->
+        <activity android:name=".activity.ImageActivity"/><!--图片下载-->
+        <activity android:name=".activity.WebViewActivity"/><!--JS交互-->
 
         <!-- 网络监听 -->
         <receiver android:name=".receiver.NetReceiver">

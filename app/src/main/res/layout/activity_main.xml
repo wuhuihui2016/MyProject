@@ -12,29 +12,41 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
 
-        <Button
-            android:id="@+id/toContactActivity"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="获取手机联系人"
-            android:background="@android:drawable/editbox_background"/>
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/toContactActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_call"
+                android:background="@android:drawable/editbox_background"/>
+            <ImageButton
+                android:id="@+id/toDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/stat_sys_download"/>
+            <ImageButton
+                android:id="@+id/toCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_camera"
+                android:background="@android:drawable/editbox_background"/>
+
+        </LinearLayout>
+
+
         <Button
             android:id="@+id/toReceive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="我是顺风耳"
             android:background="@android:drawable/editbox_background"/>
-        <ImageButton
-            android:id="@+id/toDownload"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/stat_sys_download_done"/>
-        <ImageButton
-            android:id="@+id/toCamera"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_camera"
-            android:background="@android:drawable/editbox_background"/>
+
         <Button
             android:id="@+id/toJSMutual"
             android:layout_width="match_parent"
