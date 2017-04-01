@@ -1,4 +1,4 @@
-package com.fengyang.myproject.Utils;
+package com.fengyang.myproject.utils;
 
 import android.app.Activity;
 import android.content.Context;

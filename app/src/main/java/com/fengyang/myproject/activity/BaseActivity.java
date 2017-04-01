@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
-import com.fengyang.myproject.Utils.StringUtils;
-import com.fengyang.myproject.Utils.SystemUtils;
+import com.fengyang.myproject.utils.StringUtils;
+import com.fengyang.myproject.utils.SystemUtils;
 import com.fengyang.myproject.receiver.NetReceiver;
 
 /**

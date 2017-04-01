@@ -1,4 +1,4 @@
-package com.fengyang.myproject.Utils;
+package com.fengyang.myproject.utils;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,6 +17,7 @@ public class PermissionUtils {
     public static int REQUESTCODE = 0;
     public static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     public static String[] PERMISSIONS_READ_CONTACTS = {Manifest.permission.READ_CONTACTS};
+    public static String[] PERMISSIONS_CAMERA = {Manifest.permission.CAMERA};
 
     /**
      * 判断通讯录权限获取成功与否
@@ -49,6 +50,23 @@ public class PermissionUtils {
     public static void checkSDcardPermission(Activity activity, OnCheckCallback checkCallback) {
         int permission = ActivityCompat.checkSelfPermission(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            checkCallback.onCheck(false);
+        } else {
+            checkCallback.onCheck(true);
+        }
+    }
+
+    /**
+     * 判断相机权限获取成功与否
+     * 失败后本方法不调用系统弹出框
+     * @param activity
+     * @param checkCallback
+     */
+    public static void checkCameraPermission(Activity activity, OnCheckCallback checkCallback) {
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.CAMERA);
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             checkCallback.onCheck(false);

@@ -1,4 +1,4 @@
-package com.fengyang.myproject.Utils;
+package com.fengyang.myproject.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class ContansUtils {
 
-	private static String TAG = "ContansUtils";
+	private static final String TAG = "ContansUtils";
 
 	/**
 	 * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法

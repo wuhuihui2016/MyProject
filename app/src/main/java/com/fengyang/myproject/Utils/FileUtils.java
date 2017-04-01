@@ -1,4 +1,4 @@
-package com.fengyang.myproject.Utils;
+package com.fengyang.myproject.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public class FileUtils {
 
-    public static String basePath = Environment.getExternalStorageDirectory()+ "/myProject/";
+    public static final String basePath = Environment.getExternalStorageDirectory()+ "/myProject/";
 
     /**
      * 创建目录

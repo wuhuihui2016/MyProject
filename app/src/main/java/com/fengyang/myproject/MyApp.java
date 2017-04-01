@@ -3,9 +3,9 @@ package com.fengyang.myproject;
 import android.app.Application;
 import android.content.Intent;
 
-import com.fengyang.myproject.Utils.ContansUtils;
-import com.fengyang.myproject.Utils.CrashHandler;
-import com.fengyang.myproject.Utils.LogUtils;
+import com.fengyang.myproject.utils.ContansUtils;
+import com.fengyang.myproject.utils.CrashHandler;
+import com.fengyang.myproject.utils.LogUtils;
 import com.fengyang.myproject.receiver.MyReceiver;
 
 import java.util.Timer;

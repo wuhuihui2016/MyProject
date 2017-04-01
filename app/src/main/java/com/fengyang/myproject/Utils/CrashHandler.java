@@ -1,4 +1,4 @@
-package com.fengyang.myproject.Utils;
+package com.fengyang.myproject.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

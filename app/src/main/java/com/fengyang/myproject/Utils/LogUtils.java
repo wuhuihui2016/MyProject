@@ -1,4 +1,4 @@
-package com.fengyang.myproject.Utils;
+package com.fengyang.myproject.utils;
 
 import android.util.Log;
 
@@ -9,7 +9,7 @@ import android.util.Log;
 public class LogUtils {
 
     // 是否输出日志的开关+
-    public static boolean DEBUG = true;
+    public static final boolean DEBUG = true;
 
     public static void i(String TAG, String msg) {
         if (DEBUG) {

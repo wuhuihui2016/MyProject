@@ -7,9 +7,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.fengyang.myproject.R;
-import com.fengyang.myproject.Utils.PermissionUtils;
-import com.fengyang.myproject.Utils.StringUtils;
 import com.fengyang.myproject.receiver.MyReceiver;
+import com.fengyang.myproject.utils.PermissionUtils;
+import com.fengyang.myproject.utils.StringUtils;
 
 /**
  * 子功能的主架构
@@ -18,7 +18,6 @@ import com.fengyang.myproject.receiver.MyReceiver;
 public class MainActivity extends BaseActivity {
 
     private boolean isClicked = false;//按钮是否已点击标志
-    private ImageButton toContactActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,11 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         //TODO 3.跳转页面后下载图片并显示
-        do3Download();
+        do2Download();
+
+        //TODO 3.获取相机权限跳转TakePhotoActivity
+        do3TakePhoto();
+
         //TODO 5.JS交互
         do5JSMutual();
 
@@ -36,11 +39,11 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        //TODO 1.获取联系人权限并跳转指定ContactActivity
+        //TODO 1.获取联系人权限并跳转ContactActivity
         do1Contact();//申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
 
-        //TODO 2.发送广播的方法在MyApp.class中
-        do2Receiver();//由于OnReceiveCallback为静态必须重新赋值，需在onResume时再次调用方法
+        //TODO 4.发送广播的方法在MyApp.class中
+        do4Receiver();//由于OnReceiveCallback为静态必须重新赋值，需在onResume时再次调用方法
 
 
     }
@@ -51,8 +54,8 @@ public class MainActivity extends BaseActivity {
      */
     private void do1Contact() {
         //申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
-        toContactActivity = (ImageButton) findViewById(R.id.toContactActivity);
-        PermissionUtils.checkContactsPermission(getApplicationContext(), new PermissionUtils.OnCheckCallback() {
+        final ImageButton toContactActivity = (ImageButton) findViewById(R.id.toContactActivity);
+        PermissionUtils.checkContactsPermission(MainActivity.this, new PermissionUtils.OnCheckCallback() {
             @Override
             public void onCheck(boolean isSucess) {
                 if (isClicked) {
@@ -67,7 +70,7 @@ public class MainActivity extends BaseActivity {
                     toContactActivity.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            PermissionUtils.checkContactsPermission(getApplicationContext(), new PermissionUtils.OnCheckCallback() {
+                            PermissionUtils.checkContactsPermission(MainActivity.this, new PermissionUtils.OnCheckCallback() {
                                 @Override
                                 public void onCheck(final boolean isSucess) {
                                     if (isSucess) {
@@ -87,10 +90,41 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+
+
+
+    /**
+     * 跳转页面后下载图片并显示
+     */
+    private void do2Download() {
+        ImageButton toDownload = (ImageButton) findViewById(R.id.toDownload);
+        toDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ImageActivity.class));
+            }
+        });
+
+    }
+
+    /**
+     * 拍照
+     */
+    private void do3TakePhoto() {
+        //申请弹出获取拍照权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
+        final ImageButton toCamera = (ImageButton) findViewById(R.id.toCamera);
+        toCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), TakePhotoActivity.class));
+            }
+        });
+    }
+
     /**
      * 接收数据并显示数据
      */
-    private void do2Receiver() {
+    private void do4Receiver() {
         MyReceiver.registerCallBack(new MyReceiver.OnReceiveCallback() {
             @Override
             public void onCheck(int i) {
@@ -100,21 +134,6 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
-    }
-
-
-    /**
-     * 跳转页面后下载图片并显示
-     */
-    private void do3Download() {
-        ImageButton toDownload = (ImageButton) findViewById(R.id.toDownload);
-        toDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ImageActivity.class));
-            }
-        });
-
     }
 
     /**
