@@ -29,7 +29,7 @@ public class MyReceiver extends BroadcastReceiver {
 
 
     public interface OnReceiveCallback {
-        void onCheck(int i);
+        void onCheck(int number);
     }
 
 

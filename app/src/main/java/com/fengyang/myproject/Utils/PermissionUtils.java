@@ -3,11 +3,17 @@ package com.fengyang.myproject.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+
+import java.io.File;
 
 /**
  * Created by wuhuihui on 2017/3/24.
@@ -17,7 +23,7 @@ public class PermissionUtils {
     public static int REQUESTCODE = 0;
     public static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     public static String[] PERMISSIONS_READ_CONTACTS = {Manifest.permission.READ_CONTACTS};
-    public static String[] PERMISSIONS_CAMERA = {Manifest.permission.CAMERA};
+    public static String[] PERMISSIONS_CAMERA = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
 
     /**
      * 判断通讯录权限获取成功与否
@@ -42,7 +48,7 @@ public class PermissionUtils {
 
 
     /**
-     * 判断通讯录权限获取成功与否
+     * 判断SDcard权限获取成功与否
      * 失败后本方法不调用系统弹出框
      * @param activity
      * @param checkCallback
@@ -65,13 +71,20 @@ public class PermissionUtils {
      * @param checkCallback
      */
     public static void checkCameraPermission(Activity activity, OnCheckCallback checkCallback) {
-        int permission = ActivityCompat.checkSelfPermission(activity,
-                Manifest.permission.CAMERA);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            checkCallback.onCheck(false);
-        } else {
-            checkCallback.onCheck(true);
+        try {//权限获取异常处理
+            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){   //如果可用
+                File file = new File(FileUtils.getAppDir(), "camera.jpg");
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                activity.startActivityForResult(intent, REQUESTCODE);
+                checkCallback.onCheck(true);
+            } else {
+                StringUtils.show1Toast(activity, "SDCard不可用!");
+            }
+        } catch (Exception e) {
+            if (e.toString().contains("permission")) {
+                checkCallback.onCheck(false);
+            }
         }
     }
 

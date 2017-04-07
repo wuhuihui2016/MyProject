@@ -27,7 +27,17 @@ import java.util.UUID;
  */
 public class FileUtils {
 
-    public static final String basePath = Environment.getExternalStorageDirectory()+ "/myProject/";
+    public static final String dirPath = Environment.getExternalStorageDirectory()+ "/myProject/";
+
+    /**
+     * 创建app根目录
+     * @return
+     */
+    public static File getAppDir () {
+        File appDir = new File(dirPath);
+        if (! appDir.exists())  createDirs(appDir);
+        return appDir;
+    }
 
     /**
      * 创建目录
@@ -38,6 +48,7 @@ public class FileUtils {
             path.mkdirs();
         }
     }
+
 
     /**
      * 文件是否存在
@@ -134,7 +145,7 @@ public class FileUtils {
                     file = new File(fileName);
                     InputStream is = new URL(url).openStream();
                     bitmap = BitmapFactory.decodeStream(is);
-                    File dir = new File(basePath);
+                    File dir = new File(dirPath);
                     if (! dir.exists()) dir.mkdir();
                     file.createNewFile();
                     FileOutputStream filStream = new FileOutputStream(file);

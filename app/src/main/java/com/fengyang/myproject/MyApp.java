@@ -3,10 +3,9 @@ package com.fengyang.myproject;
 import android.app.Application;
 import android.content.Intent;
 
+import com.fengyang.myproject.receiver.MyReceiver;
 import com.fengyang.myproject.utils.ContansUtils;
 import com.fengyang.myproject.utils.CrashHandler;
-import com.fengyang.myproject.utils.LogUtils;
-import com.fengyang.myproject.receiver.MyReceiver;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,6 +28,13 @@ public class MyApp extends Application {
     }
 
     /**
+     * 获取application实例
+     */
+    public static Application getInstance() {
+        return instance;
+    }
+
+    /**
      * 生成随机数，发送广播
      */
     private void do2toReceive() {
@@ -39,12 +45,12 @@ public class MyApp extends Application {
             @Override
             public void run() {
                 //生成1-100之间的随机数（每5秒执行一次）
-                int i = (int)(Math.random() * 100);
+                int i = (int)(Math.random() * 100) + 1;
+//                LogUtils.i("random", i + "");
                 if (i % 5 == 0) {//如果是5的倍数，则发送广播
                     Intent intent = new Intent(MyReceiver.ACTION);
                     intent.putExtra("random", i);
                     sendBroadcast(intent);
-                    LogUtils.i("random", i + "");
                 }
             }
         };

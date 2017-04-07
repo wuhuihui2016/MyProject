@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/downloadImage"
+        android:id="@+id/loadImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:textSize="15sp"
-        android:text="下载图片"
+        android:text=""
         android:layout_marginBottom="10dp"
-        android:background="@android:drawable/editbox_background"/>
+        android:background="@drawable/shape_app"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/downloadImage"
+        android:layout_below="@id/loadImage"
         android:layout_gravity="center|center_horizontal"
-        style="?android:attr/progressBarStyleLarge"
+        style="?android:attr/progressBarStyleSmall"
         android:visibility="gone"/>
 
     <ImageView
@@ -27,6 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerInside"
-        android:layout_below="@id/downloadImage"/>
+        android:layout_below="@id/loadImage"/>
 
 </RelativeLayout>

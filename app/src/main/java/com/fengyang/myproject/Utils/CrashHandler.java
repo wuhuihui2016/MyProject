@@ -162,7 +162,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         if (Environment.getExternalStorageState().equals(  
                 Environment.MEDIA_MOUNTED)) {  
             try {  
-                File dir = new File(FileUtils.basePath + "crash");
+                File dir = new File(FileUtils.dirPath + "crash");
                 LogUtils.i("CrashHandler", dir.toString());
                 if (!dir.exists())  
                     dir.mkdir();  

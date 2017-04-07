@@ -4,15 +4,25 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.fengyang.myproject.R;
+import com.fengyang.myproject.receiver.NetReceiver;
 import com.fengyang.myproject.utils.StringUtils;
 import com.fengyang.myproject.utils.SystemUtils;
-import com.fengyang.myproject.receiver.NetReceiver;
+import com.fengyang.myproject.view.SildingFinishLinearLayout;
 
 /**
  * Created by wuhuihui on 2017/3/24.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
 
     protected Context context;//获取当前对象
     protected Activity activity;//获取当前对象
@@ -22,28 +32,80 @@ public class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //初始化
-        init();
+        initActivity();
 
     }
 
     /**
-     * 初始化
+     * 初始化Activity
      */
-    private void init() {
-        //设置竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    private void initActivity () {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//设置竖屏
+        setContentView(R.layout.activity_base_layout);
+        context = this; activity = this; TAG = getLocalClassName(); //初始化常量
+        if (! SystemUtils.isNetworkConnected(context))  StringUtils.show1Toast(context, "当前网络不可用"); //判断网络
 
-        //初始化常量
-        context = this;
-        activity = this;
-        TAG = getLocalClassName();
+        //设置右滑关闭当前Activity
+        SildingFinishLinearLayout sildingLayout = (SildingFinishLinearLayout) findViewById(R.id.sildingLayout);
+        if (sildingLayout != null) {
+            sildingLayout.setBackgroundResource(R.color.app_background);
+            sildingLayout.setOnSildingFinishListener(new SildingFinishLinearLayout.OnSildingFinishListener() {
 
-        //判断网络
-        if (! SystemUtils.isNetworkConnected(context)) {
-            StringUtils.show1Toast(context, "当前网络不可用");
+                @Override
+                public void onSildingFinish() {
+                    finish();
+                }
+            });
         }
     }
+
+    /**
+     * 设置中间内容布局
+     * @param layoutID
+     * @param titleStr
+     */
+    protected void setContentView(String titleStr, int layoutID) {
+        //关闭当前界面按钮
+        ImageButton return_btn = (ImageButton) findViewById(R.id.return_btn);
+        return_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        //设置当前界面的title
+        TextView title = (TextView) findViewById(R.id.title);
+        if (TAG.contains("MainActivity")) {
+            return_btn.setVisibility(View.GONE);
+            title.setText(R.string.app_name);
+        } else {
+            return_btn.setVisibility(View.VISIBLE);
+            title.setText(titleStr);
+        }
+
+        //加载中间布局
+        FrameLayout content_layout = (FrameLayout) findViewById(R.id.content_layout);
+        content_layout.removeAllViews();
+        View view = LayoutInflater.from(this).inflate(layoutID, null);
+        content_layout.addView(view);
+
+    }
+
+    /**
+     * 设置界面右上角按钮的点击事件
+     * @param text
+     * @param listener
+     */
+    protected void setRightBtnListener(CharSequence text, View.OnClickListener listener) {
+        if (!TextUtils.isEmpty(text)) {
+            Button right_btn = (Button) findViewById(R.id.right_btn);
+            right_btn.setVisibility(View.VISIBLE);
+            right_btn.setText(text);
+            right_btn.setOnClickListener(listener);
+        }
+    }
+
 
     @Override
     protected void onResume() {
@@ -58,5 +120,22 @@ public class BaseActivity extends Activity {
                 }
             }
         });
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        if (! TAG.contains("MainActivity")) {
+            overridePendingTransition(0, R.anim.slide_right_out);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (! TAG.contains("MainActivity")) {
+            overridePendingTransition(0, R.anim.slide_right_out);
+        }
     }
 }
