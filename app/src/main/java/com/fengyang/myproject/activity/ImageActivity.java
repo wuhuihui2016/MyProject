@@ -18,16 +18,17 @@ import com.fengyang.myproject.utils.StringUtils;
 import java.io.File;
 
 /**
- * 权限打开后下载显示图片
+ * 两功能的结合页面
+ * SDcard和相机权限打开后
+ * 1.下载并显示图片（标志isDownload = true）
+ * 2.拍照后返回图片显示
  */
 public class ImageActivity extends BaseActivity {
 
     private Button loadImage;
     private ProgressBar progressBar;
     private ImageView imageView;
-    private final int TAKE_PHOTO_CODE = 1;
-    private Bitmap bitmap;
-    private boolean isClicked, isDownload, isSucessful;//按钮是否已点击标志,下载页面标志，相机权限获取成功标志
+    private boolean isClicked, isDownload, isShown;//按钮是否已点击标志,下载页面标志,相机权限系统弹出框已弹出标志
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,12 @@ public class ImageActivity extends BaseActivity {
 
         isDownload = getIntent().getBooleanExtra("isDownload", false);
         if (isDownload) loadImage.setText("下载图片");
-        else loadImage.setText("拍照");
+        else {
+            loadImage.setText("拍照");
+            takePhoto();
+        }
+
+        FileUtils.createDirs(FileUtils.imagePath);
     }
 
     @Override
@@ -49,8 +55,12 @@ public class ImageActivity extends BaseActivity {
         if(isDownload) {
             doDownload();//申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
         } else {
-            //避免成功获取权限返回后重复调用相机加判断,仅当不成功时再次调用权限判断
-            if (! isSucessful) takePhoto();
+            if(isShown) {//相机权限系统框弹出后，尝试打开系统相机界面
+                try {
+                    PermissionUtils.startCamera(activity);
+                    isShown = false;
+                } catch (Exception e) {}
+            }
         }
     }
 
@@ -99,7 +109,7 @@ public class ImageActivity extends BaseActivity {
         isClicked = false;
         progressBar.setVisibility(View.VISIBLE);
         String url = "http://pic.qiantucdn.com/58pic/10/96/99/18u58PICXCS.jpg";
-        String fileName = FileUtils.dirPath + "image.jpg";
+        String fileName = FileUtils.imagePath + "image.jpg";
         FileUtils.downLoadImage(url, fileName, new FileUtils.onSucessCallback() {
             @Override
             public void onSucess(Bitmap bitmap) {
@@ -135,65 +145,47 @@ public class ImageActivity extends BaseActivity {
 
 
 
-    /******************************************************************************
+    /*********start****************************************************************
      * 获取权限，调用相机
-    /******************************************************************************
+     ******************************************************************************/
 
     /**
      * 获取权限，调用相机
      */
     private void takePhoto() {
         //申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
-        PermissionUtils.checkCameraPermission(ImageActivity.this, new PermissionUtils.OnCheckCallback() {
+        loadImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheck(boolean isSucess) {
-                if (isClicked) {
-                    if (isSucess) {
-                        //权限获取成功后，如果跳转按钮已点击则将标志还原,成功标志为true,为避免onReume时不重复调用相机
-                        isSucessful = true;
-                        isClicked = false;
-                    }
-                    //TODO 由于测试时发现该提示老出现，体验不好将其注释
-//                    else {//也要考虑某些手机（比如vivo，oppo）自动禁止权限的问题
-//                        StringUtils.show1Toast(context, "可能读取相机权限未打开，请检查后重试！");
-//                    }
-                } else {//设置按钮的点击事件，进一步判断权限的获取或跳转指定界面
-                    loadImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            PermissionUtils.checkCameraPermission(ImageActivity.this, new PermissionUtils.OnCheckCallback() {
-                                @Override
-                                public void onCheck(final boolean isSucess) {
-                                    if (isSucess) {
-                                        isSucessful = true;
-                                        isClicked = false;
-                                    } else {
-                                        //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
-                                        isClicked = true;
-                                        PermissionUtils.notPermission(ImageActivity.this, PermissionUtils.PERMISSIONS_CAMERA);
-                                        isSucessful = true;
-                                    }
-                                }
-                            });
+            public void onClick(View v) {
+                PermissionUtils.checkCameraPermission(ImageActivity.this, new PermissionUtils.OnCheckCallback() {
+                    @Override
+                    public void onCheck(final boolean isSucess) {
+                        if (! isSucess) {
+                            //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
+                            PermissionUtils.notPermission(ImageActivity.this, PermissionUtils.PERMISSIONS_CAMERA);
+                            isShown = true;
                         }
-                    });
-                }
+                    }
+                });
             }
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if (resultCode == RESULT_OK && requestCode == TAKE_PHOTO_CODE) {
-                File file = new File(FileUtils.dirPath + "camera.jpg");
-                if(file.exists()) {
-                    imageView.setImageBitmap(FileUtils.readImage(FileUtils.dirPath + "camera.jpg"));
-                }
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PermissionUtils.REQUESTCODE) {
+            //拍照返回后显示照片
+            File file = new File(FileUtils.imagePath + "camera.jpg");
+            if(file.exists()) {
+                imageView.setImageBitmap(FileUtils.readImage(FileUtils.imagePath + "camera.jpg"));
             }
+        }
 
     }
 
+    /*********end****************************************************************
+     * 获取权限，调用相机
+     ******************************************************************************/
 
 }

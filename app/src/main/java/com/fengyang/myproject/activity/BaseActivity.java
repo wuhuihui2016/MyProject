@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.receiver.NetReceiver;
+import com.fengyang.myproject.utils.LogUtils;
 import com.fengyang.myproject.utils.StringUtils;
 import com.fengyang.myproject.utils.SystemUtils;
 import com.fengyang.myproject.view.SildingFinishLinearLayout;
@@ -45,17 +46,19 @@ public class BaseActivity extends FragmentActivity {
         context = this; activity = this; TAG = getLocalClassName(); //初始化常量
         if (! SystemUtils.isNetworkConnected(context))  StringUtils.show1Toast(context, "当前网络不可用"); //判断网络
 
-        //设置右滑关闭当前Activity
-        SildingFinishLinearLayout sildingLayout = (SildingFinishLinearLayout) findViewById(R.id.sildingLayout);
-        if (sildingLayout != null) {
-            sildingLayout.setBackgroundResource(R.color.app_background);
-            sildingLayout.setOnSildingFinishListener(new SildingFinishLinearLayout.OnSildingFinishListener() {
+        if (isOtherActivity()) {
+            //设置右滑关闭当前Activity
+            SildingFinishLinearLayout sildingLayout = (SildingFinishLinearLayout) findViewById(R.id.sildingLayout);
+            if (sildingLayout != null) {
+                sildingLayout.setBackgroundResource(R.color.app_background);
+                sildingLayout.setOnSildingFinishListener(new SildingFinishLinearLayout.OnSildingFinishListener() {
 
-                @Override
-                public void onSildingFinish() {
-                    finish();
-                }
-            });
+                    @Override
+                    public void onSildingFinish() {
+                        finish();
+                    }
+                });
+            }
         }
     }
 
@@ -65,30 +68,28 @@ public class BaseActivity extends FragmentActivity {
      * @param titleStr
      */
     protected void setContentView(String titleStr, int layoutID) {
-        //关闭当前界面按钮
-        ImageButton return_btn = (ImageButton) findViewById(R.id.return_btn);
-        return_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        if(isOtherActivity()) {
+            //关闭当前界面按钮
+            ImageButton return_btn = (ImageButton) findViewById(R.id.return_btn);
+            return_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
-        //设置当前界面的title
-        TextView title = (TextView) findViewById(R.id.title);
-        if (TAG.contains("MainActivity")) {
-            return_btn.setVisibility(View.GONE);
-            title.setText(R.string.app_name);
-        } else {
-            return_btn.setVisibility(View.VISIBLE);
+            //设置当前界面的title
+            TextView title = (TextView) findViewById(R.id.title);
             title.setText(titleStr);
-        }
 
-        //加载中间布局
-        FrameLayout content_layout = (FrameLayout) findViewById(R.id.content_layout);
-        content_layout.removeAllViews();
-        View view = LayoutInflater.from(this).inflate(layoutID, null);
-        content_layout.addView(view);
+            //加载中间布局
+            FrameLayout content_layout = (FrameLayout) findViewById(R.id.content_layout);
+            content_layout.removeAllViews();
+            View view = LayoutInflater.from(this).inflate(layoutID, null);
+            content_layout.addView(view);
+        } else {
+            LogUtils.i("setContentView","MainActivity's  layout is setten!");
+        }
 
     }
 
@@ -126,7 +127,7 @@ public class BaseActivity extends FragmentActivity {
     @Override
     public void finish() {
         super.finish();
-        if (! TAG.contains("MainActivity")) {
+        if (isOtherActivity()) {
             overridePendingTransition(0, R.anim.slide_right_out);
         }
     }
@@ -134,8 +135,17 @@ public class BaseActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (! TAG.contains("MainActivity")) {
+        if (isOtherActivity()) {
             overridePendingTransition(0, R.anim.slide_right_out);
         }
+    }
+
+    /**
+     * 判断当前activity是不是不是MainActivity
+     * @return
+     */
+    private boolean isOtherActivity() {
+        if (TAG.contains("MainActivity")) return false;
+        else return true;
     }
 }

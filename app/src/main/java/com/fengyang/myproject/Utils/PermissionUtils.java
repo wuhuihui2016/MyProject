@@ -73,10 +73,7 @@ public class PermissionUtils {
     public static void checkCameraPermission(Activity activity, OnCheckCallback checkCallback) {
         try {//权限获取异常处理
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){   //如果可用
-                File file = new File(FileUtils.getAppDir(), "camera.jpg");
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                activity.startActivityForResult(intent, REQUESTCODE);
+                startCamera(activity);
                 checkCallback.onCheck(true);
             } else {
                 StringUtils.show1Toast(activity, "SDCard不可用!");
@@ -89,7 +86,18 @@ public class PermissionUtils {
     }
 
     /**
-     * 联系人权限获取回调
+     * 跳转系统相机
+     * @param activity
+     */
+    public static void startCamera(Activity activity) {
+        File file = new File(FileUtils.getDirFile(FileUtils.imagePath), "camera.jpg");
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        activity.startActivityForResult(intent, REQUESTCODE);
+    }
+
+    /**
+     * 权限获取回调
      */
     public interface OnCheckCallback {
         void onCheck(boolean isSucess);

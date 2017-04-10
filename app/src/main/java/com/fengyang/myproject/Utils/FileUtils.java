@@ -27,25 +27,28 @@ import java.util.UUID;
  */
 public class FileUtils {
 
-    public static final String dirPath = Environment.getExternalStorageDirectory()+ "/myProject/";
+    public static final String dirPath = Environment.getExternalStorageDirectory()+ "/myProject/";//项目根目录
+    public static final String imagePath = dirPath + "image/";//图片保存路径
+
 
     /**
      * 创建app根目录
      * @return
      */
-    public static File getAppDir () {
-        File appDir = new File(dirPath);
-        if (! appDir.exists())  createDirs(appDir);
-        return appDir;
+    public static File getDirFile (String dirPath) {
+        File dirPathFile = new File(dirPath);
+        if (! dirPathFile.exists())  createDirs(dirPath);
+        return dirPathFile;
     }
 
     /**
      * 创建目录
-     * @param path
+     * @param dirPath
      */
-    public static void createDirs(File path) {
-        if (path != null && !path.exists()) {
-            path.mkdirs();
+    public static void createDirs(String dirPath) {
+        File dir = new File(dirPath);
+        if (dirPath != null && ! dir.exists()) {
+            dir.mkdirs();
         }
     }
 
