@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.receiver.MyReceiver;
+import com.fengyang.myproject.utils.DialogUtils;
 import com.fengyang.myproject.utils.StringUtils;
 
 /**
@@ -17,6 +18,8 @@ import com.fengyang.myproject.utils.StringUtils;
  *   TODO 3.跳转TakePhotoActivity获取相机权限
  *   TODO 4.发送广播的方法在MyApp.class中
  *   TODO 5.JS交互
+ *   TODO 6.文字游戏
+ *   TODO 7.横竖屏切换
  */
 public class MainActivity extends BaseActivity {
 
@@ -41,7 +44,18 @@ public class MainActivity extends BaseActivity {
         } else if (v.getId() == R.id.toReceive) {
             //TODO 4.发送广播的方法在MyApp.class中
             //如果该服务只在一个界面执行，由于OnReceiveCallback为静态必须重新赋值，需在onResume时再次调用方法
-            StringUtils.show1Toast(getApplicationContext(), "顺风耳已启动~~");
+            DialogUtils.showMsgDialog(MainActivity.this, "", "顺风耳已启动~~", new DialogUtils.DialogListener() {
+                @Override
+                public void onClick(View v) {
+                    super.onClick(v);
+                    StringUtils.show2Toast(getApplicationContext(), "顺风耳已启动~~");
+                }
+            }, new DialogUtils.DialogListener() {
+                @Override
+                public void onClick(View v) {
+                    super.onClick(v);
+                }
+            });
             final Button toReceive = (Button) findViewById(R.id.toReceive);
             toReceive.setTextColor(Color.parseColor("#541E00"));
 
@@ -53,7 +67,12 @@ public class MainActivity extends BaseActivity {
             });
 
         } else if (v.getId() == R.id.toJSMutual) {
+            //TODO 5.JS交互
             startActivity(new Intent(getApplication(), WebViewActivity.class));
+
+        } else if (v.getId() == R.id.toWordGame) {
+            //TODO 6.文字游戏
+            startActivity(new Intent(getApplication(), TextActivity.class));
 
         }
     }

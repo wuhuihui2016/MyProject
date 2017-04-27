@@ -18,10 +18,12 @@ import com.fengyang.myproject.utils.StringUtils;
 import java.io.File;
 
 /**
- * 两功能的结合页面
+ * 图片功能的结合页面
+ * 显示GIF图片
  * SDcard和相机权限打开后
  * 1.下载并显示图片（标志isDownload = true）
  * 2.拍照后返回图片显示
+ *
  */
 public class ImageActivity extends BaseActivity {
 

@@ -16,7 +16,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
-        <activity android:name=".activity.MainActivity">
+
+        <!-- activity注册start -->
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,14 +30,21 @@
         <!--联系人-->
         <activity android:name=".activity.ContactActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <!--图片下载-->
+        <!--图片下载/调用系统相机返回照片-->
         <activity android:name=".activity.ImageActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <!--调用系统相机返回bitmap-->
         <!--JS交互-->
         <activity android:name=".activity.WebViewActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!--文字游戏-->
+        <activity android:name=".activity.TextActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- activity注册end -->
 
+        <!-- ************************************************************************** -->
+        <!-- ************************************************************************** -->
+
+        <!-- receiver注册start -->
         <!-- 网络监听 -->
         <receiver android:name=".receiver.NetReceiver">
             <intent-filter>
@@ -48,6 +58,8 @@
                 <action android:name="com.example.fengyangtech.myexample.receiver"/>
             </intent-filter>
         </receiver>
+
+        <!-- receiver注册ens -->
 
 
     </application>

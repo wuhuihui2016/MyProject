@@ -1,5 +1,6 @@
 package com.fengyang.myproject.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -192,5 +193,16 @@ public class StringUtils {
      */
     public static void show2Toast(Context context, String message){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * 时间格式化
+     * @param date
+     * @return
+     */
+    @SuppressLint("SimpleDateFormat") public static String format(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date());
+
     }
 }

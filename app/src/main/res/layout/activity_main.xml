@@ -24,10 +24,11 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <com.fengyang.myproject.view.IOSScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:scrollbars="none"
         android:padding="10dp">
         <!-- 固定布局 fillViewport表示子布局填充满
              该scrollview的子布局期盼是使用具体高度，尽量不用matchparent属性-->
@@ -96,10 +97,33 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/shape_app"
                     android:onClick="onClick"/>
+
+                <Button
+                    android:id="@+id/toWordGame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="文字游戏"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
             </LinearLayout>
         </LinearLayout>
 
-    </ScrollView>
+    </com.fengyang.myproject.view.IOSScrollView>
 </LinearLayout>
 
 

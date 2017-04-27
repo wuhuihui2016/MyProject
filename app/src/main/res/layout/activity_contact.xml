@@ -10,11 +10,12 @@
         android:text="获取联系人"
         android:background="@drawable/shape_app"/>
 
-    <TextView
-        android:id="@+id/text"
+    <com.fengyang.myproject.view.AutoListView
+        android:id="@+id/auto_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"/>
+        android:divider="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
 

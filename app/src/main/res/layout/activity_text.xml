@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 跑马灯效果，必须文字足够长，才能让控件加宽-->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:textColor="@android:color/holo_red_light"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:layout_gravity="center_vertical|center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusableInTouchMode="true"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="1.狒狒，每天进步一点点 2.狒狒，每天进步一点点 3.狒狒，每天进步一点点 4.狒狒，每天进步一点点 5.狒狒，每天进步一点点" />
+
+    <Button
+        android:id="@+id/notify1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@android:color/holo_green_dark"
+        android:onClick="onClick"
+        android:text="简易通知" />
+
+    <Button
+        android:id="@+id/notify2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@android:color/holo_blue_dark"
+        android:onClick="onClick"
+        android:text="发送图文意图通知" />
+
+</LinearLayout>

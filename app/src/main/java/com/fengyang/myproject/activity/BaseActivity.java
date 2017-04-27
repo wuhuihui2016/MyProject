@@ -88,7 +88,7 @@ public class BaseActivity extends FragmentActivity {
             View view = LayoutInflater.from(this).inflate(layoutID, null);
             content_layout.addView(view);
         } else {
-            LogUtils.i("setContentView","MainActivity's  layout is setten!");
+            LogUtils.i("setContentView", "MainActivity's  layout is setten!");
         }
 
     }
@@ -141,7 +141,7 @@ public class BaseActivity extends FragmentActivity {
     }
 
     /**
-     * 判断当前activity是不是不是MainActivity
+     * 判断当前activity是不是非MainActivity
      * @return
      */
     private boolean isOtherActivity() {
