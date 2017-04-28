@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false" >
+    <!-- 按顺序和时间播放图片 android:oneshot="true" 播放一次  false：循环播放-->
+
+    <item
+        android:drawable="@drawable/nowplay_anim1"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim2"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim3"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim4"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim5"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim6"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim7"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim8"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim9"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim10"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim11"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim12"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim13"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim14"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim15"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/nowplay_anim16"
+        android:duration="50"/>
+
+</animation-list>

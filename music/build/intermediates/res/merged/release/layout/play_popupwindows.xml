@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    android:paddingTop="5dp" >
+
+    <ListView
+        android:id="@+id/playList"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:divider="@null"
+        android:padding="5dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/close"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:text="@string/close"
+        android:padding="2dp"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="15sp" />
+
+</LinearLayout>

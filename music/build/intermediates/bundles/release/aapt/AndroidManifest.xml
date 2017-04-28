@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fengyang.music"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name" >
+
+        <!-- 首页 -->
+        <activity android:name="com.fengyang.music.activity.MusicActivity" />
+        <!-- 音乐播放详情页 -->
+        <activity
+            android:name="com.fengyang.music.activity.PlayActivity"
+            android:noHistory="true" />
+        <!-- 设置页 -->
+        <activity android:name="com.fengyang.music.activity.SettingActivity" />
+        <!-- 本地搜索音乐文件 -->
+        <activity android:name="com.fengyang.music.activity.SearchActivity" />
+        <!-- 设置休眠时间 -->
+        <activity android:name="com.fengyang.music.activity.SetTimeActivity" />
+        <!-- 切换皮肤 -->
+        <activity android:name="com.fengyang.music.activity.AlterSkinActivity" />
+
+        <!-- 锁屏,保证唯一 -->
+        <activity
+            android:name="com.fengyang.music.activity.LockActivity"
+            android:launchMode="singleInstance" />
+        <!-- 批量操作 -->
+        <activity android:name="com.fengyang.music.activity.MuiMusicActivity" />
+
+        <!-- 播放服务 -->
+        <service android:name="com.fengyang.music.service.PlayService" />
+    </application>
+
+</manifest>

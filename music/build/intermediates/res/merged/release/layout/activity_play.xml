@@ -1,0 +1,219 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/topViewColor"
+    android:orientation="vertical" >
+
+    <include layout="@layout/activity_topview" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        <com.fengyang.music.view.ImageTextButtonView
+            android:id="@+id/iTButView"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/isLike"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/unlike" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:gravity="center_vertical|center"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@drawable/play" />
+
+        <WebView
+            android:id="@+id/gif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+            android:background="@drawable/play_anim"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="0dp"
+        android:onClick="onClick"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="@string/longTime"
+            android:textColor="#FFCD2D"
+            android:textSize="15sp" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="7" />
+
+        <TextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="@string/longTime"
+            android:textColor="#FFCD2D"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center|center_vertical"
+        android:orientation="horizontal" >
+
+        <!-- 切换播放模式的4个按钮 -->
+
+        <ImageButton
+            android:id="@+id/modecircle"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/modecircle_selector" />
+
+        <ImageButton
+            android:id="@+id/modeorder"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/modeorder_selector"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/moderandom"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/moderandom_selector"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/modesingle"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/modesingle_selector"
+            android:visibility="gone" />
+        <!-- end -->
+
+        <ImageButton
+            android:id="@+id/prePlay"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/nowplaypre_pressed" />
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/nowplayplay_selector" />
+
+        <ImageButton
+            android:id="@+id/pause"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/nowplaypause_selector"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/nextPlay"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/nowplaynext_selector" />
+
+        <ImageButton
+            android:id="@+id/listPlay"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/nowplaycurlist_selector" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false" >
+
+    <!-- 按顺序和时间播放图片 android:oneshot="true" 播放一次  false：循环播放 -->
+
+    <item
+        android:drawable="@drawable/lockscreen_arrow1"
+        android:duration="250"/>
+    <item
+        android:drawable="@drawable/lockscreen_arrow2"
+        android:duration="250"/>
+    <item
+        android:drawable="@drawable/lockscreen_arrow3"
+        android:duration="250"/>
+
+</animation-list>

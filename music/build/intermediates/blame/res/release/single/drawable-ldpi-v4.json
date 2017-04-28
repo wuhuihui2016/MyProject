@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin7.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin7.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin1.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin1.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin3.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin3.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin8.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin8.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin5.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin5.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin2.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin2.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin6.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin6.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin9.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin9.jpg"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-ldpi-v4\\skin4.jpg",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\drawable-ldpi\\skin4.jpg"
+    }
+]

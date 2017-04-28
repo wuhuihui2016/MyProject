@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">我的音乐</string>
+    <string name="listen">听音乐</string>
+    <string name="enjoy">享现在</string>
+    <string name="all">所有的</string>
+    <string name="liked">喜欢的</string>
+    <string name="muido">批量操作</string>
+    <string name="allselect">全选</string>
+    <string name="collect">收藏</string>
+    <string name="delete">删除</string>
+    <string name="longTime">00:00</string>
+    <string name="setTimeInfo">请输入睡眠等待时间</string>
+    <string name="todel">确认删除</string>
+    <string name="dellocal">同时删除本地音乐</string>
+    <string name="close">关闭</string>
+    <string name="time">30</string>
+    <string name="defaultSkin">默认皮肤</string>
+    <string name="search">搜索本地音乐</string>
+    <string name="hot">热门</string>
+    <string name="history">搜索历史</string>
+    <string name="sleepTime">睡眠定时</string>
+    <string name="lockScan">锁屏</string>
+    <string name="shaker">摇一摇切歌</string>
+    <string name="nightMode">夜间模式</string>
+    <string name="alterSkin">换肤</string>
+    <string name="sao">扫一扫</string>
+    <string name="lock">使用锁屏</string>
+    <string name="shake">晃动手机切歌</string>
+    <string name="clearCache">清除缓存</string>
+    <string name="exit">退出APP</string>
+    <string name="slideRight">右滑解锁</string>
+
+</resources>
