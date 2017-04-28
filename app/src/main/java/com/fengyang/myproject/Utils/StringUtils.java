@@ -1,9 +1,10 @@
 package com.fengyang.myproject.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -115,14 +116,29 @@ public class StringUtils {
      * @return
      */
     public static boolean isPhone(String mobile){
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(17[0-9]))\\d{8}$");
-        Matcher m = p.matcher(mobile);
-        return m.matches();
+        if (mobile != null && mobile.length() == 11) {
+            Pattern pattern = Pattern.compile("^1[3|4|5|6|7|8][0-9]\\d{8}$");
+            Matcher matcher = pattern.matcher(mobile);
+            return matcher.matches();
+        }
+        return false;
     }
+
+    /**
+     * 验证输入的身份证号是否合法
+     */
+    public static boolean isLegalId(String id){
+        if (id.toUpperCase().matches("(^\\d{15}$)|(^\\d{17}([0-9]|X)$)")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     /**
      *  1.长度至少为6位
-     2.密码不能是重复的
-     3.密码不能是连续的数字组合
+        2.密码不能是重复的
+        3.密码不能是连续的数字组合
      * @param password
      * @return true为符合规则,false为不符合规则
      */
@@ -196,13 +212,34 @@ public class StringUtils {
     }
 
     /**
-     * 时间格式化
-     * @param date
+     * md5加密方法
+     * @param password
      * @return
      */
-    @SuppressLint("SimpleDateFormat") public static String format(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(new Date());
+    public static String md5Password(String password) {
 
+        try {
+            // 得到一个信息摘要器
+            MessageDigest digest = MessageDigest.getInstance("md5");
+            byte[] result = digest.digest(password.getBytes());
+            StringBuffer buffer = new StringBuffer();
+            // 把没一个byte 做一个与运算 0xff;
+            for (byte b : result) {
+                // 与运算
+                int number = b & 0xff;
+                String str = Integer.toHexString(number);
+                // System.out.println(str);
+                if (str.length() == 1) {
+                    buffer.append("0");
+                }
+                buffer.append(str);
+            }
+            // 标准的md5加密后的结果
+            return buffer.toString();
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "";
+        }
     }
 }

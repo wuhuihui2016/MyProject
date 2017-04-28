@@ -3,6 +3,7 @@ package com.fengyang.myproject.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.StatFs;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -30,6 +31,65 @@ public class FileUtils {
     public static final String dirPath = Environment.getExternalStorageDirectory()+ "/myProject/";//项目根目录
     public static final String imagePath = dirPath + "image/";//图片保存路径
 
+    /**
+     * 判断SDCard是否可用
+     * @return
+     */
+    public static boolean isSDCardEnable() {
+        return Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED);
+
+    }
+
+    /**
+     * 获取SD卡路径
+     * @return
+     */
+    public static String getSDCardPath() {
+        return Environment.getExternalStorageDirectory().getAbsolutePath()
+                + File.separator;
+    }
+
+    /**
+     * 获取SD卡的剩余容量 单位byte
+     * @return
+     */
+    public static long getSDCardAllSize() {
+        if (isSDCardEnable()) {
+            StatFs stat = new StatFs(getSDCardPath());
+            // 获取空闲的数据块的数量
+            long availableBlocks = stat.getAvailableBlocks();
+            // 获取单个数据块的大小（byte）
+            long blockSize = stat.getBlockSize();
+            return blockSize * availableBlocks;
+        }
+        return 0;
+    }
+
+    /**
+     * 获取指定路径所在空间的剩余可用容量字节数，单位byte
+     * @param filePath
+     * @return 容量字节 SDCard可用空间，内部存储可用空间
+     */
+    public static long getFreeBytes(String filePath) {
+        // 如果是sd卡的下的路径，则获取sd卡可用容量
+        if (filePath.startsWith(getSDCardPath())) {
+            filePath = getSDCardPath();
+        } else {// 如果是内部存储的路径，则获取内存存储的可用容量
+            filePath = Environment.getDataDirectory().getAbsolutePath();
+        }
+        StatFs stat = new StatFs(filePath);
+        long availableBlocks = (long) stat.getAvailableBlocks() - 4;
+        return stat.getBlockSize() * availableBlocks;
+    }
+
+    /**
+     * 获取系统存储路径
+     * @return
+     */
+    public static String getRootDirectoryPath() {
+        return Environment.getRootDirectory().getAbsolutePath();
+    }
 
     /**
      * 创建app根目录
@@ -52,7 +112,6 @@ public class FileUtils {
         }
     }
 
-
     /**
      * 文件是否存在
      * @param file
@@ -65,7 +124,11 @@ public class FileUtils {
         return false;
     }
 
-    //下载文件
+    /**
+     * 下载文件
+     * @param urlStr 下载url路径
+     * @return
+     */
     public static StringBuffer downLoad(String urlStr){
         StringBuffer sb = null;
         try {

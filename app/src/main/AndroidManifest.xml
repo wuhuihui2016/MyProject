@@ -9,6 +9,18 @@
     <uses-permission android:name="android.permission.INTERNET"/> <!-- 连接网络 -->
     <uses-permission android:name="android.permission.CAMERA"/> <!-- 相机 -->
 
+
+    <!-- 二维码所需的权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+
+    <!-- 锁屏相关权限 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -17,15 +29,26 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
 
+        <!-- 屏幕适配 -->
+        <supports-screens
+            android:largeScreens="true"
+            android:normalScreens="true"
+            android:smallScreens="true"
+            android:resizeable="true"
+            android:anyDensity="true" />
+
         <!-- activity注册start -->
-        <activity android:name=".activity.MainActivity"
-            android:launchMode="singleTask">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 首页-->
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleTask"/>
 
         <!--联系人-->
         <activity android:name=".activity.ContactActivity"

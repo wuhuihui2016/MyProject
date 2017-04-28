@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.fengyang.music.activity.MusicActivity;
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.receiver.MyReceiver;
 import com.fengyang.myproject.utils.DialogUtils;
@@ -19,7 +20,7 @@ import com.fengyang.myproject.utils.StringUtils;
  *   TODO 4.发送广播的方法在MyApp.class中
  *   TODO 5.JS交互
  *   TODO 6.文字游戏
- *   TODO 7.横竖屏切换
+ *   TODO 7.音乐
  */
 public class MainActivity extends BaseActivity {
 
@@ -73,6 +74,10 @@ public class MainActivity extends BaseActivity {
         } else if (v.getId() == R.id.toWordGame) {
             //TODO 6.文字游戏
             startActivity(new Intent(getApplication(), TextActivity.class));
+
+        } else if (v.getId() == R.id.music) {
+            //TODO 7.音乐
+            startActivity(new Intent(getApplication(), MusicActivity.class));
 
         }
     }

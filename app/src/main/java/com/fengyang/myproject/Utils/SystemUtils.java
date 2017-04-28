@@ -2,17 +2,62 @@ package com.fengyang.myproject.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by wuhuihui on 2017/3/24.
  */
 public class SystemUtils {
+
+    /**
+     * 获取应用程序名称
+     */
+    public static String getAppName(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(
+                    context.getPackageName(), 0);
+            int labelRes = packageInfo.applicationInfo.labelRes;
+            return context.getResources().getString(labelRes);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * [获取应用程序版本名称信息]
+     *
+     * @param context
+     * @return 当前应用的版本名称
+     */
+    public static String getVersionName(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(
+                    context.getPackageName(), 0);
+            return packageInfo.versionName;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * 根据手机分辨率从dp转成px
      * @param context
@@ -108,29 +153,30 @@ public class SystemUtils {
     }
 
     /**
-     * 获取应用的app版本名称
-     * @param context
-     * @return app版本名称
+     * 打开键盘
+     * @param editText 输入框
+     * @param activity  上下文
      */
-    public static String getVersionName(Context context) {
-        try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            String name = appInfo.metaData.getString("version_name");
-            if (name != null) {
-                return name;
+    public static void openKeybord(final Activity activity, final EditText editText) {
+        //必须要等UI绘制完成之后，打开软键盘的代码才能生效，所以要设置一个延时
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) activity
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(editText, InputMethodManager.RESULT_SHOWN);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,
+                        InputMethodManager.HIDE_IMPLICIT_ONLY);
             }
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+        }, 500);
     }
 
     /**
      * 隐藏输入键盘
      * @param activity
      */
-    public static void hideInput(Activity activity) {
+    public static void hideKeybord(Activity activity) {
         ((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(
                         activity.getCurrentFocus().getWindowToken(),
@@ -155,6 +201,107 @@ public class SystemUtils {
     @SuppressWarnings("deprecation")
     public static int getWinHight(Activity context) {
         return context.getWindowManager().getDefaultDisplay().getHeight();
+    }
+
+    /**
+     * 获得屏幕高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenWidth(Context context)
+    {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
+    }
+
+    /**
+     * 获得屏幕宽度
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenHeight(Context context)
+    {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
+    }
+
+    /**
+     * 获得状态栏的高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getStatusHeight(Context context)
+    {
+
+        int statusHeight = -1;
+        try
+        {
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height")
+                    .get(object).toString());
+            statusHeight = context.getResources().getDimensionPixelSize(height);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return statusHeight;
+    }
+
+    /**
+     * 获取当前屏幕截图，包含状态栏
+     *
+     * @param activity
+     * @return
+     */
+    public static Bitmap snapShotWithStatusBar(Activity activity)
+    {
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bmp = view.getDrawingCache();
+        int width = getScreenWidth(activity);
+        int height = getScreenHeight(activity);
+        Bitmap bp = null;
+        bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
+        view.destroyDrawingCache();
+        return bp;
+
+    }
+
+    /**
+     * 获取当前屏幕截图，不包含状态栏
+     *
+     * @param activity
+     * @return
+     */
+    public static Bitmap snapShotWithoutStatusBar(Activity activity)
+    {
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bmp = view.getDrawingCache();
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+
+        int width = getScreenWidth(activity);
+        int height = getScreenHeight(activity);
+        Bitmap bp = null;
+        bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height
+                - statusBarHeight);
+        view.destroyDrawingCache();
+        return bp;
+
     }
 
 }

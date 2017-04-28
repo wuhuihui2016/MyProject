@@ -49,7 +49,7 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notify_layout);
         remoteViews.setTextViewText(R.id.name, "简易通知" + i);
         remoteViews.setTextColor(R.id.name, Color.parseColor("#454545"));
-        remoteViews.setTextViewText(R.id.time, StringUtils.format(new Date()));
+        remoteViews.setTextViewText(R.id.time, StringUtils.formatDate(new Date()));
         remoteViews.setImageViewResource(R.id.image, R.mipmap.app_icon);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -78,7 +78,7 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         //通知图文布局
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notify_layout);
         remoteViews.setTextViewText(R.id.name, "自定义View");
-        remoteViews.setTextViewText(R.id.time, StringUtils.format(new Date()));
+        remoteViews.setTextViewText(R.id.time, StringUtils.formatDate(new Date()));
         remoteViews.setImageViewResource(R.id.image, R.mipmap.app_icon);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -174,14 +174,14 @@ public class AutoListView extends ListView implements OnScrollListener {
 
 	public void onRefreshComplete(String updateTime) {
 		lastUpdate.setText(this.getContext().getString(R.string.lastUpdateTime,
-				StringUtils.format(new Date())));
+				StringUtils.formatDate(new Date())));
 		state = NONE;
 		refreshHeaderViewByState();
 	}
 
 	// 用于下拉刷新结束后的回调
 	public void onRefreshComplete() {
-		String currentTime = StringUtils.format(new Date());
+		String currentTime = StringUtils.formatDate(new Date());
 		onRefreshComplete(currentTime);
 	}
 
