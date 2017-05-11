@@ -24,7 +24,7 @@
 
     </RelativeLayout>
 
-    <com.fengyang.myproject.view.IOSScrollView
+    <com.fengyang.toollib.view.IOSScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -119,13 +119,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="音乐"
+                    android:text="懒猫音乐"
                     android:background="@drawable/shape_app"
                     android:onClick="onClick"/>
             </LinearLayout>
         </LinearLayout>
 
-    </com.fengyang.myproject.view.IOSScrollView>
+    </com.fengyang.toollib.view.IOSScrollView>
 </LinearLayout>
 
 

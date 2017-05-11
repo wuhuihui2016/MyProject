@@ -1,8 +1,5 @@
 package com.fengyang.music.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,12 +9,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.fengyang.music.R;
 import com.fengyang.music.adapter.TimeAdapter;
-import com.fengyang.music.utils.ContansUtils;
+import com.fengyang.music.utils.MusicUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Title: SetTimeActivity   
@@ -25,7 +24,7 @@ import com.fengyang.music.utils.ContansUtils;
  * @author wuhuihui
  * @date 2016年5月20日 下午2:36:04 
  */
-public class SetTimeActivity extends Base_SetActivity {
+public class SetTimeActivity extends MusicBaseActivity {
 
 	private List<String> list;//时间选择列表
 	private ListView listView;
@@ -35,16 +34,11 @@ public class SetTimeActivity extends Base_SetActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setTitle(this, "设置睡眠时间");
-		contentView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_settime, null);
-		setView(contentView);
-		
-		RelativeLayout layout = (RelativeLayout) contentView.findViewById(R.id.layout);
-		layout.setOnTouchListener(this);
+		setContentView("设置睡眠时间", R.layout.activity_settime);
 
-		listView = (ListView) contentView.findViewById(R.id.listView);
+		listView = (ListView) findViewById(R.id.listView);
 		
-		adapter = new TimeAdapter(getData(), getApplicationContext(), ContansUtils.getTimeIndex());
+		adapter = new TimeAdapter(getData(), getApplicationContext(), MusicUtils.getTimeIndex());
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -52,15 +46,15 @@ public class SetTimeActivity extends Base_SetActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if (position == 0) ContansUtils.setTime = false;
+				if (position == 0) MusicUtils.setTime = false;
 				else if (position == 6) {
 					showDialog();
 				} else {
-					if (position == 1) ContansUtils.setPlaytime(getApplicationContext(), 10);
-					else if (position == 2) ContansUtils.setPlaytime(getApplicationContext(), 20);
-					else if (position == 3) ContansUtils.setPlaytime(getApplicationContext(), 30);
-					else if (position == 4) ContansUtils.setPlaytime(getApplicationContext(), 60);
-					else if (position == 5) ContansUtils.setPlaytime(getApplicationContext(), 90);
+					if (position == 1) MusicUtils.setPlaytime(context, 10);
+					else if (position == 2) MusicUtils.setPlaytime(context, 20);
+					else if (position == 3) MusicUtils.setPlaytime(context, 30);
+					else if (position == 4) MusicUtils.setPlaytime(context, 60);
+					else if (position == 5) MusicUtils.setPlaytime(context, 90);
 				}
 				adapter.setSelected(listView, position);//避免延迟，主动设置
 			}
@@ -88,8 +82,8 @@ public class SetTimeActivity extends Base_SetActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				String result = time.getText().toString();
 				if (result != null) {
-					ContansUtils.isUserDefined = true;
-					ContansUtils.setPlaytime(getApplicationContext(), Integer.parseInt(result));
+					MusicUtils.isUserDefined = true;
+					MusicUtils.setPlaytime(context, Integer.parseInt(result));
 					adapter.setSelected(listView, 6);
 				} else {
 					Toast.makeText(getApplicationContext(), "请输入睡眠等待时间", Toast.LENGTH_SHORT).show();
@@ -101,7 +95,7 @@ public class SetTimeActivity extends Base_SetActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				adapter.setSelected(listView, 0);
-				ContansUtils.setPlaytime(getApplicationContext(), 0);
+				MusicUtils.setPlaytime(context, 0);
 			}
 		});
 

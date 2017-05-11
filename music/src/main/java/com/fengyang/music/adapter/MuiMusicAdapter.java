@@ -1,10 +1,6 @@
 package com.fengyang.music.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +11,11 @@ import android.widget.TextView;
 
 import com.fengyang.music.R;
 import com.fengyang.music.model.Music;
+import com.fengyang.toollib.utils.LogUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Title: MusicAdapter   
  * @Description: TODO 音乐适配器
@@ -61,12 +62,12 @@ public class MuiMusicAdapter extends BaseAdapter {
 	 * @date 2016年6月15日 上午11:05:14
 	 */
 	public void selectAll(ListView listView,boolean isAll) {
-		Log.i(TAG, "selectAll");
+		LogUtils.i(TAG, "selectAll");
 		selList.clear();
 		if (isAll) selList.addAll(list);
 
 		notifyDataSetChanged();
-		Log.i("MuiMusicAdapter", selList.toString());
+		LogUtils.i("MuiMusicAdapter", selList.toString());
 	}
 
 	/** 
@@ -84,7 +85,7 @@ public class MuiMusicAdapter extends BaseAdapter {
 		else selList.add(music);
 
 		notifyDataSetChanged();
-		Log.i(TAG, selList.toString());
+		LogUtils.i(TAG, selList.toString());
 	}
 
 	@Override

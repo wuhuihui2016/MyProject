@@ -36,7 +36,6 @@
     <string name="all">所有的</string>
     <string name="allselect">全选</string>
     <string name="alterSkin">换肤</string>
-    <string name="app_name">我的音乐</string>
     <string name="clearCache">清除缓存</string>
     <string name="close">关闭</string>
     <string name="collect">收藏</string>
@@ -52,7 +51,7 @@
     <string name="lock">使用锁屏</string>
     <string name="lockScan">锁屏</string>
     <string name="longTime">00:00</string>
-    <string name="muido">批量操作</string>
+    <string name="muido">多选</string>
     <string name="nightMode">夜间模式</string>
     <string name="sao">扫一扫</string>
     <string name="search">搜索本地音乐</string>

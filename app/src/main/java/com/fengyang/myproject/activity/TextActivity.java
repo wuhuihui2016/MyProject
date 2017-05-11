@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.fengyang.myproject.R;
-import com.fengyang.myproject.utils.StringUtils;
+import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.StringUtils;
 
 import java.util.Date;
 
@@ -46,7 +47,7 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         notification.when = System.currentTimeMillis();
         notification.tickerText = "简易通知" + i;
         //通知图文布局
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notify_layout);
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.app_notify_layout);
         remoteViews.setTextViewText(R.id.name, "简易通知" + i);
         remoteViews.setTextColor(R.id.name, Color.parseColor("#454545"));
         remoteViews.setTextViewText(R.id.time, StringUtils.formatDate(new Date()));
@@ -76,7 +77,7 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         notification.when = System.currentTimeMillis();
         notification.tickerText = "自定义View已经启动";
         //通知图文布局
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notify_layout);
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.app_notify_layout);
         remoteViews.setTextViewText(R.id.name, "自定义View");
         remoteViews.setTextViewText(R.id.time, StringUtils.formatDate(new Date()));
         remoteViews.setImageViewResource(R.id.image, R.mipmap.app_icon);

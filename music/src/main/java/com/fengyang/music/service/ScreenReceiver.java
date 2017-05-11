@@ -9,11 +9,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Vibrator;
-import android.util.Log;
 
 import com.fengyang.music.activity.LockActivity;
-import com.fengyang.music.utils.ContansUtils;
-import com.fengyang.music.utils.ToolUtils;
+import com.fengyang.music.utils.MusicUtils;
+import com.fengyang.toollib.utils.LogUtils;
 
 /**
 * @Title: ScreenReceiver 锁屏接收器
@@ -27,16 +26,16 @@ public class ScreenReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(final Context context, Intent intent) {
-		Log.i(TAG, "OnReceiver---" + intent.getAction());
+		LogUtils.i(TAG, "OnReceiver---" + intent.getAction());
 		
 		if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-			if (PlayService.isPlaying() && ContansUtils.getIsLock()) {
+			if (PlayService.isPlaying() && MusicUtils.getIsLock()) {
 				//仅当音乐播放和设置了锁屏时，锁屏界面才显示
 				Intent lockedIntent = new Intent(context, LockActivity.class);
 				lockedIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);        
 				context.startActivity(lockedIntent);
 			}
-			if (ContansUtils.getIsShaked()) {//仅当锁屏时摇一摇切歌才有效
+			if (MusicUtils.getIsShaked()) {//仅当锁屏时摇一摇切歌才有效
 				//定义sensor管理器  
 				SensorManager mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);  
 				//震动  
@@ -63,9 +62,9 @@ public class ScreenReceiver extends BroadcastReceiver {
 								
 								//摇动手机后，再伴随震动提示~~  
 								vibrator.vibrate(100);
-								Log.i(TAG, "摇一摇切歌~~");
+								LogUtils.i(TAG, "摇一摇切歌~~");
 								//摇动手机后，切歌下一首
-								ToolUtils.startService(context, PlayService.ACTION_NEXT);
+								MusicUtils.startService(context, PlayService.ACTION_NEXT);
 							}  
 						}  
 					}

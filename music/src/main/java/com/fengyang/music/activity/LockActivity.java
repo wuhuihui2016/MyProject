@@ -1,12 +1,5 @@
 package com.fengyang.music.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,7 +9,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -32,9 +24,16 @@ import android.widget.TextView;
 import com.fengyang.music.R;
 import com.fengyang.music.service.MyNotifyReceiver;
 import com.fengyang.music.service.PlayService;
-import com.fengyang.music.utils.ContansUtils;
+import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.music.utils.NotificationUtils;
-import com.fengyang.music.utils.ToolUtils;
+import com.fengyang.toollib.utils.LogUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @Title: LockActivity   
@@ -42,7 +41,7 @@ import com.fengyang.music.utils.ToolUtils;
  * @author wuhuihui
  * @date 2016年5月12日 下午4:03:23 
  */
-public class LockActivity extends BaseActivity implements OnClickListener, 
+public class LockActivity extends MusicBaseActivity implements OnClickListener,
 OnTouchListener, OnGestureListener {
 
 	private TextView time, date, song;//时间/日期/音乐基本信息
@@ -127,7 +126,7 @@ OnTouchListener, OnGestureListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		ToolUtils.setTimerNull(timer);
+		MusicUtils.setTimerNull(timer);
 	}
 
 	/** 
@@ -167,19 +166,19 @@ OnTouchListener, OnGestureListener {
 	public void onClick(View v) {
 		if (v.getId() == R.id.prePlay) {//上一首播放
 			isPlaying(true);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PRE);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PRE);
 
 		} else if (v.getId() == R.id.play) {//播放
 			isPlaying(true);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
 
 		} else if (v.getId() == R.id.pause) {//暂停
 			isPlaying(false);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PAUSE);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PAUSE);
 
 		} else if (v.getId() == R.id.nextPlay) {//下一首播放
 			isPlaying(true);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_NEXT);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_NEXT);
 
 		}
 	}
@@ -193,7 +192,7 @@ OnTouchListener, OnGestureListener {
 	public class MyReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Log.i(TAG, "OnReceiver");
+			LogUtils.i(TAG, "OnReceiver");
 			//处理接收到的内容
 			if(intent != null){
 				if (intent.getAction() == PlayService.ACTION_PLAY) {
@@ -218,8 +217,8 @@ OnTouchListener, OnGestureListener {
 	private void isPlaying(boolean isPlaying) {
 
 		//设置基本显示
-		if (ContansUtils.getLastMusic() != null) {
-			song.setText(ContansUtils.getLastMusic().getArtist()+ "-" + ContansUtils.getLastMusic().getTitle()); 
+		if (MusicUtils.getLastMusic() != null) {
+			song.setText(MusicUtils.getLastMusic().getArtist()+ "-" + MusicUtils.getLastMusic().getTitle());
 		} else {
 			song.setText("听音乐,享现在"); 
 		}
@@ -250,9 +249,9 @@ OnTouchListener, OnGestureListener {
 			float velocityY) {
 		// X轴的坐标位移大于FLING_MIN_DISTANCE，且移动速度大于FLING_MIN_VELOCITY个像素/秒
 		if (e1.getX() - e2.getX() > 110) { // 向左滑动
-			Log.i(TAG, "向左滑动");
+			LogUtils.i(TAG, "向左滑动");
 		} else if (e2.getX() - e1.getX() > 110) { // 向右滑动
-			Log.i(TAG, "向右滑动");
+			LogUtils.i(TAG, "向右滑动");
 			finish();
 		}
 		return false;
@@ -263,7 +262,7 @@ OnTouchListener, OnGestureListener {
 	 */
 	@Override
 	public void onLongPress(MotionEvent e) {
-		Log.d(TAG, "触发长按回调");
+		LogUtils.d(TAG, "触发长按回调");
 	}
 
 	/**
@@ -280,7 +279,7 @@ OnTouchListener, OnGestureListener {
 	 */
 	@Override
 	public boolean onDown(MotionEvent e) {
-		Log.d(TAG, "按下回调");
+		LogUtils.d(TAG, "按下回调");
 		return false;
 	}
 
@@ -289,7 +288,7 @@ OnTouchListener, OnGestureListener {
 	 */
 	@Override
 	public void onShowPress(MotionEvent e) {
-		Log.d(TAG, "按住不松回调");
+		LogUtils.d(TAG, "按住不松回调");
 	}
 
 	/**
@@ -297,7 +296,7 @@ OnTouchListener, OnGestureListener {
 	 */
 	@Override
 	public boolean onSingleTapUp(MotionEvent e) {
-		Log.d(TAG, "触发抬起回调");
+		LogUtils.d(TAG, "触发抬起回调");
 		return false;
 	}
 

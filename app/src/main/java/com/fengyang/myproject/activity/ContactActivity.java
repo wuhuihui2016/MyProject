@@ -13,8 +13,9 @@ import android.widget.Button;
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.utils.DialogUtils;
 import com.fengyang.myproject.utils.PermissionUtils;
-import com.fengyang.myproject.utils.StringUtils;
-import com.fengyang.myproject.view.AutoListView;
+import com.fengyang.toollib.view.AutoListView;
+import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

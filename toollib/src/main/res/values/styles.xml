@@ -1,0 +1,15 @@
+<resources>
+    <!-- 未使用其中定义的style,但文件元素不能为空-->
+    <style name="style">
+        <item name="android:button">@null</item>
+    </style>
+
+    <!-- 自定义当AutoListView刷新数据是进度条显示的效果 -->
+    <style name="autolistview_customProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@drawable/autolistview_custom_progress_bar</item>
+        <item name="android:layout_width">21dip</item>
+        <item name="android:layout_height">21dip</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+</resources>

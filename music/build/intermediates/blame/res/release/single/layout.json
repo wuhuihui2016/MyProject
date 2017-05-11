@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\music_notify_layout.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\music_notify_layout.xml"
+    },
+    {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\history_item_layout.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\history_item_layout.xml"
     },
@@ -36,6 +40,14 @@
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_base_layout.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\activity_base_layout.xml"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\autolistview_pull_to_refresh_header.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\autolistview_pull_to_refresh_header.xml"
+    },
+    {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_alert_dialog_material.xml"
     },
@@ -50,6 +62,10 @@
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_base_play_bottom.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\activity_base_play_bottom.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_action.xml",
@@ -88,6 +104,10 @@
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\search_view.xml"
     },
     {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\aotulistview_footer.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\aotulistview_footer.xml"
+    },
+    {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_dialog_title_material.xml"
     },
@@ -122,14 +142,6 @@
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_media.xml"
-    },
-    {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\notify_layout.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\notify_layout.xml"
-    },
-    {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_base_play.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\activity_base_play.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\play_item_layout.xml",
@@ -176,8 +188,8 @@
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\time_dialog.xml"
     },
     {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_base_set.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\activity_base_set.xml"
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_play_base.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\activity_play_base.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_setting.xml",
@@ -216,10 +228,6 @@
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\footetview.xml"
     },
     {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_topview.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\activity_topview.xml"
-    },
-    {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_title_item.xml"
     },
@@ -232,16 +240,16 @@
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_part_time.xml"
     },
     {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_music_main.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\activity_music_main.xml"
+    },
+    {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\settime_item_layout.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\settime_item_layout.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\activity_main.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",

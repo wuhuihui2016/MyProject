@@ -6,11 +6,12 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.fengyang.music.R;
 import com.fengyang.music.service.PlayService;
+import com.fengyang.toollib.utils.ActivityUtils;
+import com.fengyang.toollib.utils.LogUtils;
 
 /**
  * @Title: NotificationUtils   
@@ -47,16 +48,16 @@ public class NotificationUtils {
 		Notification notification = new Notification();
 		notification.icon = R.drawable.icon_app_notify;
 		notification.when = System.currentTimeMillis();
-		notification.tickerText = "我的音乐";
+		notification.tickerText = "懒猫音乐";
 
 		//通知图文布局
 		//注意: remoteViews布局中有控件的限定，且不可有onClick属性
-		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.notify_layout);
+		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.music_notify_layout);
 
-		if (ContansUtils.getLastMusic() != null) {
-			notification.tickerText = ContansUtils.getLastMusic().getTitle();
-			remoteViews.setTextViewText(R.id.song, ContansUtils.getLastMusic().getTitle());
-			remoteViews.setTextViewText(R.id.singer, ContansUtils.getLastMusic().getArtist());
+		if (MusicUtils.getLastMusic() != null) {
+			notification.tickerText = MusicUtils.getLastMusic().getTitle();
+			remoteViews.setTextViewText(R.id.song, MusicUtils.getLastMusic().getTitle());
+			remoteViews.setTextViewText(R.id.singer, MusicUtils.getLastMusic().getArtist());
 		} else {
 			remoteViews.setTextViewText(R.id.song, "听音乐");
 			remoteViews.setTextViewText(R.id.singer, "享现在");
@@ -86,7 +87,7 @@ public class NotificationUtils {
 				context, 0, playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
 		//仅在除PlayActivity页面外的通知有全局点击效果
-		Log.i(TAG, "currentActivity---" +  ActivityUtils.currentActivity().getLocalClassName());
+		LogUtils.i(TAG, "currentActivity---" +  ActivityUtils.currentActivity().getLocalClassName());
 		if (! ActivityUtils.currentActivity().getLocalClassName().contains("PlayActivity")) {
 			Intent notifyIntent = new Intent(Intent.ACTION_MAIN);
 			notifyIntent.addCategory(Intent.CATEGORY_LAUNCHER);

@@ -18,10 +18,13 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
+    <color name="app_background">#F5F5F5</color>
+    <color name="app_color">#541E00</color>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="black">@android:color/black</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -40,6 +43,7 @@
     <color name="encode_view">#ffffffff</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
+    <color name="gray">#999999</color>
     <color name="help_button_view">#ffcccccc</color>
     <color name="help_view">#ff404040</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
@@ -100,6 +104,7 @@
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="viewfinder_mask">#60000000</color>
+    <color name="white">@android:color/white</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
     <declare-styleable name="ActionBarLayout"><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ActionMenuItemView"><attr name="android:minWidth"/></declare-styleable>
@@ -244,7 +249,7 @@
     <string name="all">所有的</string>
     <string name="allselect">全选</string>
     <string name="alterSkin">换肤</string>
-    <string name="app_name">我的音乐</string>
+    <string name="app_name">懒猫</string>
     <string name="clearCache">清除缓存</string>
     <string name="close">关闭</string>
     <string name="collect">收藏</string>
@@ -255,13 +260,20 @@
     <string name="exit">退出APP</string>
     <string name="history">搜索历史</string>
     <string name="hot">热门</string>
+    <string name="lastUpdateTime">最近更新：%s</string>
     <string name="liked">喜欢的</string>
     <string name="listen">听音乐</string>
+    <string name="load_data">点击重新加载数据</string>
+    <string name="load_full">已加载全部</string>
     <string name="lock">使用锁屏</string>
     <string name="lockScan">锁屏</string>
     <string name="longTime">00:00</string>
-    <string name="muido">批量操作</string>
+    <string name="more">加载中</string>
+    <string name="muido">多选</string>
     <string name="nightMode">夜间模式</string>
+    <string name="no_data">暂无数据</string>
+    <string name="pull_to_refresh">下拉可以刷新</string>
+    <string name="release_to_refresh">松开可以刷新</string>
     <string name="sao">扫一扫</string>
     <string name="search">搜索本地音乐</string>
     <string name="setTimeInfo">请输入睡眠等待时间</string>
@@ -1600,5 +1612,14 @@
         <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>
+    <style name="autolistview_customProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@drawable/autolistview_custom_progress_bar</item>
+        <item name="android:layout_width">21dip</item>
+        <item name="android:layout_height">21dip</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="style">
+        <item name="android:button">@null</item>
     </style>
 </resources>

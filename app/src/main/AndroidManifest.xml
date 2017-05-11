@@ -69,7 +69,7 @@
 
         <!-- receiver注册start -->
         <!-- 网络监听 -->
-        <receiver android:name=".receiver.NetReceiver">
+        <receiver android:name="com.fengyang.toollib.utils.NetReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>

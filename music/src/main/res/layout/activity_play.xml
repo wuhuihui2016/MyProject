@@ -2,10 +2,7 @@
     android:id="@+id/playLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/topViewColor"
     android:orientation="vertical" >
-
-    <include layout="@layout/activity_topview" />
 
     <RelativeLayout
         android:layout_width="match_parent"

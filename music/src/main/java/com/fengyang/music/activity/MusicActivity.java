@@ -1,11 +1,7 @@
 package com.fengyang.music.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,9 +13,9 @@ import com.fengyang.music.R;
 import com.fengyang.music.adapter.MusicAdapter;
 import com.fengyang.music.model.Music;
 import com.fengyang.music.service.PlayService;
-import com.fengyang.music.utils.ContansUtils;
-import com.fengyang.music.utils.DBUtils;
-import com.fengyang.music.utils.ToolUtils;
+import com.fengyang.music.utils.MusicDBUtils;
+import com.fengyang.music.utils.MusicUtils;
+import com.fengyang.toollib.utils.LogUtils;
 
 import java.util.List;
 
@@ -29,7 +25,7 @@ import java.util.List;
  * @author wuhuihui
  * @date 2016年6月3日 下午2:12:49 
  */
-@SuppressLint("ResourceAsColor") public class MusicActivity extends Base_PlayActivity {
+public class MusicActivity extends MusicBasePlayActivity {
 
 	private Button all, liked;//切换的按钮
 	private TextView muido;//随机播放/批量操作
@@ -39,24 +35,19 @@ import java.util.List;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setTitle(this, "我的音乐");
+		setContentView4Play("懒猫音乐", R.layout.activity_music_main);
 
-		Log.i(TAG, "手动启动服务");
-		startService(new Intent(getApplicationContext(), PlayService.class));
+		MusicUtils.getMusicList(context);
 
-		View contentView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_main, null);
-		setView(contentView);
-
-		btn_back.setVisibility(View.INVISIBLE);
-		all = (Button) contentView.findViewById(R.id.all);
+		all = (Button) findViewById(R.id.all);
 		all.setOnClickListener(this);
-		liked = (Button) contentView.findViewById(R.id.liked);
+		liked = (Button) findViewById(R.id.liked);
 		liked.setOnClickListener(this);
 		muido = (TextView) findViewById(R.id.muido);
 		muido.setOnClickListener(this);
 
-		listView = (ListView) contentView.findViewById(R.id.musicListView);
-		
+		listView = (ListView) findViewById(R.id.musicListView);
+
 	}
 
 	@Override
@@ -66,6 +57,9 @@ import java.util.List;
 			select(1);
 		} else if (v.getId() == R.id.liked){
 			select(2);
+		} else if (v.getId() == R.id.play4list) {//全部播放
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY_ALL);
+
 		} else if (v.getId() == R.id.muido) {
 			Intent intent = new Intent(getApplicationContext(), MuiMusicActivity.class);
 			intent.putExtra("index", index);
@@ -84,14 +78,17 @@ import java.util.List;
 	private void select(int i) {
 		index = i;
 		if (i == 1) {//获取所有音乐
-			all.setBackgroundColor(Color.parseColor("#1AFD9C"));
-			liked.setBackgroundColor(Color.parseColor("#E8FFF5"));
+			all.setBackgroundResource(R.drawable.shape_app_color);
+			all.setTextColor(getResources().getColor(R.color.white));
+			liked.setBackgroundResource(R.drawable.shape_app);
+			liked.setTextColor(getResources().getColor(R.color.app_color));
 
-			if (ContansUtils.list.size() > 0) {
+			if (MusicUtils.list.size() > 0) {
+				LogUtils.i("select", MusicUtils.list.toString());
 				listView.removeFooterView(footerView);//添加头布局前需remove之前添加的View
-				footerView.setText("共有" + ContansUtils.list.size() + "首音乐");
+				footerView.setText("共有" + MusicUtils.list.size() + "首音乐");
 				listView.addFooterView(footerView);
-				adapter = new MusicAdapter(ContansUtils.list, getApplicationContext());
+				adapter = new MusicAdapter(MusicUtils.list, getApplicationContext());
 				adapter.notifyDataSetChanged();
 				listView.setAdapter(adapter);
 
@@ -100,19 +97,22 @@ import java.util.List;
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						ContansUtils.setLastMusic(getApplicationContext(), ContansUtils.list.get(position), 0);
-						ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
+						MusicUtils.setLastMusic(MusicUtils.list.get(position), 0);
+						MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
 					}
 				});
 			}
 
 		} else if (i == 2) {//获取喜欢的音乐列表
-			all.setBackgroundColor(Color.parseColor("#E8FFF5"));
-			liked.setBackgroundColor(Color.parseColor("#1AFD9C"));
-			DBUtils utils = new DBUtils(getApplicationContext());
+			all.setBackgroundResource(R.drawable.shape_app);
+			all.setTextColor(getResources().getColor(R.color.app_color));
+			liked.setBackgroundResource(R.drawable.shape_app_color);
+			liked.setTextColor(getResources().getColor(R.color.white));
+
+			MusicDBUtils utils = new MusicDBUtils(getApplicationContext());
 			List<Music> liskedMusics = utils.getLikedList();
-			Log.i(TAG, "喜欢的音乐列表---" + liskedMusics.toString());
-			if (ContansUtils.list.size() > 0) {
+			LogUtils.i(TAG, "喜欢的音乐列表---" + liskedMusics.toString());
+			if (MusicUtils.list.size() > 0) {
 				listView.removeFooterView(footerView);//添加头布局前需remove之前添加的View
 				footerView.setText("共有" + liskedMusics.size() + "首喜欢的音乐");
 				listView.addFooterView(footerView);
@@ -125,19 +125,19 @@ import java.util.List;
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						ContansUtils.setLastMusic(getApplicationContext(), ContansUtils.list.get(position), 0);
-						ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
+						MusicUtils.setLastMusic(MusicUtils.list.get(position), 0);
+						MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
 					}
 				});
 			} 
 		}
 
 		//定位到当前音乐
-		if (ContansUtils.getLastMusic() != null) {
-			if (ContansUtils.getLastMusic().getId()  == ContansUtils.list.size()) {
+		if (MusicUtils.getLastMusic() != null) {
+			if (MusicUtils.getLastMusic().getId()  == MusicUtils.list.size()) {
 				listView.setSelection(1);
 			} else {
-				listView.setSelection(ContansUtils.getLastMusic().getId());
+				listView.setSelection(MusicUtils.getLastMusic().getId());
 			}
 		}
 	}

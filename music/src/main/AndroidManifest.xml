@@ -5,8 +5,7 @@
     android:versionName="1.0" >
 
     <application
-        android:allowBackup="true"
-        android:label="@string/app_name">
+        android:allowBackup="true">
 
         <!-- 首页 -->
         <activity

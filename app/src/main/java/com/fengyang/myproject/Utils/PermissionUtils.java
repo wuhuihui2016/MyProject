@@ -13,6 +13,9 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.fengyang.toollib.utils.FileUtils;
+import com.fengyang.toollib.utils.StringUtils;
+
 import java.io.File;
 
 /**

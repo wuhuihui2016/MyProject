@@ -1,12 +1,8 @@
 package com.fengyang.music.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,10 +19,14 @@ import com.fengyang.music.adapter.HistoryAdapter;
 import com.fengyang.music.adapter.MusicAdapter;
 import com.fengyang.music.model.Music;
 import com.fengyang.music.service.PlayService;
-import com.fengyang.music.utils.ContansUtils;
-import com.fengyang.music.utils.ToolUtils;
+import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.music.view.FlowLayout;
 import com.fengyang.music.view.SearchView;
+import com.fengyang.toollib.utils.LogUtils;
+import com.fengyang.toollib.utils.SystemUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Title: SearchActivity   
@@ -34,9 +34,8 @@ import com.fengyang.music.view.SearchView;
  * @author wuhuihui
  * @date 2016年6月3日 下午2:21:29 
  */
-public class SearchActivity extends Base_PlayActivity {
+public class SearchActivity extends MusicBasePlayActivity {
 
-	private View contentView;
 	private SearchView searchView;
 	private ImageButton clearHistory;
 	private LinearLayout linearLayout, historyLayout;
@@ -57,8 +56,7 @@ public class SearchActivity extends Base_PlayActivity {
 		                android:windowSoftInputMode="adjustPan"这样键盘就会覆盖屏幕。*/
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-		setTitle(this, "");
-		btn_setting.setVisibility(View.GONE);
+		setContentView4Play("", R.layout.activity_search);
 		//searchView
 		searchView = (SearchView) findViewById(R.id.searchView);
 		searchView.setVisibility(View.VISIBLE);
@@ -66,22 +64,16 @@ public class SearchActivity extends Base_PlayActivity {
 		searchView.setEditTextSize(12);
 		searchView.setEditTextColor(Color.BLACK);
 
-		contentView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_search, null);
-		setView(contentView);
-
-		LinearLayout layout = (LinearLayout) contentView.findViewById(R.id.layout);
-		layout.setOnTouchListener(this);
-
 		flowLayout = (FlowLayout) findViewById(R.id.flowLayout);
 		linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
 		historyLayout = (LinearLayout) findViewById(R.id.historyLayout);
 		historyListView = (ListView) findViewById(R.id.historyListView);
 
 		//searchListView
-		listView = (ListView) contentView.findViewById(R.id.searchListView);
+		listView = (ListView) findViewById(R.id.searchListView);
 		listView.addFooterView(footerView);
 
-		clearHistory = (ImageButton) contentView.findViewById(R.id.clearHistory);
+		clearHistory = (ImageButton) findViewById(R.id.clearHistory);
 		clearHistory.setOnClickListener(this);
 
 		setSearchTag();
@@ -90,7 +82,7 @@ public class SearchActivity extends Base_PlayActivity {
 
 			@Override
 			public void onClick(View v) {
-				ToolUtils.hideInput(SearchActivity.this);
+				SystemUtils.hideInput(SearchActivity.this);
 				key = searchView.getText();
 				isFinishedSeach(true);
 			}
@@ -98,7 +90,7 @@ public class SearchActivity extends Base_PlayActivity {
 
 			@Override
 			public void onClick(View v) {
-				ToolUtils.hideInput(SearchActivity.this);
+				SystemUtils.hideInput(SearchActivity.this);
 				searchView.setText("");
 				isFinishedSeach(false);
 			}
@@ -119,9 +111,9 @@ public class SearchActivity extends Base_PlayActivity {
 				isFinishedSeach(false);
 			} else {
 				//保存搜索记录，查找结果
-				ContansUtils.addHistory(getApplicationContext(), key);
+				MusicUtils.addHistory(key);
 				searchList.clear();
-				for (Music music: ContansUtils.list) {
+				for (Music music: MusicUtils.list) {
 					if (music.getAlbum().contains(key) //专辑名查找
 							|| music.getArtist().contains(key) //歌手查找
 							|| music.getTitle().contains(key)) { //歌名查找
@@ -149,8 +141,8 @@ public class SearchActivity extends Base_PlayActivity {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						ContansUtils.setLastMusic(getApplicationContext(), searchList.get(position), 0);
-						ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
+						MusicUtils.setLastMusic(searchList.get(position), 0);
+						MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
 					}
 				});
 			}
@@ -158,9 +150,9 @@ public class SearchActivity extends Base_PlayActivity {
 			listView.setVisibility(View.GONE);
 			linearLayout.setVisibility(View.VISIBLE);
 			setSearchTag();
-			final List<String> hisList = ContansUtils.getHistory();
+			final List<String> hisList = MusicUtils.getHistory();
 
-			Log.i(TAG, "搜索历史列表---" + hisList.size() + ":" + hisList.toString());
+			LogUtils.i(TAG, "搜索历史列表---" + hisList.size() + ":" + hisList.toString());
 			if (hisList.size() > 0) {
 				historyLayout.setVisibility(View.VISIBLE);
 				historyListView.setAdapter(new HistoryAdapter(hisList, getApplicationContext()));
@@ -190,18 +182,18 @@ public class SearchActivity extends Base_PlayActivity {
 	private void setSearchTag() {
 		flowLayout.removeAllViews();//避免多次执行后出现重复多余View
 		List<String> tagList = new ArrayList<String>();
-		int size = ContansUtils.list.size();
-		Log.i(TAG, "size---" + size);
+		int size = MusicUtils.list.size();
+		LogUtils.i(TAG, "size---" + size);
 		for (int i = 0; i < size; i++) {
 			if (size > 0) {
 				int x = (int)(Math.random() * (size - 1));//产生一个size - 1以内的整数
-				String singer = ContansUtils.list.get(x).getArtist();
-				Log.i(TAG, singer);
+				String singer = MusicUtils.list.get(x).getArtist();
+				LogUtils.i(TAG, singer);
 				tagList.add(singer);
 			}
 		}
 		
-		ContansUtils.removeRepeat(tagList);//去重
+		MusicUtils.removeRepeat(tagList);//去重
 		for (int i = 0; i < tagList.size(); i++) {
 			if (i <= 9) {//取10个标签
 				View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tagview, null);
@@ -228,8 +220,8 @@ public class SearchActivity extends Base_PlayActivity {
 	public void onClick(View v) {
 		super.onClick(v);
 		if (v.getId() == R.id.clearHistory) {
-			Log.i(TAG, "clearHistory");
-			ContansUtils.clearHistory(getApplicationContext());
+			LogUtils.i(TAG, "clearHistory");
+			MusicUtils.clearHistory();
 			isFinishedSeach(false);
 		}
 	}
@@ -243,8 +235,8 @@ public class SearchActivity extends Base_PlayActivity {
 	*/
 	private void toback() {
 		isFinishedSeach(false);
-		searchView.setText(ContansUtils.getHistory()
-				.get(ContansUtils.getHistory().size() - 1));
+		searchView.setText(MusicUtils.getHistory()
+				.get(MusicUtils.getHistory().size() - 1));
 	}
 	
 	@Override

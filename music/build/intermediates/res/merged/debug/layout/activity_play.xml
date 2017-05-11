@@ -5,14 +5,12 @@
     android:background="@color/topViewColor"
     android:orientation="vertical" >
 
-    <include layout="@layout/activity_topview" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" >
 
-        <com.fengyang.music.view.ImageTextButtonView
+        <com.fengyang.musicradio.view.ImageTextButtonView
             android:id="@+id/iTButView"
             android:layout_width="30dp"
             android:layout_height="wrap_content"

@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.fengyang.myproject.receiver.MyReceiver;
-import com.fengyang.myproject.utils.ContansUtils;
-import com.fengyang.myproject.utils.CrashHandler;
+import com.fengyang.toollib.utils.ContansUtils;
+import com.fengyang.toollib.utils.CrashHandler;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,6 +24,9 @@ public class MyApp extends Application {
         instance = this;
 
         CrashHandler.getInstance().init(getApplicationContext());//程序崩溃日志输出保存
+
+        ContansUtils.setPres(this);//设置存储空间，获取编辑器
+
         do2toReceive();//生成随机数，发送广播
     }
 
@@ -56,21 +59,6 @@ public class MyApp extends Application {
         };
         timer.schedule(task, 0, 5000);//每5秒执行一次
 
-    }
-
-    /**
-     * 保存键值对
-     */
-    public void setValue(String key, String value) {
-        ContansUtils.put(instance, key, value);
-    }
-
-    /**
-     * 以键获取值
-     * @return
-     */
-    public Object getValue(String key) {
-        return (Object) ContansUtils.get(instance, key, "");
     }
 
 }

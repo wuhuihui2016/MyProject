@@ -11,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.fengyang.myproject.R;
-import com.fengyang.myproject.utils.FileUtils;
+import com.fengyang.toollib.utils.FileUtils;
 import com.fengyang.myproject.utils.PermissionUtils;
-import com.fengyang.myproject.utils.StringUtils;
+import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.StringUtils;
 
 import java.io.File;
 

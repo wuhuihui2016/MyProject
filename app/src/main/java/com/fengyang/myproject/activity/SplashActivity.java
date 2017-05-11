@@ -13,7 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.fengyang.music.utils.ToolUtils;
+import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.myproject.R;
 
 import java.util.Timer;
@@ -65,7 +65,7 @@ public class SplashActivity extends Activity {
 	* @date 2016年6月3日 下午2:42:30
 	*/
 	private void toNext() {
-		ToolUtils.setTimerNull(timer);
+		MusicUtils.setTimerNull(timer);
 		startActivity(new Intent(getApplicationContext(), MainActivity.class));
 		finish();
 	}

@@ -1,8 +1,5 @@
 package com.fengyang.music.activity;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,7 +17,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -29,7 +24,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
@@ -41,11 +35,14 @@ import com.fengyang.music.R;
 import com.fengyang.music.adapter.PlayMusicAdapter;
 import com.fengyang.music.model.Music;
 import com.fengyang.music.service.PlayService;
-import com.fengyang.music.utils.ActivityUtils;
-import com.fengyang.music.utils.ContansUtils;
-import com.fengyang.music.utils.DBUtils;
-import com.fengyang.music.utils.ToolUtils;
+import com.fengyang.music.utils.MusicDBUtils;
+import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.music.view.ImageTextButtonView;
+import com.fengyang.toollib.utils.LogUtils;
+import com.fengyang.toollib.utils.StringUtils;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @Title: PlayActivity   
@@ -53,36 +50,30 @@ import com.fengyang.music.view.ImageTextButtonView;
  * @author wuhuihui
  * @date 2016年5月12日 下午4:03:23 
  */
-public class PlayActivity extends BaseActivity implements OnClickListener, OnSeekBarChangeListener {
+public class PlayActivity extends MusicBaseActivity implements OnClickListener, OnSeekBarChangeListener {
 
 	private ImageView imageView, anim;
 	private WebView webView;
 
-	private TextView tvTitle, start, end;//头部页面标题，底部开始时间，底部结束时间
+	private TextView start, end;//头部页面标题，底部开始时间，底部结束时间
 	private ImageButton isLike, modecircle, modeorder, moderandom, modesingle, play, pause;
 	private ImageTextButtonView iTButView;
 	private SeekBar seekBar;//进度条
 	private Timer playTimer = null;
 	private PopupWindow popupWindow;
 	private MyReceiver myReceiver;//内部接收器，控制界面指令
-	private DBUtils utils;
+	private MusicDBUtils utils;
 	private Music lastMusic;
 
-	@SuppressLint("InlinedApi") @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		//屏幕保持常亮
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, 
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-		setContentView(R.layout.activity_play);
+		setContentView("", R.layout.activity_play);
 
-		//向右滑动手势
-		LinearLayout playLayout = (LinearLayout) findViewById(R.id.playLayout);
-		playLayout.setOnTouchListener(this);
-
-		tvTitle = (TextView) findViewById(R.id.tv_title);
 		iTButView = (ImageTextButtonView) findViewById(R.id.iTButView);
 		isLike = (ImageButton) findViewById(R.id.isLike);
 		start = (TextView) findViewById(R.id.start);
@@ -111,15 +102,15 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 		if (PlayService.media == null) isPlaying(false); 
 		else isPlaying(PlayService.media.isPlaying());
 
-		setModeView(ContansUtils.getPlayMode());//设置控件显示当前播放模式
+		setModeView(MusicUtils.getPlayMode());//设置控件显示当前播放模式
 
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Log.i(TAG, "onPause");
-		ToolUtils.setTimerNull(playTimer);
+		LogUtils.i(TAG, "onPause");
+		MusicUtils.setTimerNull(playTimer);
 	}
 
 	@SuppressLint("HandlerLeak") Handler handler = new Handler() {
@@ -131,8 +122,8 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 				int allTime = PlayService.media.getDuration();      //总毫秒             
 				seekBar.setMax(allTime);//设置进度条
 				seekBar.setProgress(progress);
-				start.setText(ToolUtils.getTimeFormat(progress));
-				end.setText(ToolUtils.getTimeFormat(allTime));
+				start.setText(StringUtils.getTimeFormat(progress));
+				end.setText(StringUtils.getTimeFormat(allTime));
 			}
 		};
 	};
@@ -140,48 +131,41 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onClick(View v) {
-		if(v.getId() == R.id.btn_back){
-			ActivityUtils.finishAllActivity();
-			startActivity(new Intent(getApplicationContext(), MusicActivity.class));
-
-		} else if (v.getId() == R.id.btn_setting) {//跳转设置页
-			startActivity(new Intent(this, SettingActivity.class));
-
-		} else if (v.getId() == R.id.modecircle) {//列表播放
+		if (v.getId() == R.id.modecircle) {//列表播放
 			setModeView(Music.mode_order);
-			ContansUtils.setPlayMode(getApplicationContext(), Music.mode_order);
+			MusicUtils.setPlayMode(Music.mode_order);
 			Toast.makeText(getApplicationContext(), "列表播放", Toast.LENGTH_SHORT).show();
 
 		} else if (v.getId() == R.id.modeorder) {//随机播放
 			setModeView(Music.mode_random);
-			ContansUtils.setPlayMode(getApplicationContext(), Music.mode_random);
+			MusicUtils.setPlayMode(Music.mode_random);
 			Toast.makeText(getApplicationContext(), "随机播放", Toast.LENGTH_SHORT).show();
 
 		} else if (v.getId() == R.id.moderandom) {//单首循环
 			setModeView(Music.mode_single);
-			ContansUtils.setPlayMode(getApplicationContext(), Music.mode_single);
+			MusicUtils.setPlayMode(Music.mode_single);
 			Toast.makeText(getApplicationContext(), "单首循环", Toast.LENGTH_SHORT).show();
 
 		} else if (v.getId() == R.id.modesingle) {//循环播放
 			setModeView(Music.mode_circle);
-			ContansUtils.setPlayMode(getApplicationContext(), Music.mode_circle);
+			MusicUtils.setPlayMode(Music.mode_circle);
 			Toast.makeText(getApplicationContext(), "循环播放", Toast.LENGTH_SHORT).show();
 
 		} else if (v.getId() == R.id.prePlay) {//上一首播放
 			isPlaying(true);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PRE);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PRE);
 
 		} else if (v.getId() == R.id.play) {//播放
 			isPlaying(true);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
 
 		} else if (v.getId() == R.id.pause) {//暂停
 			isPlaying(false);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PAUSE);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PAUSE);
 
 		} else if (v.getId() == R.id.nextPlay) {//下一首播放
 			isPlaying(true);
-			ToolUtils.startService(getApplicationContext(), PlayService.ACTION_NEXT);
+			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_NEXT);
 
 		} else if (v.getId() == R.id.listPlay) {//显示列表
 			View layout = LayoutInflater.from(PlayActivity.this).inflate(R.layout.play_popupwindows, null);
@@ -199,16 +183,16 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 
 			TextView topText = new TextView(getApplicationContext());
 			topText.setTextColor(Color.GRAY);
-			topText.setText("   播放队列（" + ContansUtils.list.size() + "）");
+			topText.setText("   播放队列（" + MusicUtils.list.size() + "）");
 			playList.addHeaderView(topText);
 
-			playList.setAdapter(new PlayMusicAdapter(ContansUtils.list, getApplicationContext()));
+			playList.setAdapter(new PlayMusicAdapter(MusicUtils.list, getApplicationContext()));
 
-			if (ContansUtils.getLastMusic() != null) {
-				if (ContansUtils.getLastMusic().getId()  == ContansUtils.list.size()) {
+			if (MusicUtils.getLastMusic() != null) {
+				if (MusicUtils.getLastMusic().getId()  == MusicUtils.list.size()) {
 					playList.setSelection(1);
 				} else {
-					playList.setSelection(ContansUtils.getLastMusic().getId());
+					playList.setSelection(MusicUtils.getLastMusic().getId());
 				}
 			}
 		
@@ -218,9 +202,9 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 					popupWindow.dismiss();
-					ContansUtils.setLastMusic(getApplicationContext(), ContansUtils.list.get(position - 1), 0);
+					MusicUtils.setLastMusic(MusicUtils.list.get(position - 1), 0);
 
-					ToolUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
+					MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
 
 				}
 			});
@@ -284,7 +268,7 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 	public class MyReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Log.i(TAG, "OnReceiver");
+			LogUtils.i(TAG, "OnReceiver");
 			//处理接收到的内容
 			if(intent != null){
 				if (intent.getAction() == PlayService.ACTION_PLAY) {
@@ -292,7 +276,7 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 
 				} else if (intent.getAction() == PlayService.ACTION_PAUSE) {
 					isPlaying(false);
-					ToolUtils.setTimerNull(playTimer);
+					MusicUtils.setTimerNull(playTimer);
 
 				} else if (intent.getAction() == PlayService.ACTION_SETTIME){
 					setTimeInfo();
@@ -309,12 +293,12 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 	 * @date 2016年5月31日 上午11:52:30
 	 */
 	private void setTimeInfo() {
-		Log.i(TAG, "setTimeInfo");
+		LogUtils.i(TAG, "setTimeInfo");
 
-		if (ContansUtils.setTime && ContansUtils.lastTime != 0) {
+		if (MusicUtils.setTime && MusicUtils.lastTime != 0) {
 			iTButView.setVisibility(View.VISIBLE);
 			iTButView.setTextViewText(
-					ToolUtils.getTimeFormat(ContansUtils.lastTime * 1000));
+					StringUtils.getTimeFormat(MusicUtils.lastTime * 1000));
 			
 			iTButView.setOnTouchListener(new OnTouchListener() {
 				
@@ -339,7 +323,7 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 
 		@Override
 		public void run() {
-			Log.i(TAG, "更新播放进度........");
+			LogUtils.i(TAG, "更新播放进度........");
 			handler.sendMessage(new Message());
 		}
 	}
@@ -350,7 +334,7 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 		if (fromUser) {//判断用户拖动
 			if (PlayService.media != null) {
 				PlayService.media.seekTo(progress);//避免出现重音
-				ContansUtils.setLastMusic(getApplicationContext(), ContansUtils.getLastMusic(), progress);
+				MusicUtils.setLastMusic(MusicUtils.getLastMusic(), progress);
 			}
 		}
 	}
@@ -371,21 +355,21 @@ public class PlayActivity extends BaseActivity implements OnClickListener, OnSee
 	 */
 	private void isPlaying(boolean isPlaying) {
 
-		ToolUtils.setTimerNull(playTimer);
-		utils = new DBUtils(getApplicationContext());
-		lastMusic = ContansUtils.getLastMusic();
+		MusicUtils.setTimerNull(playTimer);
+		utils = new MusicDBUtils(getApplicationContext());
+		lastMusic = MusicUtils.getLastMusic();
 
 		//设置基本显示
 		if (lastMusic != null) {
 			if (lastMusic.getTitle() != null) {
-				tvTitle.setText(lastMusic.getTitle() + "-" + lastMusic.getArtist()); 
+				setTitle(lastMusic.getTitle() + "-" + lastMusic.getArtist());
 				if (utils.isLiked(lastMusic)) {
 					isLike.setImageResource(R.drawable.liked);
 				} else {
 					isLike.setImageResource(R.drawable.unlike);
 				}
 			} else {
-				tvTitle.setText("听音乐" + "-" + "享现在"); 
+				setTitle("听音乐" + "-" + "享现在");
 			}
 		}
 

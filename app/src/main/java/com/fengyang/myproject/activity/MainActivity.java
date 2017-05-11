@@ -10,7 +10,9 @@ import com.fengyang.music.activity.MusicActivity;
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.receiver.MyReceiver;
 import com.fengyang.myproject.utils.DialogUtils;
-import com.fengyang.myproject.utils.StringUtils;
+import com.fengyang.myproject.utils.PermissionUtils;
+import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.StringUtils;
 
 /**
  * TODO 子功能的主架构
@@ -20,9 +22,11 @@ import com.fengyang.myproject.utils.StringUtils;
  *   TODO 4.发送广播的方法在MyApp.class中
  *   TODO 5.JS交互
  *   TODO 6.文字游戏
- *   TODO 7.音乐
+ *   TODO 7.懒猫音乐
  */
 public class MainActivity extends BaseActivity {
+
+    private boolean isClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +79,55 @@ public class MainActivity extends BaseActivity {
             //TODO 6.文字游戏
             startActivity(new Intent(getApplication(), TextActivity.class));
 
-        } else if (v.getId() == R.id.music) {
-            //TODO 7.音乐
-            startActivity(new Intent(getApplication(), MusicActivity.class));
-
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        toMusic();
+    }
+
+    /**
+     *  TODO 7.懒猫音乐
+     *  需打开文件权限才可进入音乐
+     * 注意:避免用户拒绝访问权限时出现无限循环的系统框弹出
+     */
+    private void toMusic() {
+        final Button music_btn = (Button) findViewById(R.id.music);
+        PermissionUtils.checkSDcardPermission(MainActivity.this, new PermissionUtils.OnCheckCallback() {
+            @Override
+            public void onCheck(boolean isSucess) {
+                if (isClicked) {
+                    if (isSucess) {
+                        isClicked = false;
+                        startActivity(new Intent(getApplication(), MusicActivity.class));
+                    } else {//也要考虑某些手机（比如vivo，oppo）自动禁止权限的问题
+                        StringUtils.show1Toast(context, "可能读取SDCard权限未打开，请检查后重试！");
+                    }
+                } else {//设置按钮的点击事件，进一步判断权限的获取或跳转指定界面
+                    music_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PermissionUtils.checkSDcardPermission(MainActivity.this, new PermissionUtils.OnCheckCallback() {
+                                @Override
+                                public void onCheck(final boolean isSucess) {
+                                    if (isSucess) {
+                                        isClicked = false;
+                                        startActivity(new Intent(getApplication(), MusicActivity.class));
+                                    } else {
+                                        //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
+                                        isClicked = true;
+                                        PermissionUtils.notPermission(MainActivity.this, PermissionUtils.PERMISSIONS_STORAGE);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
 }

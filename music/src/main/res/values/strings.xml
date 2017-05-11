@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">我的音乐</string>
     <string name="listen">听音乐</string>
     <string name="enjoy">享现在</string>
     <string name="all">所有的</string>
     <string name="liked">喜欢的</string>
-    <string name="muido">批量操作</string>
+    <string name="muido">多选</string>
     <string name="allselect">全选</string>
     <string name="collect">收藏</string>
     <string name="delete">删除</string>

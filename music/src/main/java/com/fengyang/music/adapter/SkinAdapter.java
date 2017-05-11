@@ -1,7 +1,5 @@
 package com.fengyang.music.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -12,7 +10,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.fengyang.music.R;
-import com.fengyang.music.utils.ContansUtils;
+import com.fengyang.music.utils.MusicUtils;
+
+import java.util.List;
 
 /**
  * @Title: SkinAdapter   
@@ -75,7 +75,7 @@ public class SkinAdapter extends BaseAdapter {
 
 		drawable = list.get(position);
 		viewHolder.skin.setImageDrawable(drawable);
-		if (ContansUtils.getSkin() == (position + 1)) {
+		if (MusicUtils.getSkin() == (position + 1)) {
 			viewHolder.selected.setVisibility(View.VISIBLE);
 		} else {
 			viewHolder.selected.setVisibility(View.GONE);

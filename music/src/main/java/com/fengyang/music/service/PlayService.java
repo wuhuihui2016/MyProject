@@ -8,12 +8,12 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.fengyang.music.model.Music;
-import com.fengyang.music.utils.ContansUtils;
+import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.music.utils.NotificationUtils;
-import com.fengyang.music.utils.ToolUtils;
+import com.fengyang.toollib.utils.LogUtils;
+import com.fengyang.toollib.utils.StringUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +30,7 @@ public class PlayService extends Service {
 	public static MediaPlayer media = null;//音乐播放媒体
 
 	public static final String ACTION_PLAY = "play";//播放
+	public static final String ACTION_PLAY_ALL = "playAll";//列表播放，从第一手开始播放
 	public static final String ACTION_PRE = "pre";//上一首
 	public static final String ACTION_NEXT = "next";//下一首
 	public static final String ACTION_PAUSE = "pause";//暂停
@@ -45,7 +46,6 @@ public class PlayService extends Service {
 	public void onCreate() {
 		super.onCreate();
 
-		Log.i(TAG, "onCreate");
 		//注册通知接收器
 		notifyReceiver = new MyNotifyReceiver();
 		IntentFilter filter = new IntentFilter();
@@ -61,52 +61,55 @@ public class PlayService extends Service {
 		screenFilter.addAction(Intent.ACTION_SCREEN_OFF);
 		registerReceiver(screenReceiver, screenFilter);
 
-		ContansUtils.getMusicList(getApplicationContext());//获取所有音乐列表
-		ContansUtils.getEditor(getApplicationContext());//获取app存储空间
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null){
-			Log.i(TAG, "OnReceiver---" + intent.getAction());
-			if (intent.getAction() == ACTION_PLAY) {//播放
-				if (ContansUtils.getLastMusic() == null && ContansUtils.list.size() > 0) {
+			LogUtils.i(TAG, "OnReceiver---" + intent.getAction());
+			if (intent.getAction().equals(ACTION_PLAY)) {//播放
+				if (MusicUtils.getLastMusic() == null && MusicUtils.list.size() > 0) {
 					playRandom();
 				} else {
-					play(ContansUtils.getLastMusic());
+					play(MusicUtils.getLastMusic());
 				}
 
-			} else if (intent.getAction() == ACTION_PRE) {//上一首
+			} else if (intent.getAction().equals(ACTION_PLAY_ALL)) {//全部播放
+				if (MusicUtils.list.size() > 0) {
+					MusicUtils.setPlayMode(Music.mode_order);//列表播放模式
+					play(MusicUtils.list.get(0));
+				}
+			} else if (intent.getAction().equals(ACTION_PRE)) {//上一首
 				playPre();
 
-			} else if (intent.getAction() == ACTION_NEXT) {//下一首
+			} else if (intent.getAction().equals(ACTION_NEXT)) {//下一首
 				playNext();
 
-			} else if (intent.getAction() == ACTION_PAUSE) {//暂停
+			} else if (intent.getAction().equals(ACTION_PAUSE)) {//暂停
 				if (media != null && media.isPlaying()) {
 					media.pause();
 				}
 				NotificationUtils.updateNotification(getApplicationContext());
 
-			} else if (intent.getAction() == ACTION_SETTIME) {//设置睡眠时间
+			} else if (intent.getAction().equals(ACTION_SETTIME)) {//设置睡眠时间
 				Timer timer = new Timer();
-				if (ContansUtils.setTime) {
+				if (MusicUtils.setTime) {
 					timer.schedule(new TimerTask() {
 
 						@Override
 						public void run() {
-							Log.i(TAG, "开启睡眠时间,还剩:" 
-									+ ToolUtils.getTimeFormat(ContansUtils.lastTime * 1000));
+							LogUtils.i(TAG, "开启睡眠时间,还剩:"
+									+ StringUtils.getTimeFormat(MusicUtils.lastTime * 1000));
 							Intent setTime = new Intent();
 							setTime.setAction(ACTION_SETTIME);
 							sendBroadcast(setTime);
 
-							if (ContansUtils.lastTime == 5) {//最后五秒显示退出按钮
+							if (MusicUtils.lastTime == 5) {//最后五秒显示退出按钮
 								Intent toExitIntent = new Intent();
 								toExitIntent.setAction(ACTION_TOEXIT);
 								sendBroadcast(toExitIntent);
-								
-							} else if (ContansUtils.lastTime == 0) {//无任何操作则默认退出APP
+
+							} else if (MusicUtils.lastTime == 0) {//无任何操作则默认退出APP
 								Intent exitIntent = new Intent();
 								exitIntent.setAction(ACTION_EXIT);
 								sendBroadcast(exitIntent);
@@ -114,93 +117,94 @@ public class PlayService extends Service {
 						}
 					}, 1000);
 
-				} else ToolUtils.setTimerNull(timer);
-			} 
+				} else MusicUtils.setTimerNull(timer);
+			}
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
 
-	/** 
-	 * @Title: isPlaying 
+	/**
+	 * @Title: isPlaying
 	 * @Description: TODO 获取当前播放状态
-	 * @return  
+	 * @return
 	 * @return boolean
-	 * @author wuhuihui  
+	 * @author wuhuihui
 	 * @date 2016年6月2日 上午11:13:01
 	 */
 	public static boolean isPlaying() {
 		if (media != null && media.isPlaying()) {
 			return true;
-		} 
+		}
 		return false;
 	}
 
-	/** 
-	 * @Title: playNext 
+	/**
+	 * @Title: playNext
 	 * @Description: TODO  播放下一首（取决于顺序播放还是随机播放）
 	 * @return void
-	 * @author wuhuihui  
+	 * @author wuhuihui
 	 * @date 2016年5月10日 下午2:41:30
 	 */
 	private void playNext() {
-		if (ContansUtils.getLastMusic() == null) {
-			play(ContansUtils.list.get(0));//如果无最后播放记录，则播放第一首
+		if (MusicUtils.getLastMusic() == null) {
+			play(MusicUtils.list.get(0));//如果无最后播放记录，则播放第一首
 
 		} else {
-			if (ContansUtils.getPlayMode() == Music.mode_circle 
-					|| ContansUtils.getPlayMode() == Music.mode_single ) {
-				if (ContansUtils.getLastMusic().getId() == ContansUtils.list.size()) {//循环播放
-					play(ContansUtils.list.get(0));//如果播放到列表的最后一首，则从头开始播放
+			if (MusicUtils.getPlayMode() == Music.mode_circle
+					|| MusicUtils.getPlayMode() == Music.mode_single ) {
+				if (MusicUtils.getLastMusic().getId() == MusicUtils.list.size()) {//循环播放
+					play(MusicUtils.list.get(0));//如果播放到列表的最后一首，则从头开始播放
 
 				} else { //否则播放列表的下一首音乐
-					play(ContansUtils.list.get(ContansUtils.getLastMusic().getId()));
+					play(MusicUtils.list.get(MusicUtils.getLastMusic().getId()));
 
 				}
 
-			} else if (ContansUtils.getPlayMode() == Music.mode_order) {//列表播放
-				if (ContansUtils.getLastMusic().getId() == ContansUtils.list.size()) {
+			} else if (MusicUtils.getPlayMode() == Music.mode_order) {//列表播放
+				if (MusicUtils.getLastMusic().getId() == MusicUtils.list.size()) {
 					//如果播放到列表的最后一首，则停止播放,释放播放器
 					media.release();
 
 				} else { //否则播放列表的下一首音乐
-					play(ContansUtils.list.get(ContansUtils.getLastMusic().getId()));
+					play(MusicUtils.list.get(MusicUtils.getLastMusic().getId()));
 
 				}
 
-			} else if (ContansUtils.getPlayMode() == Music.mode_random) {//随机播放
+			} else if (MusicUtils.getPlayMode() == Music.mode_random) {//随机播放
 				playRandom();
 
 			}
 		}
 	}
-	/** 
-	 * @Title: playPre 
+	/**
+	 * @Title: playPre
 	 * @Description: TODO   播放上一首（取决于顺序播放还是随机播放）
 	 * @return void
-	 * @author wuhuihui  
+	 * @author wuhuihui
 	 * @date 2016年5月11日 下午5:00:31
 	 */
 	private void playPre() {
-		if (ContansUtils.getLastMusic() == null) {
-			play(ContansUtils.list.get(0));//如果无最后播放记录，则播放第一首
+		if (MusicUtils.getLastMusic() == null) {
+			play(MusicUtils.list.get(0));//如果无最后播放记录，则播放第一首
 
 		} else {
-			if (ContansUtils.getPlayMode() == Music.mode_circle || ContansUtils.getPlayMode() == Music.mode_single ) {
-				if (ContansUtils.getLastMusic().getId() == 1) {
-					play(ContansUtils.list.get(ContansUtils.list.size() - 1));//如果播放到列表的第一首，则从尾首开始播放
+			if (MusicUtils.getPlayMode() == Music.mode_circle
+					|| MusicUtils.getPlayMode() == Music.mode_single ) {
+				if (MusicUtils.getLastMusic().getId() == 1) {
+					play(MusicUtils.list.get(MusicUtils.list.size() - 1));//如果播放到列表的第一首，则从尾首开始播放
 				} else { //否则播放列表的上一首音乐
-					play(ContansUtils.list.get(ContansUtils.getLastMusic().getId() - 2));
+					play(MusicUtils.list.get(MusicUtils.getLastMusic().getId() - 2));
 				}
 
-			} else if (ContansUtils.getPlayMode() == Music.mode_order) {//列表播放
-				if (ContansUtils.getLastMusic().getId() == 1) {
+			} else if (MusicUtils.getPlayMode() == Music.mode_order) {//列表播放
+				if (MusicUtils.getLastMusic().getId() == 1) {
 					//如果播放到列表的第一首,则停止播放,释放播放器
 					media.release();
 				} else { //否则播放列表的上一首音乐
-					play(ContansUtils.list.get(ContansUtils.getLastMusic().getId() - 1));
+					play(MusicUtils.list.get(MusicUtils.getLastMusic().getId() - 1));
 				}
 
-			} else if (ContansUtils.getPlayMode() == Music.mode_random) {//随机播放
+			} else if (MusicUtils.getPlayMode() == Music.mode_random) {//随机播放
 				playRandom();
 
 			}
@@ -208,28 +212,28 @@ public class PlayService extends Service {
 		}
 	}
 
-	/** 
+	/**
 	 * @Title: getRandom 获取随机音乐并播放
-	 * @Description: TODO   
+	 * @Description: TODO
 	 * @return void
-	 * @author wuhuihui  
+	 * @author wuhuihui
 	 * @date 2016年5月6日 下午3:05:09
 	 */
 	private void playRandom() {
-		int location = (int)(Math.random() * (ContansUtils.list.size()));
-		Music music = ContansUtils.list.get(location);
+		int location = (int)(Math.random() * (MusicUtils.list.size()));
+		Music music = MusicUtils.list.get(location);
 		if (music != null) {
-			Log.i(TAG + "---" + "随便来一首！", location + "---" +  music.toString());
-			play(ContansUtils.list.get(location));
+			LogUtils.i(TAG + "---" + "随便来一首！", location + "---" +  music.toString());
+			play(MusicUtils.list.get(location));
 		}
 	}
 
-	/** 
-	 * @Title: play 
+	/**
+	 * @Title: play
 	 * @Description: TODO 播放音乐
-	 * @param music  
+	 * @param music
 	 * @return void
-	 * @author wuhuihui  
+	 * @author wuhuihui
 	 * @date 2016年5月6日 下午3:03:45
 	 */
 	private void play(Music music) {
@@ -241,7 +245,7 @@ public class PlayService extends Service {
 				}
 
 				//创建播放器，设置并播放音乐
-				Log.i(TAG, "创建播放器，设置并播放音乐");
+				LogUtils.i(TAG, "创建播放器，设置并播放音乐");
 				media = new MediaPlayer();
 				media.setAudioStreamType(AudioManager.STREAM_MUSIC);//设置播放类型
 				media.setOnCompletionListener(new MediaCompletionListener());
@@ -253,8 +257,8 @@ public class PlayService extends Service {
 
 				media.seekTo(music.getProgress());
 
-				Log.i(TAG, "保存播放位置...." + music.getProgress());
-				ContansUtils.setLastMusic(getApplicationContext(), music, music.getProgress());
+				LogUtils.i(TAG, "保存播放位置...." + music.getProgress());
+				MusicUtils.setLastMusic(music, music.getProgress());
 
 				Intent playIntent = new Intent();
 				playIntent.setAction(ACTION_PLAY);
@@ -272,32 +276,32 @@ public class PlayService extends Service {
 	}
 
 	/**
-	 * @Title: MediaErrorListener  
-	 * @Description: TODO 播放时候错误回调 
+	 * @Title: MediaErrorListener
+	 * @Description: TODO 播放时候错误回调
 	 * @author wuhuihui
-	 * @date 2016年5月6日 下午5:09:50 
+	 * @date 2016年5月6日 下午5:09:50
 	 */
 	private class MediaErrorListener implements OnErrorListener {
 		@Override
 		public boolean onError(MediaPlayer arg0, int arg1, int arg2) {
-			Log.i(TAG, "播放时候遇到错误，播放下一首");
+			LogUtils.i(TAG, "播放时候遇到错误，播放下一首");
 			playNext();
 			return false;
 		}
 	}
 
 	/**
-	 * @Title: MediaCompletionListener   
+	 * @Title: MediaCompletionListener
 	 * @Description: TODO 播放完成事件
 	 * @author wuhuihui
-	 * @date 2016年5月6日 下午5:10:28 
+	 * @date 2016年5月6日 下午5:10:28
 	 */
 	private class MediaCompletionListener implements OnCompletionListener {
 		@Override
 		public void onCompletion(MediaPlayer mediaPlayer) {
-			if (ContansUtils.getPlayMode() == Music.mode_single) {
-				ContansUtils.setLastMusicProgress(getApplicationContext(), 0);
-				play(ContansUtils.getLastMusic());
+			if (MusicUtils.getPlayMode() == Music.mode_single) {
+				MusicUtils.setLastMusicProgress(0);
+				play(MusicUtils.getLastMusic());
 
 			} else {
 				playNext();
@@ -309,7 +313,7 @@ public class PlayService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Log.i(TAG, "onDestroy");
+		LogUtils.i(TAG, "onDestroy");
 		media.stop();
 		media.release();
 		media = null;

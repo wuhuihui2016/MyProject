@@ -1,7 +1,5 @@
 package com.fengyang.music.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,8 @@ import android.widget.TextView;
 
 import com.fengyang.music.R;
 import com.fengyang.music.model.Music;
+
+import java.util.List;
 /**
 * @Title: MusicAdapter   
 * @Description: TODO 音乐适配器
@@ -19,9 +19,8 @@ import com.fengyang.music.model.Music;
 */
 public class MusicAdapter extends BaseAdapter {
 
-	List<Music> list;
 	Context context;
-	Music music;
+	List<Music> list;
 
 	public MusicAdapter(List<Music> list,Context context) {
 		super();
@@ -46,25 +45,25 @@ public class MusicAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder = null;
-		if(convertView == null){
+		ViewHolder viewHolder;
+		if(convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(R.layout.item_layout, null);
 			viewHolder = new ViewHolder();
 			viewHolder.song = (TextView) convertView.findViewById(R.id.song);
 			viewHolder.singer = (TextView) convertView.findViewById(R.id.singer);
 			convertView.setTag(viewHolder);
-		}else{
+		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		music = list.get(position);
+		Music music = list.get(position);
 		viewHolder.song.setText(music.getTitle());
 		viewHolder.singer.setText(music.getArtist() + "   " + music.getAlbum());
 		return convertView;
 	}
 
 	class ViewHolder{
-		TextView song,singer;
+		TextView song, singer;
 	}
 
 }

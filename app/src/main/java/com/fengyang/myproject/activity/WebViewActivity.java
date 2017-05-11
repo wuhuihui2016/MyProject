@@ -9,12 +9,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.fengyang.myproject.R;
-import com.fengyang.myproject.utils.StringUtils;
+import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.StringUtils;
 
 /**
  * Created by wuhuihui on 2017/3/28.
  */
-public class WebViewActivity extends BaseActivity{
+public class WebViewActivity extends BaseActivity {
 
     private WebView webView;
 
