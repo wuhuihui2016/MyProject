@@ -40,6 +40,7 @@ import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.music.view.ImageTextButtonView;
 import com.fengyang.toollib.utils.LogUtils;
 import com.fengyang.toollib.utils.StringUtils;
+import com.fengyang.toollib.utils.SystemUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -110,7 +111,7 @@ public class PlayActivity extends MusicBaseActivity implements OnClickListener, 
 	protected void onPause() {
 		super.onPause();
 		LogUtils.i(TAG, "onPause");
-		MusicUtils.setTimerNull(playTimer);
+		SystemUtils.stopTimer(playTimer);
 	}
 
 	@SuppressLint("HandlerLeak") Handler handler = new Handler() {
@@ -276,7 +277,7 @@ public class PlayActivity extends MusicBaseActivity implements OnClickListener, 
 
 				} else if (intent.getAction() == PlayService.ACTION_PAUSE) {
 					isPlaying(false);
-					MusicUtils.setTimerNull(playTimer);
+					SystemUtils.stopTimer(playTimer);
 
 				} else if (intent.getAction() == PlayService.ACTION_SETTIME){
 					setTimeInfo();
@@ -355,7 +356,7 @@ public class PlayActivity extends MusicBaseActivity implements OnClickListener, 
 	 */
 	private void isPlaying(boolean isPlaying) {
 
-		MusicUtils.setTimerNull(playTimer);
+		SystemUtils.stopTimer(playTimer);
 		utils = new MusicDBUtils(getApplicationContext());
 		lastMusic = MusicUtils.getLastMusic();
 

@@ -23,6 +23,7 @@ import com.fengyang.music.service.PlayService;
 import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.toollib.utils.LogUtils;
 import com.fengyang.toollib.utils.StringUtils;
+import com.fengyang.toollib.utils.SystemUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -223,7 +224,7 @@ public class MusicBasePlayActivity extends MusicBaseActivity {
 	 * @date 2016年6月2日 上午11:15:04
 	 */
 	private void isPlaying(boolean isPlaying) {
-		MusicUtils.setTimerNull(playTimer);
+		SystemUtils.stopTimer(playTimer);
 
 		//底部菜单显示当前音乐信息
 		if (MusicUtils.getLastMusic() != null) {
@@ -246,7 +247,7 @@ public class MusicBasePlayActivity extends MusicBaseActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		MusicUtils.setTimerNull(playTimer);
+		SystemUtils.stopTimer(playTimer);
 	}
 
 	@Override

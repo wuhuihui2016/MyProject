@@ -74,6 +74,7 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
+    <color name="red">@android:color/holo_red_light</color>
     <color name="result_image_border">#ffffffff</color>
     <color name="result_minor_text">#ffc0c0c0</color>
     <color name="result_points">#c000ff00</color>

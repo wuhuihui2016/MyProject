@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/ic_shape_gray"
+        android:background="@drawable/shape_white_bkg_app_border"
         android:divider="#E0E0E0"
         android:dividerHeight="1dp" />
 

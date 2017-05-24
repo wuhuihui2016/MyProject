@@ -10,7 +10,6 @@ import com.fengyang.toollib.utils.LogUtils;
 import com.fengyang.toollib.utils.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,7 +49,7 @@ public class DBUtils extends SQLiteOpenHelper {
 		Cursor cursor = db.rawQuery("select * from t_user where name = ?",new String[]{name});
 		if(! cursor.moveToNext()){
 			db.execSQL("insert into t_user(name,age,time,jobdesc,message) values(?,?,?,?,?)",
-					new Object[]{name, age, jobdesc, StringUtils.formatDate(new Date()), info});
+					new Object[]{name, age, jobdesc, StringUtils.formatDate(), info});
 		}
 		cursor.close();
 		db.close();

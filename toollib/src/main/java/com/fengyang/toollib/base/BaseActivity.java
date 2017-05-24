@@ -72,15 +72,9 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     }
 
     public void setTitle(CharSequence title) {
-        if(isOtherActivity()) {
-
-            //设置当前界面的title
-            TextView titleView = (TextView) findViewById(R.id.title);
-            titleView.setText(title);
-
-        } else {
-            LogUtils.i("setContentView", "MainActivity's  layout is setten!");
-        }
+        //设置当前界面的title
+        TextView titleView = (TextView) findViewById(R.id.title);
+        titleView.setText(title);
 
     }
 

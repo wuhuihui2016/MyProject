@@ -12,6 +12,7 @@ import com.fengyang.music.service.PlayService;
 import com.fengyang.toollib.utils.ActivityUtils;
 import com.fengyang.toollib.utils.ContansUtils;
 import com.fengyang.toollib.utils.LogUtils;
+import com.fengyang.toollib.utils.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,7 +197,7 @@ public class MusicUtils {
 	 */
 	public static void setLastTime (final Context context, int time) {
 		LogUtils.i(TAG, "写入剩余睡眠时间---" + time);
-		MusicUtils.setTimerNull(timer);
+		SystemUtils.stopTimer(timer);
 		lastTime = time;
 		if (setTime) {
 			timer = new Timer();
@@ -418,23 +419,6 @@ public class MusicUtils {
 		LogUtils.i(TAG, list.toString());
 		return list;
 
-	}
-
-	/**
-	 * @Title: setTimerNull
-	 * @Description: TODO 将计时器置空
-	 * @param timer
-	 * @return void
-	 * @author wuhuihui
-	 * @date 2016年5月19日 下午5:29:55
-	 */
-	public static void setTimerNull(Timer timer){
-		if (timer != null) {
-			LogUtils.i(TAG, "释放timer");
-			timer.purge();
-			timer.cancel();
-			timer = null;
-		}
 	}
 
 	/**

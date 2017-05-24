@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.fengyang.toollib.view.IOSScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <!-- 固定布局 fillViewport表示子布局填充满
+        该scrollview的子布局期盼是使用具体高度，尽量不用matchparent属性-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/toContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/ic_menu_call"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+                <ImageButton
+                    android:id="@+id/toDownload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_gravity="center|center_vertical"
+                    android:background="@drawable/shape_app"
+                    android:src="@mipmap/download"
+                    android:onClick="onClick"/>
+                <ImageButton
+                    android:id="@+id/toCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/toReceive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="侧耳倾听"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+
+                <Button
+                    android:id="@+id/toJSMutual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="JS交互"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+
+                <Button
+                    android:id="@+id/toWordGame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="文字游戏"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/music"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="懒猫音乐"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+
+                <Button
+                    android:id="@+id/screen_shot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="截屏"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/shape_app"
+                    android:onClick="onClick"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.fengyang.toollib.view.IOSScrollView>
+
+    <ImageButton
+        android:id="@+id/top_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:src="@drawable/totop"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>
+
+
+
+

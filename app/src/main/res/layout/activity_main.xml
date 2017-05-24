@@ -1,131 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/app_color"
         android:fitsSystemWindows="true"
         android:clipToPadding="true"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingRight="10dp"
+        android:gravity="center|center_vertical"
+        android:textColor="@color/white"
+        android:text="@string/app_name"
+        android:textSize="22sp"/>
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/white"
-            android:text="@string/app_name"
-            android:textSize="22sp"/>
-
-    </RelativeLayout>
-
-    <com.fengyang.toollib.view.IOSScrollView
+    <FrameLayout
+        android:id="@+id/main_context"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none"
-        android:padding="10dp">
-        <!-- 固定布局 fillViewport表示子布局填充满
-             该scrollview的子布局期盼是使用具体高度，尽量不用matchparent属性-->
+        android:layout_below="@id/title"
+        android:padding="10dp"
+        android:layout_marginBottom="50dp"/>
+
+    <!-- 最下面的菜单，包含首页，分类，购物车，我的 -->
+    <LinearLayout
+        android:id="@+id/app_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:background="#F5F5F5"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:animateLayoutChanges="true">
+        <View
+            android:id="@+id/menu_topline"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#C0C0C0" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/home_page"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageButton
-                    android:id="@+id/toContact"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/shouye_pic"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:src="@mipmap/app_icon"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:id="@+id/shouye_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/ic_menu_call"
-                    android:background="@drawable/shape_app"
-                    android:onClick="onClick"/>
-                <ImageButton
-                    android:id="@+id/toDownload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:layout_gravity="center|center_vertical"
-                    android:background="@drawable/shape_app"
-                    android:src="@mipmap/download"
-                    android:onClick="onClick"/>
-                <ImageButton
-                    android:id="@+id/toCamera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:src="@android:drawable/ic_menu_camera"
-                    android:background="@drawable/shape_app"
-                    android:onClick="onClick"/>
-
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/app_name"
+                    android:textSize="12sp"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray"/>
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/mine"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/toReceive"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/wode_pic"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/wode"/>
+                <TextView
+                    android:id="@+id/wode_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="我是顺风耳"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_app"
-                    android:onClick="onClick"/>
-
-                <Button
-                    android:id="@+id/toJSMutual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="JS交互"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/shape_app"
-                    android:onClick="onClick"/>
-
-                <Button
-                    android:id="@+id/toWordGame"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="文字游戏"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/shape_app"
-                    android:onClick="onClick"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/music"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="懒猫音乐"
-                    android:background="@drawable/shape_app"
-                    android:onClick="onClick"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="我的"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
-    </com.fengyang.toollib.view.IOSScrollView>
-</LinearLayout>
+</RelativeLayout>
 
 

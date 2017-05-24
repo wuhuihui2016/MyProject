@@ -190,13 +190,30 @@ public class SystemUtils {
      * 返回true时执行后续操作
      */
     private static long lastClickTime;
-    public synchronized static boolean notFastClick() {
+    public synchronized static boolean isNotFastClick() {
         long time = System.currentTimeMillis();
         if ( time - lastClickTime < 2000) {
             return false;
         }
         lastClickTime = time;
         return true;
+    }
+
+    /**
+     * @Title: stopTimer
+     * @Description: TODO 将计时器置空
+     * @param timer
+     * @return void
+     * @author wuhuihui
+     * @date 2016年5月19日 下午5:29:55
+     */
+    public static void stopTimer(Timer timer){
+        if (timer != null) {
+            LogUtils.i(TAG, "释放timer");
+            timer.purge();
+            timer.cancel();
+            timer = null;
+        }
     }
 
     /**
@@ -225,8 +242,7 @@ public class SystemUtils {
      * @param context
      * @return
      */
-    public static int getScreenWidth(Context context)
-    {
+    public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
@@ -240,8 +256,7 @@ public class SystemUtils {
      * @param context
      * @return
      */
-    public static int getScreenHeight(Context context)
-    {
+    public static int getScreenHeight(Context context) {
         WindowManager wm = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();

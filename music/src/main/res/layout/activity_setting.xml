@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/ic_shape_gray"
+        android:background="@drawable/shape_white_bkg_app_border"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -234,7 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_shape_gray"
+            android:background="@drawable/shape_white_bkg_app_border"
             android:onClick="onClick"
             android:text="@string/clearCache"
             android:textColor="@android:color/holo_orange_light" />
@@ -244,7 +244,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_shape_gray"
+            android:background="@drawable/shape_white_bkg_app_border"
             android:onClick="onClick"
             android:text="@string/exit"
             android:textColor="@android:color/holo_red_light" />

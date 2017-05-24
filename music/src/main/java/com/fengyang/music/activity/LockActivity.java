@@ -27,6 +27,7 @@ import com.fengyang.music.service.PlayService;
 import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.music.utils.NotificationUtils;
 import com.fengyang.toollib.utils.LogUtils;
+import com.fengyang.toollib.utils.SystemUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -126,7 +127,7 @@ OnTouchListener, OnGestureListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		MusicUtils.setTimerNull(timer);
+		SystemUtils.stopTimer(timer);
 	}
 
 	/** 

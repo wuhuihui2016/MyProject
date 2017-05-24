@@ -6,18 +6,19 @@
     android:background="@drawable/splash_backgroup"
     android:orientation="vertical" >
 
-    <Button
+    <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:gravity="center|center_vertical"
-        android:onClick="onClick"
-        android:text="1"
+        android:text="1秒"
+        android:clickable="true"
+        android:padding="10dp"
         android:layout_marginRight="10dp"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/ic_shape_gray"
+        android:background="@drawable/shape_white_bkg_app_border"
         android:textColor="@android:color/holo_red_light" />
 
 </RelativeLayout>

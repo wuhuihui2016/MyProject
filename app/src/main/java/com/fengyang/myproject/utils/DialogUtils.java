@@ -61,6 +61,16 @@ public class DialogUtils {
                 titleView.setText(title);
             }
             msgView.setText(message);
+
+            comfireView.setText("知道了");
+            comfireView.setOnClickListener(new DialogListener() {
+                @Override
+                public void onClick(View v) {
+                    super.onClick(v);
+                }
+            });
+            cancel_layout.setVisibility(View.GONE);
+
             dialog.show();
 
         } catch (Exception e) {}
@@ -86,8 +96,9 @@ public class DialogUtils {
             }
             msgView.setText(message);
             comfireView.setOnClickListener(comfireListener);
-            cancelView.setOnClickListener(cancelListener);
 
+            if (cancelListener == null) cancel_layout.setVisibility(View.GONE);
+            else  cancelView.setOnClickListener(cancelListener);
             dialog.show();
 
         } catch (Exception e) {}

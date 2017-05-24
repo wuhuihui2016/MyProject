@@ -18,8 +18,6 @@ import android.widget.TextView;
 import com.fengyang.toollib.R;
 import com.fengyang.toollib.utils.StringUtils;
 
-import java.util.Date;
-
 /**
  * @desc 自定义Listview下拉刷新,上拉加载更多
  * @author fengyangtech
@@ -174,14 +172,14 @@ public class AutoListView extends ListView implements OnScrollListener {
 
 	public void onRefreshComplete(String updateTime) {
 		lastUpdate.setText(this.getContext().getString(R.string.lastUpdateTime,
-				StringUtils.formatDate(new Date())));
+				StringUtils.formatDate()));
 		state = NONE;
 		refreshHeaderViewByState();
 	}
 
 	// 用于下拉刷新结束后的回调
 	public void onRefreshComplete() {
-		String currentTime = StringUtils.formatDate(new Date());
+		String currentTime = StringUtils.formatDate();
 		onRefreshComplete(currentTime);
 	}
 

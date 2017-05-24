@@ -14,6 +14,7 @@ import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.music.utils.NotificationUtils;
 import com.fengyang.toollib.utils.LogUtils;
 import com.fengyang.toollib.utils.StringUtils;
+import com.fengyang.toollib.utils.SystemUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -117,7 +118,7 @@ public class PlayService extends Service {
 						}
 					}, 1000);
 
-				} else MusicUtils.setTimerNull(timer);
+				} else SystemUtils.stopTimer(timer);
 			}
 		}
 		return super.onStartCommand(intent, flags, startId);

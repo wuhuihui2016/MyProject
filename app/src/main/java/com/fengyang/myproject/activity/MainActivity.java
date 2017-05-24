@@ -1,133 +1,142 @@
 package com.fengyang.myproject.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
-import com.fengyang.music.activity.MusicActivity;
 import com.fengyang.myproject.R;
-import com.fengyang.myproject.receiver.MyReceiver;
-import com.fengyang.myproject.utils.DialogUtils;
+import com.fengyang.myproject.fragment.MainFragment;
+import com.fengyang.myproject.fragment.MineFragment;
 import com.fengyang.myproject.utils.PermissionUtils;
 import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.LogUtils;
 import com.fengyang.toollib.utils.StringUtils;
 
-/**
- * TODO 子功能的主架构
- *   TODO 1.跳转ContactActivity获取联系人权限
- *   TODO 2.跳转页面后获取SDcard权限下载图片并显示
- *   TODO 3.跳转TakePhotoActivity获取相机权限
- *   TODO 4.发送广播的方法在MyApp.class中
- *   TODO 5.JS交互
- *   TODO 6.文字游戏
- *   TODO 7.懒猫音乐
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends BaseActivity {
 
-    private boolean isClicked;
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
+    private List<Fragment> fragments = new ArrayList<Fragment>();
+    private Fragment frag_main, frag_mine;//首页,我的
+    private int frag_index = 0;//当前加载fragment标志位
+    private TextView shouye_title, wode_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void onClick(View v) {
+        shouye_title = (TextView) findViewById(R.id.shouye_title);
+        wode_title = (TextView) findViewById(R.id.wode_title);
 
-        if (v.getId() == R.id.toContact) {
-            //TODO 1.跳转ContactActivity获取联系人权限
-            startActivity(new Intent(getApplicationContext(), ContactActivity.class));
-
-        } else if (v.getId() == R.id.toDownload || v.getId() == R.id.toCamera) {
-            Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
-            if (v.getId() == R.id.toDownload) intent.putExtra("isDownload", true);//TODO 2.跳转页面后下载图片并显示
-            else intent.putExtra("isDownload", false);//TODO 3.获取相机权限跳转TakePhotoActivity
-            startActivity(intent);
-
-        } else if (v.getId() == R.id.toReceive) {
-            //TODO 4.发送广播的方法在MyApp.class中
-            //如果该服务只在一个界面执行，由于OnReceiveCallback为静态必须重新赋值，需在onResume时再次调用方法
-            DialogUtils.showMsgDialog(MainActivity.this, "", "顺风耳已启动~~", new DialogUtils.DialogListener() {
-                @Override
-                public void onClick(View v) {
-                    super.onClick(v);
-                    StringUtils.show2Toast(getApplicationContext(), "顺风耳已启动~~");
-                }
-            }, new DialogUtils.DialogListener() {
-                @Override
-                public void onClick(View v) {
-                    super.onClick(v);
-                }
-            });
-            final Button toReceive = (Button) findViewById(R.id.toReceive);
-            toReceive.setTextColor(Color.parseColor("#541E00"));
-
-            MyReceiver.registerCallBack(new MyReceiver.OnReceiveCallback() {
-                @Override
-                public void onCheck(int number) {
-                    toReceive.setText("我是顺风耳：" + number);
-                }
-            });
-
-        } else if (v.getId() == R.id.toJSMutual) {
-            //TODO 5.JS交互
-            startActivity(new Intent(getApplication(), WebViewActivity.class));
-
-        } else if (v.getId() == R.id.toWordGame) {
-            //TODO 6.文字游戏
-            startActivity(new Intent(getApplication(), TextActivity.class));
-
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        toMusic();
-    }
-
-    /**
-     *  TODO 7.懒猫音乐
-     *  需打开文件权限才可进入音乐
-     * 注意:避免用户拒绝访问权限时出现无限循环的系统框弹出
-     */
-    private void toMusic() {
-        final Button music_btn = (Button) findViewById(R.id.music);
+        //检测权限后显示界面
         PermissionUtils.checkSDcardPermission(MainActivity.this, new PermissionUtils.OnCheckCallback() {
             @Override
             public void onCheck(boolean isSucess) {
-                if (isClicked) {
-                    if (isSucess) {
-                        isClicked = false;
-                        startActivity(new Intent(getApplication(), MusicActivity.class));
-                    } else {//也要考虑某些手机（比如vivo，oppo）自动禁止权限的问题
-                        StringUtils.show1Toast(context, "可能读取SDCard权限未打开，请检查后重试！");
-                    }
-                } else {//设置按钮的点击事件，进一步判断权限的获取或跳转指定界面
-                    music_btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            PermissionUtils.checkSDcardPermission(MainActivity.this, new PermissionUtils.OnCheckCallback() {
-                                @Override
-                                public void onCheck(final boolean isSucess) {
-                                    if (isSucess) {
-                                        isClicked = false;
-                                        startActivity(new Intent(getApplication(), MusicActivity.class));
-                                    } else {
-                                        //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
-                                        isClicked = true;
-                                        PermissionUtils.notPermission(MainActivity.this, PermissionUtils.PERMISSIONS_STORAGE);
-                                    }
-                                }
-                            });
-                        }
-                    });
+                if (isSucess) {
+                    selectTab(1);
+                } else {
+                    PermissionUtils.notPermission(MainActivity.this, PermissionUtils.PERMISSIONS_STORAGE);
+                    StringUtils.show1Toast(context, "可能读取SDCard权限未打开，请检查后重试！");
                 }
             }
         });
+    }
 
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.home_page: selectTab(1); break;
+            case R.id.mine:      selectTab(2); break;
+        }
+    }
+
+    /**
+     * 首页切换模块
+     * @param index
+     */
+    private void selectTab(int index){
+        try {
+            manager = getSupportFragmentManager();
+            transaction = manager.beginTransaction();
+            hideFragment(transaction);
+            switch (index) {
+                case 1://首页
+                    setTitle("懒猫");
+                    shouye_title.setTextColor(Color.RED);
+                    wode_title.setTextColor(Color.BLACK);
+                    if (frag_index == 1) {
+                        transaction.remove(frag_main);
+                        transaction.commit();
+                        frag_main = null;//制空
+                        frag_index = 0;//标志复位
+                        selectTab(1);//重新加载
+                        return;
+                    } else {
+                        if (frag_main == null) {
+                            frag_main = new MainFragment();
+                            fragments.add(frag_main);
+                        }
+                        if(! frag_main.isAdded()){
+                            transaction.add(R.id.main_context, frag_main);
+                        }
+                        transaction.show(frag_main);
+                    }
+                    break;
+
+                case 2://我的
+                    setTitle("我的");
+                    shouye_title.setTextColor(Color.BLACK);
+                    wode_title.setTextColor(Color.RED);
+                    if (frag_index == 2) {
+                        transaction.remove(frag_mine);
+                        transaction.commit();
+                        frag_mine = null;
+                        frag_index = 0;
+                        selectTab(2);
+                        return;
+                    } else  {
+                        if (frag_mine == null) {
+                            frag_mine = new MineFragment();
+                            fragments.add(frag_mine);
+                        }
+                        if(! frag_mine.isAdded()){
+                            transaction.add(R.id.main_context, frag_mine);
+                        }
+                        transaction.show(frag_mine);
+                    }
+
+                    break;
+
+            }
+            transaction.commit();
+            frag_index = index;//当前加载页标志
+        } catch (Exception e) {
+            LogUtils.i("Exception", e.toString());
+        }
+    }
+
+    /**
+     * 隐藏fragments
+     * @param transaction
+     */
+    private void hideFragment(FragmentTransaction transaction){
+        for(Fragment fragment : fragments){
+            if(fragment != null && fragment.isAdded() && fragment.isVisible()){
+                transaction.hide(fragment);
+            }
+        }
     }
 
 }

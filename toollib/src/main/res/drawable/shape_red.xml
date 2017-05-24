@@ -2,15 +2,14 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle" >
 
-    <!-- rectagle矩形，oval椭圆，line水平直线，ring环形 -->
     <!-- 填充 -->
     <solid android:color="@android:color/white" />
 
     <corners
-        android:bottomLeftRadius="3dp"
-        android:bottomRightRadius="3dp"
-        android:topLeftRadius="3dp"
-        android:topRightRadius="3dp" />
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp" />
     <!-- 间隔 -->
     <padding
         android:bottom="5dp"
@@ -21,7 +20,7 @@
     <!-- 描边 -->
     <stroke
         android:dashGap="0dp"
-        android:width="0.5dp"
-        android:color="@android:color/darker_gray" />
+        android:width="0.1dp"
+        android:color="@color/red" />
 
 </shape>
