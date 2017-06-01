@@ -1,19 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:background="@android:color/white" >
 
-    <com.fengyang.music.view.SearchView
-        android:id="@+id/searchView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/btn_back"
-        android:visibility="gone" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/app_color">
+
+        <com.fengyang.toollib.view.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"/>
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:layout_weight="7"
+            android:gravity="center|center_vertical"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:text="取消"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,7 +43,7 @@
             android:text="@string/hot"
             android:textColor="@android:color/darker_gray" />
 
-        <com.fengyang.music.view.FlowLayout
+        <com.fengyang.toollib.view.FlowLayout
             android:id="@+id/flowLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,10 +89,34 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/searchListView"
+    <TextView
+        android:id="@+id/resultTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:text="搜索结果"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/nodata"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="暂无相关音乐"/>
+
+        <ListView
+            android:id="@+id/searchListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"/>
+    </RelativeLayout>
 
 </LinearLayout>

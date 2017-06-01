@@ -25,7 +25,6 @@
         android:padding="10dp"
         android:layout_marginBottom="50dp"/>
 
-    <!-- 最下面的菜单，包含首页，分类，购物车，我的 -->
     <LinearLayout
         android:id="@+id/app_buttom"
         android:layout_width="match_parent"
@@ -48,9 +47,9 @@
                 android:id="@+id/home_page"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:paddingTop="5dp"
                 android:onClick="onClick"
                 android:orientation="vertical">
                 <ImageView
@@ -75,7 +74,7 @@
                 android:id="@+id/mine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:paddingTop="5dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:onClick="onClick"

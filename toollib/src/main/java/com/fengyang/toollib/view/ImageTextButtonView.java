@@ -1,4 +1,4 @@
-package com.fengyang.music.view;
+package com.fengyang.toollib.view;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.fengyang.music.R;
+import com.fengyang.toollib.R;
+
 
 /**
 * @Title: ImageTextButtonView   

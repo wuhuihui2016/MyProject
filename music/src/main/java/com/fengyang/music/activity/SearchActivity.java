@@ -2,14 +2,15 @@ package com.fengyang.music.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,16 +21,15 @@ import com.fengyang.music.adapter.MusicAdapter;
 import com.fengyang.music.model.Music;
 import com.fengyang.music.service.PlayService;
 import com.fengyang.music.utils.MusicUtils;
-import com.fengyang.music.view.FlowLayout;
-import com.fengyang.music.view.SearchView;
+import com.fengyang.toollib.view.SearchView;
 import com.fengyang.toollib.utils.LogUtils;
-import com.fengyang.toollib.utils.SystemUtils;
+import com.fengyang.toollib.view.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Title: SearchActivity   
+ * @Title: SearchActivity
  * @Description: TODO 任意搜索本地音乐文件
  * @author wuhuihui
  * @date 2016年6月3日 下午2:21:29 
@@ -37,32 +37,35 @@ import java.util.List;
 public class SearchActivity extends MusicBasePlayActivity {
 
 	private SearchView searchView;
-	private ImageButton clearHistory;
+	private Button search_btn;
 	private LinearLayout linearLayout, historyLayout;
 	private FlowLayout flowLayout;
 	private ListView historyListView;
 
-	private String key;//搜索关键词
 	private List<Music> searchList = new ArrayList<Music>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_search);
+		initView();
+	}
 
-		/*当在Android的layout设计里面如果输入框过多，则在输入弹出软键盘的时候，下面的输入框会有一部分被软件盘挡住，从而不能获取焦点输入。
-		解决办法：
-		方法一：在你的activity中的oncreate中setContentView之前写上这个代码 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-		方法二：在项目的AndroidManifest.xml文件中界面对应的<activity>里加入 android:windowSoftInputMode="stateVisible|adjustResize"，这样会让屏幕整体上移。如果加上的是
-		                android:windowSoftInputMode="adjustPan"这样键盘就会覆盖屏幕。*/
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-		setContentView4Play("", R.layout.activity_search);
-		//searchView
+	/**
+	 * @Title: initView 初始化界面
+	 * @author wuhuihui
+	 */
+	private void initView() {
+		search_btn = (Button) findViewById(R.id.search_btn);
+		search_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		searchView = (SearchView) findViewById(R.id.searchView);
-		searchView.setVisibility(View.VISIBLE);
 		searchView.setHint("搜索本地音乐");
-		searchView.setEditTextSize(12);
-		searchView.setEditTextColor(Color.BLACK);
 
 		flowLayout = (FlowLayout) findViewById(R.id.flowLayout);
 		linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
@@ -73,79 +76,102 @@ public class SearchActivity extends MusicBasePlayActivity {
 		listView = (ListView) findViewById(R.id.searchListView);
 		listView.addFooterView(footerView);
 
-		clearHistory = (ImageButton) findViewById(R.id.clearHistory);
-		clearHistory.setOnClickListener(this);
+		//清除搜索记录按钮
+		findViewById(R.id.clearHistory).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				MusicUtils.clearHistory();
+				isFinishedSeach(null);
+			}
+		});
 
 		setSearchTag();
-		isFinishedSeach(false);
-		searchView.setOnFinishListener(new OnClickListener() {
+		isFinishedSeach(null);
+		searchView.edit.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void onClick(View v) {
-				SystemUtils.hideInput(SearchActivity.this);
-				key = searchView.getText();
-				isFinishedSeach(true);
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if(s.length() != 0) {
+					searchView.clear.setVisibility(View.VISIBLE);
+					searchView.clear.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							searchView.edit.setText("");
+						}
+					});
+					search_btn.setText("搜索");
+					search_btn.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							isFinishedSeach(searchView.getText());
+						}
+					});
+				} else {
+					searchView.clear.setVisibility(View.GONE);
+					search_btn.setText("取消");
+					search_btn.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							finish();
+						}
+					});
+				}
 			}
-		}, new OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
-				SystemUtils.hideInput(SearchActivity.this);
-				searchView.setText("");
-				isFinishedSeach(false);
-			}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+			@Override
+			public void afterTextChanged(Editable s) {}
 		});
 	}
 
-	/** 
-	 * @Title: isFinishSeach 
-	 * @Description: TODO 判断当前搜索时机，之前还是之后
-	 * @param isFinished  
+	/**
+	 * @Title: isFinishSeach
+	 * @Description: TODO 判断当前搜索时机，key是否为空
+	 * @param key
 	 * @return void
-	 * @author wuhuihui  
+	 * @author wuhuihui
 	 * @date 2016年6月6日 上午11:05:44
 	 */
-	private void isFinishedSeach(boolean isFinished)  {
-		if (isFinished) {
-			if (TextUtils.isEmpty(key)) {
-				isFinishedSeach(false);
-			} else {
-				//保存搜索记录，查找结果
-				MusicUtils.addHistory(key);
-				searchList.clear();
-				for (Music music: MusicUtils.list) {
-					if (music.getAlbum().contains(key) //专辑名查找
-							|| music.getArtist().contains(key) //歌手查找
-							|| music.getTitle().contains(key)) { //歌名查找
-						searchList.add(music);
-					}
+	private void isFinishedSeach(String key)  {
+		if (! TextUtils.isEmpty(key)) {
+			//保存搜索记录，查找结果
+			MusicUtils.addHistory(key);
+			searchList.clear();
+			for (Music music: MusicUtils.list) {
+				if (music.getAlbum().contains(key) //专辑名查找
+						|| music.getArtist().contains(key) //歌手查找
+						|| music.getTitle().contains(key)) { //歌名查找
+					searchList.add(music);
 				}
-
-				//显示结果列表
-				linearLayout.setVisibility(View.GONE);
-				listView.setVisibility(View.VISIBLE);
-				listView.removeHeaderView(footerView);
-				listView.addFooterView(footerView);
-				if (searchList.size() > 0) {
-					footerView.setText("搜索到" + searchList.size() + "首音乐");
-				} else {
-					footerView.setText("暂无音乐！");
-				}
-
-				adapter = new MusicAdapter(searchList, getApplicationContext());
-				adapter.notifyDataSetChanged();
-				listView.setAdapter(adapter);
-
-				listView.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						MusicUtils.setLastMusic(searchList.get(position), 0);
-						MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
-					}
-				});
 			}
+
+			//显示结果列表
+			linearLayout.setVisibility(View.GONE);
+			listView.setVisibility(View.VISIBLE);
+			listView.removeHeaderView(footerView);
+			listView.addFooterView(footerView);
+			if (searchList.size() > 0) {
+				footerView.setText("搜索到" + searchList.size() + "首音乐");
+			} else {
+				footerView.setText("暂无音乐！");
+			}
+
+			adapter = new MusicAdapter(searchList, getApplicationContext());
+			adapter.notifyDataSetChanged();
+			listView.setAdapter(adapter);
+
+			listView.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+										int position, long id) {
+					MusicUtils.setLastMusic(searchList.get(position), 0);
+					MusicUtils.startService(getApplicationContext(), PlayService.ACTION_PLAY);
+				}
+			});
 		} else {
 			listView.setVisibility(View.GONE);
 			linearLayout.setVisibility(View.VISIBLE);
@@ -160,10 +186,10 @@ public class SearchActivity extends MusicBasePlayActivity {
 
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						key = hisList.get(position);
+											int position, long id) {
+						String key = hisList.get(position);
 						searchView.setText(key);
-						isFinishedSeach(true);
+						isFinishedSeach(key);
 					}
 				});
 			} else {
@@ -172,11 +198,11 @@ public class SearchActivity extends MusicBasePlayActivity {
 		}
 	}
 
-	/** 
-	 * @Title: setSearchTag 
+	/**
+	 * @Title: setSearchTag
 	 * @Description: TODO 设置搜索标签  
 	 * @return void
-	 * @author wuhuihui  
+	 * @author wuhuihui
 	 * @date 2016年6月6日 下午2:50:03
 	 */
 	private void setSearchTag() {
@@ -192,7 +218,7 @@ public class SearchActivity extends MusicBasePlayActivity {
 				tagList.add(singer);
 			}
 		}
-		
+
 		MusicUtils.removeRepeat(tagList);//去重
 		for (int i = 0; i < tagList.size(); i++) {
 			if (i <= 9) {//取10个标签
@@ -205,40 +231,30 @@ public class SearchActivity extends MusicBasePlayActivity {
 
 					@Override
 					public void onClick(View v) {
-						key = ((TextView) v).getText().toString();
+						String key = ((TextView) v).getText().toString();
 						searchView.setText(key);
-						isFinishedSeach(true);
+						isFinishedSeach(key);
 					}
 				});
 				flowLayout.addView(view);
-			} else continue; 
+			} else continue;
 
 		}
 	}
 
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
-		if (v.getId() == R.id.clearHistory) {
-			LogUtils.i(TAG, "clearHistory");
-			MusicUtils.clearHistory();
-			isFinishedSeach(false);
-		}
-	}
-	
-	/** 
-	* @Title: toback 
-	* @Description: TODO 返回键操作，先将搜索结果隐藏  
-	* @return void
-	* @author wuhuihui  
-	* @date 2016年6月8日 下午3:10:09
-	*/
+	/**
+	 * @Title: toback
+	 * @Description: TODO 返回键操作，先将搜索结果隐藏
+	 * @return void
+	 * @author wuhuihui
+	 * @date 2016年6月8日 下午3:10:09
+	 */
 	private void toback() {
-		isFinishedSeach(false);
+		isFinishedSeach(null);
 		searchView.setText(MusicUtils.getHistory()
 				.get(MusicUtils.getHistory().size() - 1));
 	}
-	
+
 	@Override
 	public void finish() {
 		if(listView.isShown()) toback();

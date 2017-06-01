@@ -1,11 +1,14 @@
 package com.fengyang.myproject.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fengyang.myproject.R;
@@ -27,32 +30,43 @@ public class MainActivity extends BaseActivity {
     private Fragment frag_main, frag_mine;//首页,我的
     private int frag_index = 0;//当前加载fragment标志位
     private TextView shouye_title, wode_title;
+    private boolean canShow = false;//tabBar动画显示标志(仅在界面重新激活时为true,动画效果才实现)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        shouye_title = (TextView) findViewById(R.id.shouye_title);
-        wode_title = (TextView) findViewById(R.id.wode_title);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        shouye_title = (TextView) findViewById(R.id.shouye_title);
+        wode_title = (TextView) findViewById(R.id.wode_title);
+
         //检测权限后显示界面
         PermissionUtils.checkSDcardPermission(MainActivity.this, new PermissionUtils.OnCheckCallback() {
             @Override
             public void onCheck(boolean isSucess) {
                 if (isSucess) {
-                    selectTab(1);
+                    if (frag_index == 0) selectTab(1);//默认加载首页
+                    else selectTab(frag_index);//如果已加载“我的”，则返回时加载“我的”
                 } else {
                     PermissionUtils.notPermission(MainActivity.this, PermissionUtils.PERMISSIONS_STORAGE);
                     StringUtils.show1Toast(context, "可能读取SDCard权限未打开，请检查后重试！");
                 }
             }
         });
+
+        isShow(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        canShow = true;
+        isShow(false);
     }
 
     public void onClick(View v) {
@@ -66,7 +80,7 @@ public class MainActivity extends BaseActivity {
      * 首页切换模块
      * @param index
      */
-    private void selectTab(int index){
+    private void selectTab(int index) {
         try {
             manager = getSupportFragmentManager();
             transaction = manager.beginTransaction();
@@ -74,8 +88,8 @@ public class MainActivity extends BaseActivity {
             switch (index) {
                 case 1://首页
                     setTitle("懒猫");
-                    shouye_title.setTextColor(Color.RED);
-                    wode_title.setTextColor(Color.BLACK);
+                    shouye_title.setTextColor(getResources().getColor(R.color.app_color));
+                    wode_title.setTextColor(getResources().getColor(R.color.gray));
                     if (frag_index == 1) {
                         transaction.remove(frag_main);
                         transaction.commit();
@@ -97,8 +111,8 @@ public class MainActivity extends BaseActivity {
 
                 case 2://我的
                     setTitle("我的");
-                    shouye_title.setTextColor(Color.BLACK);
-                    wode_title.setTextColor(Color.RED);
+                    wode_title.setTextColor(getResources().getColor(R.color.app_color));
+                    shouye_title.setTextColor(getResources().getColor(R.color.gray));
                     if (frag_index == 2) {
                         transaction.remove(frag_mine);
                         transaction.commit();
@@ -137,6 +151,25 @@ public class MainActivity extends BaseActivity {
                 transaction.hide(fragment);
             }
         }
+    }
+
+    /**
+     * TabBar显示隐藏动画控制
+     * @param isShow
+     */
+    private void isShow (boolean isShow) {
+        if (canShow) {
+            LinearLayout app_buttom = (LinearLayout) findViewById(R.id.app_buttom);
+
+            Animation animation;
+            LayoutAnimationController controller;
+            if (isShow)  animation = AnimationUtils.loadAnimation(this, R.anim.tabbar_show);
+            else animation = AnimationUtils.loadAnimation(this, R.anim.tabbar_hidden);
+            controller = new LayoutAnimationController(animation);
+
+            app_buttom.setLayoutAnimation(controller);// 设置动画
+        }
+
     }
 
 }

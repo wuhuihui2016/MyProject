@@ -25,12 +25,10 @@
     <color name="share_view">#ffffffff</color>
     <color name="status_text">#ffffffff</color>
     <color name="status_view">#50000000</color>
-    <color name="topViewColor">#456577</color>
     <color name="transparent">#00000000</color>
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="viewfinder_mask">#60000000</color>
-    <declare-styleable name="FlowLayout"><attr format="dimension" name="horizontalSpacing"/><attr format="dimension" name="verticalSpacing"/></declare-styleable>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <string name="all">所有的</string>
@@ -62,16 +60,7 @@
     <string name="slideRight">右滑解锁</string>
     <string name="time">30</string>
     <string name="todel">确认删除</string>
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-
-
-
-        -->
-    </style>
+    <style name="AppBaseTheme" parent="android:Theme.Light"/>
     <style name="AppTheme" parent="AppBaseTheme">
 
         <!-- 设置没有标题 -->
@@ -80,7 +69,6 @@
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
     </style>
     <style name="PopupAnimation" parent="android:Animation">
-
         <!-- 指定显示的动画xml -->
         <item name="android:windowEnterAnimation">@anim/popup_up</item>
         <!-- 指定消失的动画xml -->

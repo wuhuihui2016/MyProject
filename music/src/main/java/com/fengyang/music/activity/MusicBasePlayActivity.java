@@ -83,10 +83,10 @@ public class MusicBasePlayActivity extends MusicBaseActivity {
 		myFilter.addAction(PlayService.ACTION_PAUSE);
 		registerReceiver(myReceiver, myFilter);
 
-		setRightBtnListener("设置", new View.OnClickListener() {
+		setRightBtnListener("搜索", new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+				startActivity(new Intent(getApplicationContext(), SearchActivity.class));
 			}
 		});
 

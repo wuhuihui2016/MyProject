@@ -16,14 +16,14 @@
         <activity
             android:name="com.fengyang.music.activity.PlayActivity"
             android:noHistory="true" />
+        <!-- 本地搜索音乐文件 -->
+        <activity
+            android:name="com.fengyang.music.activity.SearchActivity"
+            android:configChanges="orientation|keyboardHidden" />
         <!-- 设置页 -->
         <activity android:name="com.fengyang.music.activity.SettingActivity" />
-        <!-- 本地搜索音乐文件 -->
-        <activity android:name="com.fengyang.music.activity.SearchActivity" />
         <!-- 设置休眠时间 -->
         <activity android:name="com.fengyang.music.activity.SetTimeActivity" />
-        <!-- 切换皮肤 -->
-        <activity android:name="com.fengyang.music.activity.AlterSkinActivity" />
 
         <!-- 锁屏,保证唯一 -->
         <activity

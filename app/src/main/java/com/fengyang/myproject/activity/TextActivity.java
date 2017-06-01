@@ -6,14 +6,24 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RemoteViews;
+import android.widget.TextView;
+import android.widget.ViewAnimator;
 
 import com.fengyang.myproject.R;
 import com.fengyang.toollib.base.BaseActivity;
 import com.fengyang.toollib.utils.StringUtils;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 图片功能的结合页面
@@ -34,6 +44,8 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         setContentView("文字游戏", R.layout.activity_text);
 
         notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        showStreamer();
 
     }
 
@@ -97,6 +109,68 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         notifyManager.notify(requestCode, notification);
     }
 
+    /**
+     * 显示轮播横幅
+     */
+    private ViewAnimator animator; //轮播View
+    private List<String> descs = new ArrayList<String>();
+    private final long TIME_INTERVAL = 5000;
+    private boolean autoPlayFlag = false;
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(autoPlayFlag){
+                showNext();
+            }
+            handler.sendMessageDelayed(new Message(),TIME_INTERVAL);
+        }
+    };
+
+    private void showStreamer() {
+        descs.add("1.每天进步一点点");
+        descs.add("2.每天进步一点点");
+        descs.add("3.每天进步一点点");
+        descs.add("4.每天进步一点点");
+        if (descs.size() > 0) {
+            animator = (ViewAnimator) findViewById(R.id.animator);
+            for (int i = 0; i < descs.size(); i ++) {
+                final int finalI = i;
+                View view_streaner = View.inflate(this, R.layout.view_streaner, null);
+                TextView streamer_txt = (TextView) view_streaner.findViewById(R.id.streamer_txt);
+                streamer_txt.setText(descs.get(finalI));
+
+                view_streaner.findViewById(R.id.streamer_btn).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        StringUtils.show1Toast(getApplicationContext(), descs.get(finalI));
+                    }
+                });
+                animator.addView(view_streaner);
+            }
+            handler.sendMessageDelayed(new Message(),TIME_INTERVAL);
+        }
+    }
+
+    /**
+     * 下一个
+     */
+    private void showNext(){
+        animator.setOutAnimation(this,R.anim.slide_out_up);
+        animator.setInAnimation(this,R.anim.slide_in_down);
+        animator.showNext();
+    }
+
+    /**
+     * 上一个
+     */
+    private void showPrevious(){
+        animator.setOutAnimation(this,R.anim.slide_out_down);
+        animator.setInAnimation(this,R.anim.slide_in_up);
+        animator.showPrevious();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -105,6 +179,15 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.notify2:
                 notify2();
+                break;
+            case R.id.btn_previous:
+                showPrevious();
+                break;
+            case R.id.btn_next:
+                showNext();
+                break;
+            case R.id.btn_auto:
+                autoPlayFlag = true;
                 break;
         }
     }

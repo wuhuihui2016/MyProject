@@ -3,9 +3,7 @@ package com.fengyang.music.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.fengyang.music.R;
@@ -21,53 +19,17 @@ import com.fengyang.toollib.utils.LogUtils;
  */
 public class SettingActivity extends MusicBaseActivity{
 
-	private RelativeLayout search, alterSkin, sao, isLock, isShaker, isNight, isSleep;
 	private CheckBox lockCheck, shakerCheck, nightCheck, sleepCheck;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView("设置", R.layout.activity_setting);
-
-		search = (RelativeLayout) findViewById(R.id.search);
-		alterSkin = (RelativeLayout) findViewById(R.id.alterSkin);
-		sao = (RelativeLayout) findViewById(R.id.sao);
-		isLock = (RelativeLayout) findViewById(R.id.isLock);
-		lockCheck = (CheckBox) findViewById(R.id.lockCheck);
-		isShaker = (RelativeLayout) findViewById(R.id.isShaker);
-		shakerCheck = (CheckBox) findViewById(R.id.shakerCheck);
-		isNight = (RelativeLayout) findViewById(R.id.isNight);
-		nightCheck = (CheckBox) findViewById(R.id.nightCheck);
-		isSleep = (RelativeLayout) findViewById(R.id.isSleep);
-		sleepCheck = (CheckBox) findViewById(R.id.sleepCheck);
-
-		//继承自父类的OnClickListener，加上才有点击效果（？？）
-		search.setOnClickListener(this);
-		alterSkin.setOnClickListener(this);
-		sao.setOnClickListener(this);
-		isLock.setOnClickListener(this);
-		isShaker.setOnClickListener(this);
-		isNight.setOnClickListener(this);
-		isSleep.setOnClickListener(this);
-		Button clearCache = (Button) findViewById(R.id.clearCache);
-		clearCache.setOnClickListener(this);
-		Button exit = (Button) findViewById(R.id.exit);
-		exit.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		super.onClick(v);
-		if (v.getId() == R.id.search) {//搜索本地音乐
-			startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-
-		} else if (v.getId() == R.id.alterSkin) {//更改皮肤
-			startActivity(new Intent(getApplicationContext(), AlterSkinActivity.class));
-			
-		} else if (v.getId() == R.id.sao) {//扫一扫
-//			startActivity(new Intent(getApplicationContext(), CaptureActivity.class));
-
-		} else if (v.getId() == R.id.isLock) {//设置锁屏（默认有锁屏）
+		if (v.getId() == R.id.isLock) {//设置锁屏（默认有锁屏）
 			if (MusicUtils.getIsLock()) {
 				lockCheck.setButtonDrawable(R.drawable.checkbox_off);
 				MusicUtils.setIsLock(false);
@@ -118,20 +80,24 @@ public class SettingActivity extends MusicBaseActivity{
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		//锁屏
+		lockCheck = (CheckBox) findViewById(R.id.lockCheck);
 		if (MusicUtils.getIsLock()) lockCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else lockCheck.setButtonDrawable(R.drawable.checkbox_off);
 		
 		//摇一摇
+		shakerCheck = (CheckBox) findViewById(R.id.shakerCheck);
 		if (MusicUtils.getIsShaked())  shakerCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else shakerCheck.setButtonDrawable(R.drawable.checkbox_off);
 		
 		//夜间模式
+		nightCheck = (CheckBox) findViewById(R.id.nightCheck);
 		if (MusicUtils.isNight)  nightCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else nightCheck.setButtonDrawable(R.drawable.checkbox_off);
 		
 		//睡眠定时
+		sleepCheck = (CheckBox) findViewById(R.id.sleepCheck);
 		if (MusicUtils.setTime && MusicUtils.lastTime != 0)  sleepCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else sleepCheck.setButtonDrawable(R.drawable.checkbox_off);
 		

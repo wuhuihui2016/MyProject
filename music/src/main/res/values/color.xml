@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="topViewColor">#456577</color>
     <color name="img_background">#E0E0E0</color>
     <color name="model_sel_color">#ADADAD</color>
     <color name="model_unsel_color">#8f00</color>

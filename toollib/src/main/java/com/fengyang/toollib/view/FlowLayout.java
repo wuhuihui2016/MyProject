@@ -1,12 +1,12 @@
-package com.fengyang.music.view;
-
-import com.fengyang.music.R;
+package com.fengyang.toollib.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.fengyang.toollib.R;
 
 /**
 * @Title: FlowLayout   
@@ -103,7 +103,7 @@ public class FlowLayout extends ViewGroup {
     
 
     @Override
-    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
+    protected boolean checkLayoutParams(LayoutParams p) {
             return p instanceof LayoutParams;
     }
 
@@ -116,9 +116,9 @@ public class FlowLayout extends ViewGroup {
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
             return new LayoutParams(getContext(), attrs);
     }
-    
+
     @Override
-    protected LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
+    protected LayoutParams generateLayoutParams(LayoutParams p) {
             return new LayoutParams(p.width, p.height);
     }
 
