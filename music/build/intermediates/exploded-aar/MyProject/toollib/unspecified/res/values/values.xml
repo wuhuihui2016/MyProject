@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_background">#F5F5F5</color>
+    <color name="app_color">#541E00</color>
+    <color name="black">@android:color/black</color>
+    <color name="gray">#999999</color>
+    <color name="red">@android:color/holo_red_light</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="white">@android:color/white</color>
+    <declare-styleable name="FlowLayout"><attr format="dimension" name="horizontalSpacing"/><attr format="dimension" name="verticalSpacing"/></declare-styleable>
+    <string name="app_name">懒猫</string>
+    <string name="lastUpdateTime">最近更新：%s</string>
+    <string name="load_data">点击重新加载数据</string>
+    <string name="load_full">已加载全部</string>
+    <string name="more">加载中</string>
+    <string name="no_data">暂无数据</string>
+    <string name="pull_to_refresh">下拉可以刷新</string>
+    <string name="release_to_refresh">松开可以刷新</string>
+    <style name="autolistview_customProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@drawable/autolistview_custom_progress_bar</item>
+        <item name="android:layout_width">21dip</item>
+        <item name="android:layout_height">21dip</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="style">
+        <item name="android:button">@null</item>
+    </style>
+</resources>

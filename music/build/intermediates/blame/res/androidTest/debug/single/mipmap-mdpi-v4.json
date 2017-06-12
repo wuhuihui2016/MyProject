@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-mdpi-v4\\app_icon.png",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\mipmap-mdpi-v4\\app_icon.png"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-mdpi-v4\\return_icon.png",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\mipmap-mdpi-v4\\return_icon.png"
+    }
+]
