@@ -20,8 +20,6 @@
         <activity
             android:name="com.fengyang.music.activity.SearchActivity"
             android:configChanges="orientation|keyboardHidden" />
-        <!-- 设置页 -->
-        <activity android:name="com.fengyang.music.activity.SettingActivity" />
         <!-- 设置休眠时间 -->
         <activity android:name="com.fengyang.music.activity.SetTimeActivity" />
 

@@ -25,7 +25,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_base_layout.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\activity_base_layout.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\layout\\activity_base_layout.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_play.xml",
@@ -89,15 +89,11 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\aotulistview_footer.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\aotulistview_footer.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\layout\\aotulistview_footer.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_title_item.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_title_item.xml"
-    },
-    {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_setting.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_setting.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_simple.xml",
@@ -165,7 +161,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\imagetextbutton_view.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\imagetextbutton_view.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\layout\\imagetextbutton_view.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_item_layout.xml",
@@ -185,7 +181,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\search_view.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\search_view.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\layout\\search_view.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\history_item_layout.xml",
@@ -208,12 +204,12 @@
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\autolistview_pull_to_refresh_header.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\layout\\autolistview_pull_to_refresh_header.xml"
-    },
-    {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\settime_item_layout.xml",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\bundles\\debug\\res\\layout\\settime_item_layout.xml"
+    },
+    {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\autolistview_pull_to_refresh_header.xml",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\layout\\autolistview_pull_to_refresh_header.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_item_layout.xml",

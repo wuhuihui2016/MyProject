@@ -18,9 +18,6 @@
         <activity
             android:name=".activity.SearchActivity"
             android:configChanges="orientation|keyboardHidden"/>
-        <!-- 设置页 -->
-        <activity
-        android:name=".activity.SettingActivity" />
         <!-- 设置休眠时间 -->
         <activity
             android:name=".activity.SetTimeActivity"/>

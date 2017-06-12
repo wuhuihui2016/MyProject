@@ -353,7 +353,7 @@
                     "endOffset": 1270
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -372,7 +372,7 @@
                     "endOffset": 1314
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -467,7 +467,7 @@
                     "endOffset": 1686
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -828,7 +828,7 @@
                     "endOffset": 2978
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -1417,7 +1417,7 @@
                     "endOffset": 4950
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -1987,7 +1987,7 @@
                     "endOffset": 6668
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -4172,7 +4172,7 @@
                     "endOffset": 30788
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -4381,7 +4381,7 @@
                     "endOffset": 31241
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -4438,7 +4438,7 @@
                     "endOffset": 31365
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -4457,7 +4457,7 @@
                     "endOffset": 31409
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
@@ -4533,7 +4533,7 @@
                     "endOffset": 31567
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -4590,7 +4590,7 @@
                     "endOffset": 31688
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
@@ -4609,7 +4609,7 @@
                     "endOffset": 31739
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -4628,7 +4628,7 @@
                     "endOffset": 31793
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
@@ -11012,7 +11012,7 @@
                     "endOffset": 120927
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
@@ -11033,7 +11033,7 @@
                     "endOffset": 121014
                 },
                 "from": {
-                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\values\\values.xml",
+                    "file": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\values\\values.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,

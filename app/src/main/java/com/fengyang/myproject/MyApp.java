@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.fengyang.myproject.receiver.MyReceiver;
+import com.fengyang.process.RequestManager;
 import com.fengyang.toollib.utils.ContansUtils;
 import com.fengyang.toollib.utils.CrashHandler;
 import com.fengyang.toollib.utils.LogUtils;
@@ -28,6 +29,8 @@ public class MyApp extends Application {
         CrashHandler.getInstance().init(getApplicationContext());//程序崩溃日志输出保存
 
         ContansUtils.setPres(this);//设置存储空间，获取编辑器
+
+        RequestManager.init(this);//网路请求框架初始化
 
         // TODO 生成随机数，发送广播（依赖点击事件的触发）
         do2toReceive();

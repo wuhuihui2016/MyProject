@@ -64,16 +64,16 @@
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
+        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\release\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",

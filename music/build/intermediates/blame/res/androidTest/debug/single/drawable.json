@@ -13,7 +13,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\autolistview_custom_progress_bar.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\autolistview_custom_progress_bar.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\autolistview_custom_progress_bar.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_dialog_material_background_light.xml",
@@ -25,7 +25,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_2.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_2.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_2.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_item_background_holo_light.xml",
@@ -49,7 +49,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\shape_app_color.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\shape_app_color.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\shape_app_color.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\moderandom_selector.xml",
@@ -65,7 +65,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\shape_red.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\shape_red.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\shape_red.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\btn_next_selector.xml",
@@ -85,7 +85,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\pull_to_refresh_arrow.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\pull_to_refresh_arrow.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\pull_to_refresh_arrow.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_seekbar_thumb_material.xml",
@@ -93,15 +93,15 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_6.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_6.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_6.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_3.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_3.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_3.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\clock.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\clock.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\clock.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_item_background_holo_dark.xml",
@@ -113,7 +113,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_0.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_0.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_0.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
@@ -137,7 +137,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\edit_clear_btn.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\edit_clear_btn.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\edit_clear_btn.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_ratingbar_small_material.xml",
@@ -145,7 +145,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_5.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_5.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_5.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_btn_radio_material.xml",
@@ -153,11 +153,11 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\edittext_color.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\edittext_color.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\edittext_color.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_1.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_1.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_1.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\modecircle_selector.xml",
@@ -169,7 +169,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\search_icon.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\search_icon.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\search_icon.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_btn_colored_material.xml",
@@ -177,7 +177,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\shape_dialog_gray.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\shape_dialog_gray.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\shape_dialog_gray.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_cab_background_internal_bg.xml",
@@ -185,7 +185,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\shape_gray.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\shape_gray.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\shape_gray.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\player_btn_pause_selector.xml",
@@ -197,7 +197,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_4.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_4.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_4.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\nowplaypause_selector.xml",
@@ -209,7 +209,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_7.png",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\loading_7.png"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\loading_7.png"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_btn_borderless_material.xml",
@@ -221,7 +221,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\shape_app.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\shape_app.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\shape_app.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_cab_background_top_material.xml",
@@ -241,7 +241,7 @@
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\shape_white_bkg_app_border.xml",
-        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\ToolLib\\unspecified\\res\\drawable\\shape_white_bkg_app_border.xml"
+        "source": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\exploded-aar\\MyProject\\toollib\\unspecified\\res\\drawable\\shape_white_bkg_app_border.xml"
     },
     {
         "merged": "E:\\Private\\AndroidStudio_Example\\MyProject\\music\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\btn_pause_selector.xml",

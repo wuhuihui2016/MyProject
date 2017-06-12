@@ -11,13 +11,19 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fengyang.callback.ICallBack;
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.fragment.MainFragment;
 import com.fengyang.myproject.fragment.MineFragment;
+import com.fengyang.myproject.utils.DialogUtils;
 import com.fengyang.myproject.utils.PermissionUtils;
+import com.fengyang.process.HttpVolleyUtils;
+import com.fengyang.process.RequestParams;
 import com.fengyang.toollib.base.BaseActivity;
 import com.fengyang.toollib.utils.LogUtils;
 import com.fengyang.toollib.utils.StringUtils;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +42,29 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        testHttp();
+    }
+
+    /**
+     * 测试网络请求框架
+     */
+    private void testHttp() {
+        String URL = "http://beta.mobi.che-by.com:7050/appversion-getAppVersion";
+        RequestParams params = new RequestParams();
+        params.addParameter("currentVersion", "4.1");
+        params.addParameter("type", "android");
+
+        HttpVolleyUtils httpUtils = new HttpVolleyUtils();
+        httpUtils.sendGETRequest(getApplicationContext(), URL, params, new ICallBack() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                DialogUtils.showMsgDialog(MainActivity.this, "测试请求结果" + jsonObject.toString());
+            }
+
+            @Override
+            public void onFailure() {}
+        });
     }
 
     @Override
@@ -65,8 +94,10 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        //底部TAB显示动画
         canShow = true;
         isShow(false);
+
     }
 
     public void onClick(View v) {

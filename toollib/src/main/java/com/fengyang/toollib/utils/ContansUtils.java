@@ -2,7 +2,14 @@ package com.fengyang.toollib.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
+
+import com.fengyang.toollib.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.Map;
 
@@ -103,5 +110,22 @@ public class ContansUtils {
 	public static Map<String, ?> getAll() {
 		return preferences.getAll();
 	}
+
+	// 显示图片的配置
+	public static DisplayImageOptions options = new DisplayImageOptions.Builder()
+			.showImageOnLoading(R.mipmap.app_icon)
+			.showImageForEmptyUri(R.mipmap.app_icon)
+			.showImageOnFail(R.mipmap.app_icon)
+			.resetViewBeforeLoading(false)
+			.delayBeforeLoading(100)
+			.cacheInMemory(true)
+			.cacheOnDisk(true)
+			.bitmapConfig(Bitmap.Config.RGB_565)
+			.considerExifParams(true)
+			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+			.bitmapConfig(Bitmap.Config.ARGB_8888)
+			.displayer(new FadeInBitmapDisplayer(50))// 图片加载好后渐入的动画时间
+			.displayer(new RoundedBitmapDisplayer(150))//圆形图片显示，值越大越圆（<150就不圆）
+			.build();
 
 }

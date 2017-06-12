@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.INTERNET"/> <!-- 连接网络 -->
     <uses-permission android:name="android.permission.CAMERA"/> <!-- 相机 -->
 
-
     <!-- 二维码所需的权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -62,6 +61,9 @@
         <!--文字游戏-->
         <activity android:name=".activity.TextActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- 设置页 -->
+        <activity android:name=".activity.SettingActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!-- activity注册end -->
 
         <!-- ************************************************************************** -->
@@ -82,8 +84,7 @@
             </intent-filter>
         </receiver>
 
-        <!-- receiver注册ens -->
-
+        <!-- receiver注册end -->
 
     </application>
 

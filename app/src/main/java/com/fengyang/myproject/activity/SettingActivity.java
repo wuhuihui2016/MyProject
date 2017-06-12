@@ -1,23 +1,28 @@
-package com.fengyang.music.activity;
+package com.fengyang.myproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fengyang.music.R;
+import com.fengyang.music.activity.LockActivity;
+import com.fengyang.music.activity.SetTimeActivity;
 import com.fengyang.music.service.PlayService;
 import com.fengyang.music.utils.MusicUtils;
+import com.fengyang.myproject.R;
+import com.fengyang.toollib.base.BaseActivity;
 import com.fengyang.toollib.utils.LogUtils;
+import com.fengyang.toollib.utils.SystemUtils;
 
 /**
- * @Title: SettingActivity  
+ * @Title: SettingActivity
  * @Description: TODO 设置选项界面
  * @author wuhuihui
- * @date 2016年5月27日 下午3:47:12 
+ * @date 2016年5月27日 下午3:47:12
  */
-public class SettingActivity extends MusicBaseActivity{
+public class SettingActivity extends BaseActivity {
 
 	private CheckBox lockCheck, shakerCheck, nightCheck, sleepCheck;
 
@@ -25,6 +30,9 @@ public class SettingActivity extends MusicBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView("设置", R.layout.activity_setting);
+
+		TextView version = (TextView) findViewById(R.id.version);
+		version.setText("V " + SystemUtils.getVersionName(context));
 	}
 
 	public void onClick(View v) {
@@ -33,12 +41,12 @@ public class SettingActivity extends MusicBaseActivity{
 			if (MusicUtils.getIsLock()) {
 				lockCheck.setButtonDrawable(R.drawable.checkbox_off);
 				MusicUtils.setIsLock(false);
-			} else { 
+			} else {
 				lockCheck.setButtonDrawable(R.drawable.checkbox_on);
 				MusicUtils.setIsLock(true);
 			}
 			startActivity(new Intent(getApplicationContext(), LockActivity.class));
-			
+
 		} else if (v.getId() == R.id.isShaker) {//摇一摇切歌
 			if (MusicUtils.getIsShaked()) {
 				MusicUtils.setIsShaker(false);
@@ -47,7 +55,7 @@ public class SettingActivity extends MusicBaseActivity{
 				MusicUtils.setIsShaker(true);
 				shakerCheck.setBottom(R.drawable.checkbox_on);
 			}
-			
+
 		} else if (v.getId() == R.id.isNight) {//设置夜间模式
 			if (MusicUtils.isNight) {
 				nightCheck.setButtonDrawable(R.drawable.checkbox_off);
@@ -57,7 +65,7 @@ public class SettingActivity extends MusicBaseActivity{
 				} else {
 					getWindow().setBackgroundDrawableResource(MusicUtils.getDrawableSkin());
 				}
-			} else { 
+			} else {
 				nightCheck.setButtonDrawable(R.drawable.checkbox_on);
 				MusicUtils.isNight = true;
 				getWindow().setBackgroundDrawableResource(android.R.color.black);
@@ -65,7 +73,7 @@ public class SettingActivity extends MusicBaseActivity{
 
 		} else if (v.getId() == R.id.isSleep) {//设置睡眠时间
 			startActivity(new Intent(getApplicationContext(), SetTimeActivity.class));
- 
+
 		} else if (v.getId() == R.id.clearCache) {
 			LogUtils.i(TAG, "清除缓存！");
 			MusicUtils.clearCache();
@@ -85,21 +93,21 @@ public class SettingActivity extends MusicBaseActivity{
 		lockCheck = (CheckBox) findViewById(R.id.lockCheck);
 		if (MusicUtils.getIsLock()) lockCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else lockCheck.setButtonDrawable(R.drawable.checkbox_off);
-		
+
 		//摇一摇
 		shakerCheck = (CheckBox) findViewById(R.id.shakerCheck);
 		if (MusicUtils.getIsShaked())  shakerCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else shakerCheck.setButtonDrawable(R.drawable.checkbox_off);
-		
+
 		//夜间模式
 		nightCheck = (CheckBox) findViewById(R.id.nightCheck);
 		if (MusicUtils.isNight)  nightCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else nightCheck.setButtonDrawable(R.drawable.checkbox_off);
-		
+
 		//睡眠定时
 		sleepCheck = (CheckBox) findViewById(R.id.sleepCheck);
 		if (MusicUtils.setTime && MusicUtils.lastTime != 0)  sleepCheck.setButtonDrawable(R.drawable.checkbox_on);
 		else sleepCheck.setButtonDrawable(R.drawable.checkbox_off);
-		
+
 	}
 }

@@ -2,18 +2,20 @@ package com.fengyang.myproject.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.fengyang.myproject.R;
-import com.fengyang.toollib.utils.FileUtils;
 import com.fengyang.myproject.utils.PermissionUtils;
 import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.FileUtils;
 import com.fengyang.toollib.utils.StringUtils;
 
 import java.io.File;
@@ -31,7 +33,7 @@ public class ImageActivity extends BaseActivity {
     private Button loadImage;
     private ProgressBar progressBar;
     private ImageView imageView;
-    private boolean isClicked, isDownload, isShown;//按钮是否已点击标志,下载页面标志,相机权限系统弹出框已弹出标志
+    private boolean isClicked, isDownload, isPermission;//按钮是否已点击标志,下载页面标志,相机权限系统弹出框已弹出标志
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +60,12 @@ public class ImageActivity extends BaseActivity {
         if(isDownload) {
             doDownload();//申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
         } else {
-            if(isShown) {//相机权限系统框弹出后，尝试打开系统相机界面
-                try {
-                    PermissionUtils.startCamera(activity);
-                    isShown = false;
-                } catch (Exception e) {}
-            }
+            takePhoto();
         }
     }
 
     /**
-     * 下载图片并显示
+     * TODO 下载图片并显示
      * 注意:避免用户拒绝访问权限时出现无限循环的系统框弹出
      */
     private void doDownload() {
@@ -149,29 +146,55 @@ public class ImageActivity extends BaseActivity {
 
 
     /*********start****************************************************************
-     * 获取权限，调用相机
+     * TODO 获取权限，调用相机
      ******************************************************************************/
 
     /**
      * 获取权限，调用相机
      */
     private void takePhoto() {
-        //申请弹出获取联系人权限系统框后用户会选择允许或拒绝，弹出框消失，消失后会再次调用onResume方法
-        loadImage.setOnClickListener(new View.OnClickListener() {
+        PermissionUtils.checkCameraPermission(new PermissionUtils.OnCheckCallback() {
             @Override
-            public void onClick(View v) {
-                PermissionUtils.checkCameraPermission(ImageActivity.this, new PermissionUtils.OnCheckCallback() {
-                    @Override
-                    public void onCheck(final boolean isSucess) {
-                        if (! isSucess) {
-                            //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
-                            PermissionUtils.notPermission(ImageActivity.this, PermissionUtils.PERMISSIONS_CAMERA);
-                            isShown = true;
-                        }
+            public void onCheck(boolean isSucess) {
+                if (isClicked) {
+                    if (isSucess) {
+                        getCameraSucessed();
+                    } else {//也要考虑某些手机（比如vivo，oppo）自动禁止权限的问题
+                        StringUtils.show1Toast(context, "可能读取相机权限未打开，请检查后重试！");
                     }
-                });
+                } else {//设置按钮的点击事件，进一步判断权限的获取或跳转指定界面
+                    loadImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PermissionUtils.checkCameraPermission(new PermissionUtils.OnCheckCallback() {
+                                @Override
+                                public void onCheck(final boolean isSucess) {
+                                    if (isSucess) {
+                                        getCameraSucessed();
+                                    } else {
+                                        //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
+                                        isClicked = true;
+                                        PermissionUtils.notPermission(ImageActivity.this, PermissionUtils.PERMISSIONS_CAMERA);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
+
+    }
+
+    /**
+     * 相机权限获取成功
+     */
+    private void getCameraSucessed() {
+        isClicked = false;
+        File file = new File(FileUtils.getDirFile(FileUtils.imagePath), "camera.jpg");
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        startActivityForResult(intent, PermissionUtils.REQUESTCODE);
     }
 
     @Override
