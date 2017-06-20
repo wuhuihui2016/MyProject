@@ -8,10 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/app_color"
-        android:fitsSystemWindows="true"
-        android:clipToPadding="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:gravity="center|center_vertical"
         android:textColor="@color/white"
         android:text="@string/app_name"
@@ -22,7 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/title"
-        android:padding="10dp"
         android:layout_marginBottom="50dp"/>
 
     <LinearLayout

@@ -12,8 +12,11 @@ import com.fengyang.music.activity.SetTimeActivity;
 import com.fengyang.music.service.PlayService;
 import com.fengyang.music.utils.MusicUtils;
 import com.fengyang.myproject.R;
+import com.fengyang.myproject.utils.DialogUtils;
 import com.fengyang.toollib.base.BaseActivity;
+import com.fengyang.toollib.utils.ContansUtils;
 import com.fengyang.toollib.utils.LogUtils;
+import com.fengyang.toollib.utils.StringUtils;
 import com.fengyang.toollib.utils.SystemUtils;
 
 /**
@@ -79,6 +82,23 @@ public class SettingActivity extends BaseActivity {
 			MusicUtils.clearCache();
 			Toast.makeText(getApplicationContext(), "清除缓存！", Toast.LENGTH_SHORT).show();
 
+		} else if (v.getId() == R.id.login_out) {
+			DialogUtils.showMsgDialog(activity, "退出登录",
+					"当前用户" + ContansUtils.get("name", "") + "\n是否退出登录",
+					new DialogUtils.DialogListener() {
+						@Override
+						public void onClick(View v) {
+							super.onClick(v);
+							ContansUtils.remove("name");
+							StringUtils.show1Toast(activity, "退出登录成功！");
+							finish();
+						}
+					}, new DialogUtils.DialogListener() {
+						@Override
+						public void onClick(View v) {
+							super.onClick(v);
+						}
+					});
 		} else if (v.getId() == R.id.exit) {
 			//弹出退出APP对话框
 			MusicUtils.startService(getApplicationContext(), PlayService.ACTION_TOEXIT);

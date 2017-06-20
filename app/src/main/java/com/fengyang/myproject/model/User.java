@@ -6,17 +6,13 @@ package com.fengyang.myproject.model;
 public class User {
 
     private String name;
-    private String age;
+    private String pwd;
     private String time;
-    private String jobdesc;
-    private String message;
 
-    public User(String name, String age, String time, String jobdesc, String message) {
+    public User(String name, String pwd, String time) {
         this.name = name;
-        this.age = age;
+        this.pwd = pwd;
         this.time = time;
-        this.jobdesc = jobdesc;
-        this.message = message;
     }
 
     public String getName() {
@@ -27,12 +23,12 @@ public class User {
         this.name = name;
     }
 
-    public String getAge() {
-        return age;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public String getTime() {
@@ -43,30 +39,12 @@ public class User {
         this.time = time;
     }
 
-    public String getJobdesc() {
-        return jobdesc;
-    }
-
-    public void setJobdesc(String jobdesc) {
-        this.jobdesc = jobdesc;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + 
-                ", age='" + age + 
+                ", pwd='" + pwd + 
                 ", time='" + time + 
-                ", jobdesc='" + jobdesc + 
-                ", message='" + message + 
                 '}';
     }
 }

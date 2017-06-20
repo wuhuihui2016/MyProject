@@ -1,22 +1,22 @@
 package com.fengyang.myproject.fragment;
 
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.fengyang.myproject.R;
+import com.fengyang.myproject.activity.LoginActivity;
 import com.fengyang.myproject.activity.SettingActivity;
-import com.fengyang.myproject.utils.PermissionUtils;
-import com.fengyang.toollib.utils.LogUtils;
-import com.fengyang.toollib.utils.StringUtils;
+import com.fengyang.toollib.utils.ContansUtils;
 import com.fengyang.toollib.view.IOSScrollView;
 
 /**
@@ -27,8 +27,6 @@ public class MineFragment extends Fragment {
 
     private static final String TAG = "MineFragment";
     private View content;//内容布局
-    private boolean isOPent, isPermission;//手电筒打开标识
-    private Camera camera;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,78 +79,30 @@ public class MineFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        openLight();
+        getLoginInfo();
     }
 
-    private void openLight() {
-        //手电筒
-        final Button light = (Button) content.findViewById(R.id.light);
-        PermissionUtils.checkCameraPermission(new PermissionUtils.OnCheckCallback() {
+    /**
+     * 用户登录/用户信息
+     */
+    private void getLoginInfo() {
+        ImageView user_icon = (ImageView) content.findViewById(R.id.user_icon);
+        TextView user_name = (TextView) content.findViewById(R.id.user_name);
+        String name = (String) ContansUtils.get("name", "");
+        if (! TextUtils.isEmpty(name)) {//登录状态
+            user_icon.setImageResource(R.mipmap.app_icon);
+            user_name.setText(name);
+        } else {
+            user_icon.setImageResource(R.drawable.user);
+            user_name.setText("请登录");
+        }
+
+        content.findViewById(R.id.login_info).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheck(boolean isSucess) {
-                if (isPermission) {
-                    if (isSucess) {
-                        light.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                open();
-                            }
-                        });
-                    } else {
-                        StringUtils.show1Toast(getActivity(), "可能读取相机权限未打开，请检查后重试！");
-                        isOPent = false;
-                    }
-                } else {
-                    light.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (! isOPent) {
-                                PermissionUtils.checkCameraPermission( new PermissionUtils.OnCheckCallback() {
-                                    @Override
-                                    public void onCheck(final boolean isSucess) {
-                                        if (isSucess) {
-                                            isPermission = false;
-                                            open();
-                                        } else {
-                                            //权限获取失败后再次弹出系统框，将按钮的点击跳转标志设为true,保证用户点击“允许”后可直接跳转指定界面
-                                            isPermission = true;
-                                            PermissionUtils.notPermission(getActivity(), PermissionUtils.PERMISSIONS_CAMERA);
-                                        }
-                                    }
-                                });
-                            } else {
-                                close();
-                            }
-                        }
-                    });
-                }
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
-    }
-
-    /**
-     * 打开手电筒
-     */
-    private void open(){
-        LogUtils.i(TAG, "openLight");
-        isOPent = true;
-        camera = PermissionUtils.camera;
-        Camera.Parameters params = camera.getParameters();
-        params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        camera.setParameters(params);
-        camera.startPreview(); // 开始亮灯
-    }
-
-    /**
-     * 关闭手电筒
-     */
-    private void close(){
-        if (isOPent) {
-            LogUtils.i(TAG, "closeLight");
-            camera.stopPreview(); // 关掉亮灯
-            camera.release(); // 关掉照相机
-            isOPent = false;
-        }
     }
 
 }

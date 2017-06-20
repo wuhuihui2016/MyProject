@@ -20,13 +20,13 @@ public final class R {
 		public static final int verticalSpacing = 0x7f0100a0;
 	}
 	public static final class color {
-		public static final int app_background = 0x7f0c0006;
-		public static final int app_color = 0x7f0c0007;
-		public static final int black = 0x7f0c000c;
-		public static final int gray = 0x7f0c001f;
-		public static final int red = 0x7f0c003e;
-		public static final int transparent = 0x7f0c0058;
-		public static final int white = 0x7f0c005c;
+		public static final int app_background = 0x7f0b0006;
+		public static final int app_color = 0x7f0b0007;
+		public static final int black = 0x7f0b000c;
+		public static final int gray = 0x7f0b001f;
+		public static final int red = 0x7f0b003e;
+		public static final int transparent = 0x7f0b0058;
+		public static final int white = 0x7f0b005c;
 	}
 	public static final class drawable {
 		public static final int autolistview_custom_progress_bar = 0x7f02004e;
@@ -51,25 +51,25 @@ public final class R {
 		public static final int shape_white_bkg_app_border = 0x7f0200bc;
 	}
 	public static final class id {
-		public static final int arrow = 0x7f0d008d;
-		public static final int clear = 0x7f0d00a2;
-		public static final int content_layout = 0x7f0d0053;
-		public static final int edit = 0x7f0d00a1;
-		public static final int iv = 0x7f0d0091;
-		public static final int lastUpdate = 0x7f0d008c;
-		public static final int layout = 0x7f0d005c;
-		public static final int loadFull = 0x7f0d0086;
-		public static final int loading = 0x7f0d0089;
-		public static final int more = 0x7f0d0088;
-		public static final int noData = 0x7f0d0087;
-		public static final int refreshing = 0x7f0d008a;
-		public static final int return_btn = 0x7f0d0051;
-		public static final int right_btn = 0x7f0d0052;
-		public static final int search_icon = 0x7f0d00a0;
-		public static final int sildingLayout = 0x7f0d0050;
-		public static final int tip = 0x7f0d008b;
-		public static final int title = 0x7f0d002a;
-		public static final int tv = 0x7f0d0092;
+		public static final int arrow = 0x7f0c008d;
+		public static final int clear = 0x7f0c00a2;
+		public static final int content_layout = 0x7f0c0053;
+		public static final int edit = 0x7f0c00a1;
+		public static final int iv = 0x7f0c0091;
+		public static final int lastUpdate = 0x7f0c008c;
+		public static final int layout = 0x7f0c005c;
+		public static final int loadFull = 0x7f0c0086;
+		public static final int loading = 0x7f0c0089;
+		public static final int more = 0x7f0c0088;
+		public static final int noData = 0x7f0c0087;
+		public static final int refreshing = 0x7f0c008a;
+		public static final int return_btn = 0x7f0c0051;
+		public static final int right_btn = 0x7f0c0052;
+		public static final int search_icon = 0x7f0c00a0;
+		public static final int sildingLayout = 0x7f0c0050;
+		public static final int tip = 0x7f0c008b;
+		public static final int title = 0x7f0c002a;
+		public static final int tv = 0x7f0c0092;
 	}
 	public static final class layout {
 		public static final int activity_base_layout = 0x7f040019;
@@ -82,33 +82,19 @@ public final class R {
 		public static final int app_icon = 0x7f030000;
 		public static final int return_icon = 0x7f030001;
 	}
-	public static final class raw {
-		public static final int client_beta = 0x7f060000;
-		public static final int kclient129 = 0x7f060001;
-		public static final int kclient132 = 0x7f060002;
-		public static final int kclient149 = 0x7f060003;
-		public static final int kclient207 = 0x7f060004;
-		public static final int kclient208 = 0x7f060005;
-		public static final int tclient129 = 0x7f060006;
-		public static final int tclient132 = 0x7f060007;
-		public static final int tclient149 = 0x7f060008;
-		public static final int tclient207 = 0x7f060009;
-		public static final int tclient208 = 0x7f06000a;
-		public static final int tclientbeta = 0x7f06000b;
-	}
 	public static final class string {
-		public static final int app_name = 0x7f070017;
-		public static final int lastUpdateTime = 0x7f070022;
-		public static final int load_data = 0x7f070025;
-		public static final int load_full = 0x7f070026;
-		public static final int more = 0x7f07002a;
-		public static final int no_data = 0x7f07002d;
-		public static final int pull_to_refresh = 0x7f07002e;
-		public static final int release_to_refresh = 0x7f07002f;
+		public static final int app_name = 0x7f060017;
+		public static final int lastUpdateTime = 0x7f060022;
+		public static final int load_data = 0x7f060025;
+		public static final int load_full = 0x7f060026;
+		public static final int more = 0x7f06002a;
+		public static final int no_data = 0x7f06002d;
+		public static final int pull_to_refresh = 0x7f06002e;
+		public static final int release_to_refresh = 0x7f06002f;
 	}
 	public static final class style {
-		public static final int autolistview_customProgressBar = 0x7f0a0142;
-		public static final int style = 0x7f0a0143;
+		public static final int autolistview_customProgressBar = 0x7f090142;
+		public static final int style = 0x7f090143;
 	}
 	public static final class styleable {
 		public static final int[] FlowLayout = { 0x7f01009f, 0x7f0100a0 };

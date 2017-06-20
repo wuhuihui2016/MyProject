@@ -30,8 +30,8 @@ public class DBUtils extends SQLiteOpenHelper {
 	@Override
 	public synchronized void onCreate(SQLiteDatabase db) {
 
-		//用户登录记录表
-		db.execSQL("create table t_user(_id integer primary key,name varchar(20),age integer,time varchar(100),jobdesc varchar(100),info varchar(100))");
+		//用户登录记录表(昵称，密码，登录时间）
+		db.execSQL("create table t_user(_id integer primary key,name varchar(20),pwd varchar(20),time varchar(20))");
 
 	}
 
@@ -43,16 +43,46 @@ public class DBUtils extends SQLiteOpenHelper {
 		}
 	}
 
-	//插入用户登录记录表(去重后再存入)
-	public synchronized void newUser(String name, String age, String jobdesc, String info){
+	//插入/更新用户登录记录表
+	public synchronized void newUser(String name, String pwd){
 		SQLiteDatabase db = getWritableDatabase();
 		Cursor cursor = db.rawQuery("select * from t_user where name = ?",new String[]{name});
-		if(! cursor.moveToNext()){
-			db.execSQL("insert into t_user(name,age,time,jobdesc,message) values(?,?,?,?,?)",
-					new Object[]{name, age, jobdesc, StringUtils.formatDate(), info});
+		if(cursor.moveToNext()){//如果数据库中已有同名用户，则更新信息
+			db.execSQL("update t_user set pwd=? where name=?", new Object[]{pwd, name});
+		} else {//否则插入新用户
+			db.execSQL("insert into t_user(name,pwd,time) values(?,?,?)",
+					new Object[]{name, pwd, StringUtils.formatDate()});
 		}
 		cursor.close();
 		db.close();
+	}
+
+	/**
+	 * 查找某用户是否存在
+	 * @param name
+	 * @return
+     */
+	public synchronized boolean userExists(String name) {
+		SQLiteDatabase db = getWritableDatabase();
+		Cursor cursor = db.rawQuery("select * from t_user where name = ?",new String[]{name});
+		if(cursor.moveToNext()) return true;
+		return false;
+	}
+
+	/**
+	 * 查找某用户
+	 * @param name
+	 * @return
+     */
+	public synchronized User getUser(String name) {
+		User user = null;
+		SQLiteDatabase db = getWritableDatabase();
+		Cursor cursor = db.rawQuery("select * from t_user where name = ?",new String[]{name});
+		if(cursor.moveToNext())
+			user = new User(cursor.getString(cursor.getColumnIndex("name")),
+				cursor.getString(cursor.getColumnIndex("pwd")),
+				cursor.getString(cursor.getColumnIndex("time")));
+		return user;
 	}
 
 	//查看所有登录过的用户
@@ -62,10 +92,8 @@ public class DBUtils extends SQLiteOpenHelper {
 		Cursor cursor = db.rawQuery("select * from t_user",null);
 		while(cursor.moveToNext()){
 			User user = new User(cursor.getString(cursor.getColumnIndex("name")), 
-					cursor.getString(cursor.getColumnIndex("age")),
-					cursor.getString(cursor.getColumnIndex("time")),
-					cursor.getString(cursor.getColumnIndex("jobdesc")),
-					cursor.getString(cursor.getColumnIndex("info")));
+					cursor.getString(cursor.getColumnIndex("pwd")),
+					cursor.getString(cursor.getColumnIndex("time")));
 			users.add(user);
 		}
 		cursor.close();

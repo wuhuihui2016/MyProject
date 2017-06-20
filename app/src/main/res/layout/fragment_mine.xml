@@ -19,6 +19,46 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:id="@+id/login_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:paddingBottom="20dp"
+                android:background="@color/app_color">
+                <ImageButton
+                    android:id="@+id/setting"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="centerInside"
+                    android:background="@color/transparent"
+                    android:src="@drawable/setting" />
+
+                <ImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/user"
+                    android:layout_marginTop="10dp"
+                    android:padding="2dp"
+                    android:layout_below="@id/setting"/>
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/user_icon"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/user_icon"
+                    android:text="请登录"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,18 +66,9 @@
                 android:layout_marginTop="10dp">
 
                 <Button
-                    android:id="@+id/setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="设置"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_app"
-                    android:onClick="onClick"/>
-                <Button
                     android:id="@+id/light"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="手电筒"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/shape_app"

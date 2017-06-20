@@ -80,10 +80,9 @@ public class ContansUtils {
 
 	/**
 	 * 移除某个key值已经对应的值
-	 * @param fileName  保存在手机里面的文件名
 	 * @param key  键
 	 */
-	public static void remove(String fileName, String key) {
+	public static void remove(String key) {
 		editor.remove(key).commit();
 	}
 

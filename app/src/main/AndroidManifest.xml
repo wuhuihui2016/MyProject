@@ -64,6 +64,10 @@
         <!-- 设置页 -->
         <activity android:name=".activity.SettingActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- 登录页 -->
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden"/>
         <!-- activity注册end -->
 
         <!-- ************************************************************************** -->

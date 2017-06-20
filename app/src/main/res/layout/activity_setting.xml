@@ -195,22 +195,32 @@
             <Button
                 android:id="@+id/clearCache"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/shape_white_bkg_app_border"
                 android:onClick="onClick"
                 android:text="@string/clearCache"
                 android:textColor="@android:color/holo_orange_light" />
 
+            <Button
+                android:id="@+id/login_out"
+                android:text="退出登录"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_white_bkg_app_border"
+                android:onClick="onClick"
+                android:textColor="@android:color/holo_red_light"/>
+
             <!-- 退出APP -->
             <Button
                 android:id="@+id/exit"
+                android:text="@string/exit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/shape_white_bkg_app_border"
                 android:onClick="onClick"
-                android:text="@string/exit"
                 android:textColor="@android:color/holo_red_light" />
         </LinearLayout>
 

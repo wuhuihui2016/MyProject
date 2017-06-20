@@ -2,8 +2,10 @@ package com.fengyang.myproject;
 
 import android.app.Application;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.fengyang.myproject.receiver.MyReceiver;
+import com.fengyang.myproject.utils.DBUtils;
 import com.fengyang.process.RequestManager;
 import com.fengyang.toollib.utils.ContansUtils;
 import com.fengyang.toollib.utils.CrashHandler;
@@ -20,6 +22,8 @@ public class MyApp extends Application {
 
     private static Application instance;
 
+    public static DBUtils utils;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,6 +38,8 @@ public class MyApp extends Application {
 
         // TODO 生成随机数，发送广播（依赖点击事件的触发）
         do2toReceive();
+
+        utils = new DBUtils(instance);//开辟用户数据库
     }
 
     /**
@@ -42,6 +48,16 @@ public class MyApp extends Application {
     public static Application getInstance() {
         return instance;
     }
+
+    public static boolean getIsLogined () {
+        String name = (String) ContansUtils.get("name", "");
+        if (! TextUtils.isEmpty(name)) {//登录状态
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * 生成随机数，发送广播

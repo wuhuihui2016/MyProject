@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fengyang.callback.ICallBack;
+import com.fengyang.myproject.MyApp;
 import com.fengyang.myproject.R;
 import com.fengyang.myproject.fragment.MainFragment;
 import com.fengyang.myproject.fragment.MineFragment;
@@ -43,7 +45,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        testHttp();
+//        testHttp();
     }
 
     /**
@@ -65,6 +67,23 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onFailure() {}
         });
+    }
+
+    /**
+     * 设置当前TAB标题
+     * @param title
+     */
+    private void setTitle(String title) {
+        TextView titleView = (TextView) findViewById(R.id.title);
+        if (TextUtils.isEmpty(title)) {
+           titleView.setVisibility(View.GONE);
+        } else {
+            //设置当前界面的title
+            titleView.setVisibility(View.VISIBLE);
+            titleView.setText(title);
+        }
+
+        LogUtils.i(TAG, MyApp.utils.showUsers().toString());
     }
 
     @Override
@@ -141,7 +160,7 @@ public class MainActivity extends BaseActivity {
                     break;
 
                 case 2://我的
-                    setTitle("我的");
+                    setTitle("");
                     wode_title.setTextColor(getResources().getColor(R.color.app_color));
                     shouye_title.setTextColor(getResources().getColor(R.color.gray));
                     if (frag_index == 2) {
