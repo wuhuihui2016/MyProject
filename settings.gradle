@@ -1,2 +1,2 @@
-include ':app', ':toollib', ':process'
+include ':app', ':toollib', ':process', ':libzxing'
 include ':music'

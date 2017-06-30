@@ -18,6 +18,7 @@ import com.fengyang.myproject.activity.LoginActivity;
 import com.fengyang.myproject.activity.SettingActivity;
 import com.fengyang.toollib.utils.ContansUtils;
 import com.fengyang.toollib.view.IOSScrollView;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
  * Created by wuhuihui on 2017/5/11.
@@ -70,6 +71,14 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), SettingActivity.class));
+            }
+        });
+
+        //二维码扫描
+        content.findViewById(R.id.capture).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CaptureActivity.class));
             }
         });
 

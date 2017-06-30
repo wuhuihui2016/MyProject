@@ -66,11 +66,12 @@
                 android:layout_marginTop="10dp">
 
                 <Button
-                    android:id="@+id/light"
+                    android:id="@+id/capture"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
+                    android:text="二维码扫描"
                     android:background="@drawable/shape_app"
                     android:onClick="onClick"/>
 

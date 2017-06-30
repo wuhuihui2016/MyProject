@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/libzxing" />
             <option value="$PROJECT_DIR$/music" />
             <option value="$PROJECT_DIR$/process" />
             <option value="$PROJECT_DIR$/toollib" />
@@ -18,6 +19,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/libzxing" />
             <option value="$PROJECT_DIR$/music" />
             <option value="$PROJECT_DIR$/process" />
             <option value="$PROJECT_DIR$/toollib" />
