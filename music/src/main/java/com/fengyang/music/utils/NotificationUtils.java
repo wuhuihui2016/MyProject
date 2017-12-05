@@ -110,7 +110,7 @@ public class NotificationUtils {
 		}
 
 		notification.flags = Notification.FLAG_NO_CLEAR;//设置通知不可清除，且能在被杀掉进程后自动清除
-		notification.defaults = Notification.DEFAULT_LIGHTS;
+		notification.defaults = Notification.DEFAULT_SOUND;
 		notification.contentView = remoteViews;
 		notifyManager.notify(requestCode, notification);
 
